@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AboutActivity">
+
+    <TextView
+        android:id="@+id/workingtime_head"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/about_text_margin"
+        android:text="@string/workingtime_head"
+        android:textSize="@dimen/mainpage_head_textsize"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/workingtime_text"
+        android:layout_width="0dp"
+        android:layout_marginLeft="@dimen/about_text_margin"
+        android:layout_marginTop="@dimen/about_text_margintop"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/workingtime_head"
+        android:text="@string/workingtime_text" />
+
+
+    <TextView
+        android:id="@+id/ouraddress_head"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/mainpage_head_textsize"
+        android:layout_marginTop="@dimen/about_head_margin"
+        android:layout_marginLeft="@dimen/about_text_margin"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/workingtime_text"
+        android:text="@string/ouraddress_head" />
+
+
+    <TextView
+        android:id="@+id/ouraddress_text"
+        android:layout_width="0dp"
+        android:layout_marginLeft="@dimen/about_text_margin"
+        android:layout_marginTop="@dimen/about_text_margintop"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ouraddress_head"
+        android:text="@string/ouraddress_text" />
+
+    <TextView
+        android:id="@+id/ournumber_head"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/mainpage_head_textsize"
+        android:layout_marginTop="@dimen/about_head_margin"
+        android:layout_marginLeft="@dimen/about_text_margin"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/ouraddress_text"
+        android:text="@string/ournumber_head" />
+
+
+    <TextView
+        android:id="@+id/ournumber_text"
+        android:layout_width="0dp"
+        android:layout_marginLeft="@dimen/about_text_margin"
+        android:layout_marginTop="@dimen/about_text_margintop"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ournumber_head"
+        android:text="@string/ournumber_text" />
+
+
+    <android.support.design.widget.BottomNavigationView
+        android:id="@id/navigation"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="0dp"
+        android:layout_marginStart="0dp"
+        android:background="?android:attr/windowBackground"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:menu="@menu/navigation" />
+
+</android.support.constraint.ConstraintLayout>

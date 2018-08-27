@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Ярославский зоопарк</string>
+    <string name="news_text">Добро пожаловать в ярославский зоопарк! Это новости.</string>
+    <string name="title_home">Главная</string>
+    <string name="title_map">Карта</string>
+    <string name="title_about">О нас</string>
+    <string name="title_settings">Настройки</string>
+    <string name="mainpage_head">Добро пожаловать в ярославский зоопарк</string>
+    <string name="title_activity_settings">Настройки</string>
+    <string name="settingspage_head">Добро пожаловать в настройки</string>
+    <string name="pref_header_general">Общее</string>
+</resources>

@@ -1,0 +1,10 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="news_horizontal_margin">32dp</dimen>
+    <dimen name="news_text_size">20sp</dimen>
+    <dimen name="mainpage_head_textsize">25sp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="about_text_margin">16dp</dimen>
+    <dimen name="about_head_margin">32dp</dimen>
+    <dimen name="about_text_margintop">8dp</dimen>
+</resources>
