@@ -6,5 +6,6 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="about_text_margin">16dp</dimen>
     <dimen name="about_head_margin">32dp</dimen>
+    <dimen name="about_head_margintop">32dp</dimen>
     <dimen name="about_text_margintop">8dp</dimen>
 </resources>

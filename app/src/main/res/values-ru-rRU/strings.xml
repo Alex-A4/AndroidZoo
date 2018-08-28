@@ -10,4 +10,12 @@
     <string name="title_activity_settings">Настройки</string>
     <string name="settingspage_head">Добро пожаловать в настройки</string>
     <string name="pref_header_general">Общее</string>
+    <string name="title_activity_map">Карта</string>
+    <string name="mappage_head">Добро пожаловать в карту</string>
+    <string name="aboutpage_head">О нас</string>
+    <string name="workingtime_head">Время работы:</string>
+    <string name="workingtime_text">С 10:00 до 17:00 без обеда и выходных</string>
+    <string name="ouraddress_head">Наш адрес:</string>
+    <string name="ouraddress_text">г. Ярославль, ул. Шевелюха, 137</string>
+    <string name="ournumber_head">Наш телефон:</string>
 </resources>
