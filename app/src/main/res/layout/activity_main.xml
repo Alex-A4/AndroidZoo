@@ -8,37 +8,37 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".MainActivity">
 
+
     <TextView
+        android:id="@+id/mainppage_head"
         android:layout_marginRight="@dimen/news_horizontal_margin"
         android:layout_marginTop="@dimen/activity_vertical_margin"
         android:layout_marginLeft="@dimen/news_horizontal_margin"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         app:layout_constraintWidth_default="spread"
         android:text="@string/mainpage_head"
         android:textSize="@dimen/mainpage_head_textsize"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:textStyle="bold" />
 
-    <TextView
+
+    <ListView
+        android:id="@+id/news_list"
         android:layout_marginRight="@dimen/news_horizontal_margin"
         android:layout_marginLeft="@dimen/news_horizontal_margin"
-        android:id="@+id/message"
-        android:textSize="@dimen/news_text_size"
-        android:gravity="center_horizontal"
-        app:layout_constraintWidth_default="spread"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintHeight_percent="0.5"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintWidth_default="spread"
+        tools:listitem="@layout/news_item"
+        app:layout_constraintHeight_percent="0.7"
+        app:layout_constraintBottom_toTopOf="@id/navigation"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:text="@string/news_text"/>
+        app:layout_constraintTop_toBottomOf="@id/mainppage_head"></ListView>
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/navigation"
