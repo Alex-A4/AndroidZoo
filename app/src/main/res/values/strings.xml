@@ -17,4 +17,5 @@
     <string name="ouraddress_text">Yaroslavl city, Shevelyuha street, 137</string>
     <string name="ournumber_head">Our number:</string>
     <string name="ournumber_text">8(4852)74-32-21</string>
+    <string name="fragment_main_title">News</string>
 </resources>

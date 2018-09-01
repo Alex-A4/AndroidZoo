@@ -18,4 +18,5 @@
     <string name="ouraddress_head">Наш адрес:</string>
     <string name="ouraddress_text">г. Ярославль, ул. Шевелюха, 137</string>
     <string name="ournumber_head">Наш телефон:</string>
+    <string name="fragment_main_title">Новости</string>
 </resources>
