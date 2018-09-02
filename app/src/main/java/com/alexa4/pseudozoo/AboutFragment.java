@@ -8,6 +8,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+
+/**
+ * AboutFragment represent information about zoo, and communication methods,
+ * toolbar with title and icon of zoo
+ */
 public class AboutFragment extends Fragment {
     @Nullable
     @Override
