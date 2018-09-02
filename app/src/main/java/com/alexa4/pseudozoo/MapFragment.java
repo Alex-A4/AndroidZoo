@@ -9,6 +9,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+
+/**
+ * MapFragment represent map where zoo is, which place visitor can visit
+ */
 public class MapFragment extends Fragment {
 
     @Nullable
