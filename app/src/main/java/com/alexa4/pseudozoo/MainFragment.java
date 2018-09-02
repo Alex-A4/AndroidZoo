@@ -30,6 +30,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+
+/**
+ * MainFragment contains list of news, toolbar with settings button
+ * It's loading when the app starts
+ */
 public class MainFragment extends Fragment {
     private ListView newsList;
 
@@ -49,6 +54,7 @@ public class MainFragment extends Fragment {
 
         View root = inflater.inflate(R.layout.fragment_main, container, false);
 
+        //Initializing list of news
         newsList = (ListView) root.findViewById(R.id.news_list);
         newsList.setAdapter(new NewsAdapter(getContext(), R.layout.news_item, newsArrayList));
         newsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -59,6 +65,8 @@ public class MainFragment extends Fragment {
             }
         });
 
+
+        //Initializing settings button from toolbar
         ImageView settings = (ImageView) root.findViewById(R.id.main_fragment_toolbar_settings);
         settings.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,12 +88,16 @@ public class MainFragment extends Fragment {
 
         ((MainActivity) getActivity()).setSupportActionBar(toolbar);
 
+        //implementation interface between fragment and activity, without direct links
         //OnSetToolBarListener listener = (OnSetToolBarListener) getActivity();
         //listener.onToolbarSet(toolbar);
 
         return root;
     }
 
+    /**
+     * Custom class for using it in Adapter
+     */
     private class News{
         private String caption;
         private String time;
@@ -117,7 +129,9 @@ public class MainFragment extends Fragment {
     }
 
 
-
+    /**
+     * Custom adapter to represent list of news
+     */
     private class NewsAdapter extends ArrayAdapter<News> {
 
         public NewsAdapter(@NonNull Context context, int textViewResourceId,
