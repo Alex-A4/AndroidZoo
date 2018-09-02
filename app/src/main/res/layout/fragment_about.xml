@@ -104,7 +104,7 @@
             android:id="@+id/networks_vk"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:foreground="@drawable/vk"
+            android:src="@drawable/vk"
             android:scaleType="centerCrop"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toLeftOf="@id/networks_facebook"/>
@@ -112,7 +112,7 @@
             android:id="@+id/networks_facebook"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:foreground="@drawable/facebook"
+            android:src="@drawable/facebook"
             android:scaleType="centerCrop"
             app:layout_constraintLeft_toRightOf="@id/networks_vk"
             app:layout_constraintRight_toLeftOf="@id/networks_instagram"/>
@@ -120,7 +120,7 @@
             android:id="@+id/networks_instagram"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:foreground="@drawable/instagram"
+            android:src="@drawable/instagram"
             android:scaleType="centerCrop"
             app:layout_constraintLeft_toRightOf="@id/networks_facebook"
             app:layout_constraintRight_toLeftOf="@id/networks_youtube"/>
@@ -128,7 +128,7 @@
             android:id="@+id/networks_youtube"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:foreground="@drawable/youtube"
+            android:src="@drawable/youtube"
             android:scaleType="centerCrop"
             app:layout_constraintLeft_toRightOf="@id/networks_instagram"
             app:layout_constraintRight_toRightOf="parent"/>

@@ -83,11 +83,6 @@ public class MainFragment extends Fragment {
             }
         });
 
-
-        Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.main_fragment_toolbar);
-
-        ((MainActivity) getActivity()).setSupportActionBar(toolbar);
-
         //implementation interface between fragment and activity, without direct links
         //OnSetToolBarListener listener = (OnSetToolBarListener) getActivity();
         //listener.onToolbarSet(toolbar);
