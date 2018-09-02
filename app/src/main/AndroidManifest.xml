@@ -30,39 +30,7 @@
             </intent-filter>
         </activity>
 
-        <activity
-            android:name=".SettingsActivity"
-            android:label="@string/title_settings"
-            android:launchMode="singleTop">
-            <intent-filter>
-                <action android:name="com.alexa4.pseudozoo.SettingsActivity" />
 
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-
-        <activity
-            android:name=".MapActivity"
-            android:label="@string/title_map"
-            android:launchMode="singleTop">
-            <intent-filter>
-                <action android:name="com.alexa4.pseudozoo.MapActivity" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-
-        <activity
-            android:name=".AboutActivity"
-            android:label="@string/title_about"
-            android:launchMode="singleTop">
-
-            <intent-filter>
-                <action android:name="com.alexa4.pseudozoo.AboutActivity" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
     </application>
 
 </manifest>
