@@ -15,4 +15,5 @@
     <dimen name="fragment_toolbar_paddingbottom">6dp</dimen>
     <dimen name="settings_toolbar_text_leftmargin">24dp</dimen>
     <dimen name="settings_arrowback_marginleft">10dp</dimen>
+    <dimen name="networks_margin">8dp</dimen>
 </resources>

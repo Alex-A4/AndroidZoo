@@ -91,4 +91,49 @@
         app:layout_constraintTop_toBottomOf="@id/ournumber_head"
         android:text="@string/ournumber_text" />
 
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_margin="@dimen/networks_margin"
+        android:layout_height="wrap_content"
+        android:background="@drawable/about_networks_round_corners"
+        app:layout_constraintVertical_bias="0.3"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ournumber_text">
+
+        <ImageView
+            android:id="@+id/networks_vk"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:foreground="@drawable/vk"
+            android:scaleType="centerCrop"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/networks_facebook"/>
+        <ImageView
+            android:id="@+id/networks_facebook"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:foreground="@drawable/facebook"
+            android:scaleType="centerCrop"
+            app:layout_constraintLeft_toRightOf="@id/networks_vk"
+            app:layout_constraintRight_toLeftOf="@id/networks_instagram"/>
+        <ImageView
+            android:id="@+id/networks_instagram"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:foreground="@drawable/instagram"
+            android:scaleType="centerCrop"
+            app:layout_constraintLeft_toRightOf="@id/networks_facebook"
+            app:layout_constraintRight_toLeftOf="@id/networks_youtube"/>
+        <ImageView
+            android:id="@+id/networks_youtube"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:foreground="@drawable/youtube"
+            android:scaleType="centerCrop"
+            app:layout_constraintLeft_toRightOf="@id/networks_instagram"
+            app:layout_constraintRight_toRightOf="parent"/>
+    </android.support.constraint.ConstraintLayout>
+
 </android.support.constraint.ConstraintLayout>
