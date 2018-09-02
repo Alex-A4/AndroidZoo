@@ -8,9 +8,7 @@
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/settings_fragment_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimaryDark"
+        style="@style/ToolbarStyle"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent">
@@ -19,7 +17,7 @@
             android:id="@+id/settings_fragment_toolbar_back"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_marginLeft="@dimen/settings_arrowback_marginleft"
+            android:paddingRight="@dimen/settings_arrowback_paddingRight"
             android:paddingBottom="@dimen/fragment_toolbar_paddingbottom"
             android:src="@drawable/ic_back_arrow"
             app:layout_constraintTop_toTopOf="parent"
@@ -28,13 +26,7 @@
 
         <TextView
             android:id="@+id/settings_fragment_toolbar_text"
-            android:textColor="#ffffff"
-            android:layout_marginLeft="@dimen/settings_toolbar_text_leftmargin"
-            android:layout_marginTop="@dimen/fragment_toolbar_margin"
-            android:paddingBottom="@dimen/fragment_toolbar_marginbottom"
-            android:textSize="@dimen/toolbar_text_size"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/ToolBarTextStyle"
             app:layout_constraintLeft_toRightOf="@id/settings_fragment_toolbar_back"
             android:text="@string/title_settings"/>
 
