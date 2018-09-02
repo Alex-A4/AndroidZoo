@@ -10,7 +10,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
 
-public class MainActivity extends AppCompatActivity /*implements OnSetToolBarListener*/ {
+/**
+ * MainActivity is a container to all fragments which contains UI
+ * In a bottom of activity is bottomNavigation, by which we can change fragments
+ * In a top part is Constraint layout which is container where loads fragments
+ */
+public class MainActivity extends AppCompatActivity {
     BottomNavigationView navigation;
 
 
@@ -75,11 +80,4 @@ public class MainActivity extends AppCompatActivity /*implements OnSetToolBarLis
         navigation.setOnNavigationItemSelectedListener(bnl);
         navigation.setSelectedItemId(R.id.navigation_home);
     }
-
-
-    /*@Override
-    public void onToolbarSet(Toolbar toolbar) {
-        setSupportActionBar(toolbar);
-
-    }*/
 }
