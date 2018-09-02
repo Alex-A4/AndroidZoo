@@ -1,6 +1,7 @@
 package com.alexa4.pseudozoo;
 
 import android.content.Context;
+import android.media.Image;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -43,7 +44,9 @@ public class MainFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
-                             @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+                             @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
+
         View root = inflater.inflate(R.layout.fragment_main, container, false);
 
         newsList = (ListView) root.findViewById(R.id.news_list);
@@ -51,47 +54,36 @@ public class MainFragment extends Fragment {
         newsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                Toast.makeText(getContext(), newsArrayList.get(position).getCaption(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), newsArrayList.get(position).getCaption(),
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        ImageView settings = (ImageView) root.findViewById(R.id.main_fragment_toolbar_settings);
+        settings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentManager manager = getActivity().getSupportFragmentManager();
+                FragmentTransaction ft = manager.beginTransaction();
+                SettingsFragment sf = new SettingsFragment();
+                ft.replace(R.id.container, sf, "fragment_settings");
+                ft.addToBackStack(null);
+                ft.setCustomAnimations(
+                        android.R.animator.fade_in, android.R.animator.fade_out);
+                ft.commit();
+                System.out.println("Settings opened");
             }
         });
 
 
         Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.main_fragment_toolbar);
-        //OnSetToolBarListener listener = (OnSetToolBarListener) getActivity();
-
-       /* toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem menuItem) {
-
-            }
-        });*/
-
 
         ((MainActivity) getActivity()).setSupportActionBar(toolbar);
-        setHasOptionsMenu(true);
+
+        //OnSetToolBarListener listener = (OnSetToolBarListener) getActivity();
         //listener.onToolbarSet(toolbar);
 
         return root;
-    }
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.settings, menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        FragmentManager manager = getActivity().getSupportFragmentManager();
-        FragmentTransaction ft = manager.beginTransaction();
-        SettingsFragment sf = new SettingsFragment();
-        ft.replace(R.id.container, sf, "fragment_settings");
-        ft.addToBackStack(null);
-        ft.setCustomAnimations(
-                android.R.animator.fade_in, android.R.animator.fade_out);
-        ft.commit();
-        System.out.println("Settings opened");
-        return getActivity().onOptionsItemSelected(item);
     }
 
     private class News{
