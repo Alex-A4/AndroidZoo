@@ -9,6 +9,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+
+/**
+ * SettingsFragment contains primitive settings which user can use
+ */
 public class SettingsFragment extends Fragment {
     @Nullable
     @Override
