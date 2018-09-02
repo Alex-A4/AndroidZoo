@@ -25,7 +25,6 @@ public class MainActivity extends AppCompatActivity {
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                     FragmentManager manager = getSupportFragmentManager();
                     FragmentTransaction ft = manager.beginTransaction();
-                    Intent intent;
 
                     switch (item.getItemId()) {
                         case R.id.navigation_home:
@@ -39,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
                             return true;
 
                         case R.id.navigation_map:
-                            MapFragment mapf= new MapFragment();
+                            ZooMapFragment mapf= new ZooMapFragment();
                             ft.replace(R.id.container, mapf, "fragment_map");
                             ft.addToBackStack(null);
                             ft.setCustomAnimations(
