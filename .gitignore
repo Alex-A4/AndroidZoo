@@ -30,7 +30,7 @@ proguard/
 .navigation/
 
 # Android Studio captures folder
-captures/
+captures/*
 
 # IntelliJ
 *.iml
@@ -48,12 +48,18 @@ google-services.json
 
 # Freeline
 freeline.py
-freeline/
+freeline/*
 freeline_project_description.json
 
 # fastlane
-fastlane/report.xml
-fastlane/Preview.html
-fastlane/screenshots
-fastlane/test_output
-fastlane/readme.md
+fastlane/*
+
+#release
+release/*
+
+#tests
+test/*
+androidTest/*
+
+#debug
+debug/*
