@@ -29,10 +29,10 @@ public class ZooMapFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_map, container, false);
 
-        FragmentManager fm = getChildFragmentManager();
-        FragmentTransaction ft = fm.beginTransaction();
+        final FragmentManager fm = getChildFragmentManager();
+        final FragmentTransaction ft = fm.beginTransaction();
 
-        MapContainer mc= new MapContainer();
+        final MapContainer mc = new MapContainer();
         ft.replace(R.id.map_container, mc, "map_container");
         ft.addToBackStack(null);
         ft.setCustomAnimations(

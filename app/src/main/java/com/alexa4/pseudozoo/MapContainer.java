@@ -18,6 +18,7 @@ import com.yandex.mapkit.mapview.MapView;
 public class MapContainer extends Fragment {
     private MapView mapview;
 
+    //Don't forget to change ApiKey to API_KEY before commit
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,7 +29,7 @@ public class MapContainer extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.mapfragment, container, false);
+        final View root = inflater.inflate(R.layout.mapfragment, container, false);
 
         mapview = (MapView)root.findViewById (R. id.mapview);
         mapview.getMap ().move(

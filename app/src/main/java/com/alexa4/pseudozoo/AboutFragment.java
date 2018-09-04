@@ -20,9 +20,9 @@ public class AboutFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_about, container, false);
+        final View root = inflater.inflate(R.layout.fragment_about, container, false);
 
-        ImageView networks_vk = (ImageView) root.findViewById(R.id.networks_vk);
+        final ImageView networks_vk = (ImageView) root.findViewById(R.id.networks_vk);
         networks_vk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -33,7 +33,7 @@ public class AboutFragment extends Fragment {
             }
         });
 
-        ImageView networks_facebook = (ImageView) root.findViewById(R.id.networks_facebook);
+        final ImageView networks_facebook = (ImageView) root.findViewById(R.id.networks_facebook);
         networks_facebook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -44,7 +44,7 @@ public class AboutFragment extends Fragment {
             }
         });
 
-        ImageView networks_instagram = (ImageView) root.findViewById(R.id.networks_instagram);
+        final ImageView networks_instagram = (ImageView) root.findViewById(R.id.networks_instagram);
         networks_instagram.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -55,7 +55,7 @@ public class AboutFragment extends Fragment {
             }
         });
 
-        ImageView networks_youtube = (ImageView) root.findViewById(R.id.networks_youtube);
+        final ImageView networks_youtube = (ImageView) root.findViewById(R.id.networks_youtube);
         networks_youtube.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

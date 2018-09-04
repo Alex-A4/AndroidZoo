@@ -16,10 +16,10 @@ import android.view.MenuItem;
  * In a top part is Constraint layout which is container where loads fragments
  */
 public class MainActivity extends AppCompatActivity {
-    BottomNavigationView navigation;
+    private BottomNavigationView navigation;
 
 
-    BottomNavigationView.OnNavigationItemSelectedListener bnl = new
+    private final BottomNavigationView.OnNavigationItemSelectedListener bnl = new
             BottomNavigationView.OnNavigationItemSelectedListener() {
                 @Override
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -67,10 +67,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        FragmentManager manager = getSupportFragmentManager();
-        MainFragment mainFragment = new MainFragment();
+        final FragmentManager manager = getSupportFragmentManager();
+        final MainFragment mainFragment = new MainFragment();
 
-        FragmentTransaction ft = manager.beginTransaction();
+        final FragmentTransaction ft = manager.beginTransaction();
         ft.add(R.id.container, mainFragment,"fragment_main");
         ft.commit();
 

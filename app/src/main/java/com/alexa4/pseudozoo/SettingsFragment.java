@@ -17,9 +17,9 @@ public class SettingsFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_settings, container, false);
+        final View root = inflater.inflate(R.layout.fragment_settings, container, false);
 
-        ImageView backArrow = (ImageView) root.findViewById(R.id.settings_fragment_toolbar_back);
+        final ImageView backArrow = (ImageView) root.findViewById(R.id.settings_fragment_toolbar_back);
         backArrow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
