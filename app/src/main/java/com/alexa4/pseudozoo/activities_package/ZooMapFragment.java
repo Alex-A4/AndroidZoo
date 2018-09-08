@@ -1,0 +1,78 @@
+package com.alexa4.pseudozoo.activities_package;
+
+import android.annotation.SuppressLint;
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Toast;
+
+import com.alexa4.pseudozoo.R;
+
+import java.net.InetAddress;
+
+
+/**
+ * MapFragment represent map where zoo is, which place visitor can visit
+ */
+public class ZooMapFragment extends Fragment {
+
+    private FragmentTransaction ft;
+    private FragmentManager fm;
+    @SuppressLint("ResourceType")
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
+
+        View root = inflater.inflate(R.layout.fragment_map, container, false);
+
+        fm = getChildFragmentManager();
+        ft = fm.beginTransaction();
+
+        return root;
+    }
+
+
+    /**
+     * Returns true if internet connection exists
+     * @return internet connection status
+     */
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
+
+    /**
+     * If internet connection exists, then show map
+     */
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (isNetworkAvailable()) {
+            final MapContainer mc = new MapContainer();
+            ft.replace(R.id.map_container, mc, "map_container");
+            ft.addToBackStack(null);
+            ft.setCustomAnimations(
+                    android.R.animator.fade_in, android.R.animator.fade_out);
+            ft.commit();
+        } else {
+            Toast toast =  Toast.makeText(getContext(), "Check your internet connection", Toast.LENGTH_SHORT);
+            toast.setGravity(Gravity.CENTER, 0, 0);
+            toast.show();
+        }
+    }
+}
