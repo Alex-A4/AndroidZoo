@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ZooMapFragment">
+    tools:context=".activities_package.ZooMapFragment">
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/map_fragment_toolbar"

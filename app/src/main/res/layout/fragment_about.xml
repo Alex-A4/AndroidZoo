@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AboutFragment">
+    tools:context=".activities_package.AboutFragment">
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/about_fragment_toolbar"
