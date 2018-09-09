@@ -3,6 +3,5 @@
     <color name="colorPrimary">#379a00</color>
     <color name="colorPrimaryDark">#006b00</color>
     <color name="colorAccent">#ffea00</color>
-    <color name="colorToolbar">#379a00</color>
     <color name="colorToolbarItems">@android:color/black</color>
 </resources>

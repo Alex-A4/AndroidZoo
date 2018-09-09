@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -32,20 +33,13 @@
 
     </android.support.constraint.ConstraintLayout>
 
-
-    <TextView
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="@string/settingspage_head"
-        android:textSize="@dimen/mainpage_head_textsize"
-
-        app:layout_constraintWidth_default="spread"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:layout_marginLeft="@dimen/news_horizontal_margin"
-        android:layout_marginRight="@dimen/news_horizontal_margin"
-        app:layout_constraintLeft_toLeftOf="parent"
+    <Switch
+        android:id="@+id/settings_switch_night_mode"
+        style="@style/SwitcherStyle"
+        android:text="@string/settings_theme_switch"
         app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/settings_fragment_toolbar"/>
+
 
 </android.support.constraint.ConstraintLayout>

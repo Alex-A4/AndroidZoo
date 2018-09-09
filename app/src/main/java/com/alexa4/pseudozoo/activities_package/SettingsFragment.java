@@ -7,7 +7,10 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.Switch;
+import android.widget.Toast;
 
 import com.alexa4.pseudozoo.R;
 
@@ -20,6 +23,18 @@ public class SettingsFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View root = inflater.inflate(R.layout.fragment_settings, container, false);
+
+        final Switch night_mode = root.findViewById(R.id.settings_switch_night_mode);
+        night_mode.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked){
+                    Toast.makeText(getContext(), "Night mode enabled", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getContext(), "Night mode disabled", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
 
         final ImageView backArrow = (ImageView) root.findViewById(R.id.settings_fragment_toolbar_back);
         backArrow.setOnClickListener(new View.OnClickListener() {

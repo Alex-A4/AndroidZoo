@@ -24,7 +24,7 @@
     </style>
 
     <style name="ToolbarStyle">
-        <item name="android:background">@color/colorToolbar</item>
+        <item name="android:background">@color/colorPrimary</item>
         <item name="android:padding">@dimen/toolbar_padding_TopBottom</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">match_parent</item>
@@ -48,5 +48,14 @@
         <item name="android:textSize">@dimen/toolbar_text_size</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="SwitcherStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/settings_switch_textSize</item>
+        <item name="android:layout_marginLeft">@dimen/settings_switch_marginLR</item>
+        <item name="android:layout_marginRight">@dimen/settings_switch_marginLR</item>
+        <item name="android:layout_marginTop">@dimen/settings_switch_marginTop</item>
     </style>
 </resources>
