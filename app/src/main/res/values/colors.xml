@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#379a00</color>
-    <color name="colorPrimaryDark">#006b00</color>
+    <color name="colorPrimaryDark">#003b00</color>
     <color name="colorAccent">#ffea00</color>
+
+    <color name="colorPrimaryNight">#003b00</color>
+    <color name="colorPrimaryLightNight">#34692b</color>
+    <color name="colorScreenBackground">#ffffff</color>
+
     <color name="colorToolbarItems">@android:color/black</color>
 </resources>
