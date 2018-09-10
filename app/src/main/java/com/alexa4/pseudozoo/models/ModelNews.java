@@ -9,6 +9,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+
+/**
+ * Model class which contains list of News and methods to exchange information with Presenter
+ */
 public class ModelNews {
     private ArrayList<News> newsArrayList = new ArrayList<News>(Arrays.asList(
             new News("1 и 2 сентября - День знаний в Ярославском зоопарке!","02 августа 2018", R.drawable.firstseptember,"1 и 2 сентября 2018 года мы приглашаем мальчишек и девчонок, а так же их родителей на День знаний в Ярославский зоопарк! Для Вас - интерактивная экскурсия, лекторий, а так же возможность познаокмиться с нашим учебным центром!"),

@@ -6,6 +6,10 @@ import com.alexa4.pseudozoo.user_data.News;
 
 import java.util.ArrayList;
 
+
+/**
+ *
+ */
 public class PresenterNews extends PresenterParent{
     private final ModelNews modelNews;
 
@@ -27,7 +31,7 @@ public class PresenterNews extends PresenterParent{
         modelNews.loadNews(new ModelNews.LoadNewsCallback() {
             @Override
             public void onLoad(ArrayList<News> list) {
-                ((MainFragment) getview()).updateNewsList(list);
+                ((MainFragment) getView()).updateNewsList(list);
             }
         });
     }
