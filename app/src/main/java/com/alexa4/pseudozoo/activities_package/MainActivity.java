@@ -14,7 +14,6 @@ import com.alexa4.pseudozoo.presenter.PresenterNews;
 import com.alexa4.pseudozoo.presenter.PresenterParent;
 import com.alexa4.pseudozoo.presenter.ViewInterfaceParent;
 
-
 /**
  * MainActivity is a container to all fragments which contains UI
  * In a bottom of activity is bottomNavigation, by which we can change fragments
@@ -106,4 +105,17 @@ public class MainActivity extends AppCompatActivity implements ViewInterfacePare
         navigation.setOnNavigationItemSelectedListener(bnl);
         navigation.setSelectedItemId(R.id.navigation_home);
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        setColors();
+    }
+
+    public void setColors(){
+        if (nightMode.getMode())
+            navigation.setBackgroundColor(getResources().getColor(R.color.colorPrimaryNight));
+        else navigation.setBackgroundColor(getResources().getColor(R.color.colorScreenBackground));
+    }
 }
+

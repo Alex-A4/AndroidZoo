@@ -88,5 +88,6 @@ public class SettingsFragment extends Fragment implements ViewInterfaceParent {
             toolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
             settingsFragment.setBackgroundColor(getResources().getColor(R.color.colorScreenBackground));
         }
+        ((MainActivity) getContext()).setColors();
     }
 }
