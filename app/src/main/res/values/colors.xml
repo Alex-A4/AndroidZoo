@@ -9,4 +9,5 @@
     <color name="colorScreenBackground">#ffffff</color>
 
     <color name="colorToolbarItems">@android:color/black</color>
+    <color name="colorText">#000000</color>
 </resources>

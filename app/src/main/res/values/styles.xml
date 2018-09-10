@@ -9,6 +9,7 @@
     </style>
 
     <style name="Aboutpage_headers">
+        <item name="android:textColor">@color/colorText</item>
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginLeft">@dimen/about_text_margin</item>
@@ -17,6 +18,7 @@
     </style>
 
     <style name="Aboutpage_text">
+        <item name="android:textColor">@color/colorText</item>
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_marginLeft">@dimen/about_text_margin</item>
         <item name="android:layout_marginTop">@dimen/about_text_margintop</item>
