@@ -1,11 +1,13 @@
 package com.alexa4.pseudozoo.activities_package;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -34,10 +36,14 @@ import java.util.ArrayList;
 public class MainFragment extends Fragment implements ViewInterface {
     private ListView newsList;
 
+    private ConstraintLayout toolbar;
+    private ConstraintLayout fragmentMain;
+
     private ArrayList<News> newsArrayList;
 
     private PresenterNews presenterNews;
 
+    @SuppressLint("ResourceAsColor")
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Nullable
     @Override
@@ -47,8 +53,9 @@ public class MainFragment extends Fragment implements ViewInterface {
 
         final View root = inflater.inflate(R.layout.fragment_main, container, false);
 
-        //Initializing list of news
         newsList = (ListView) root.findViewById(R.id.news_list);
+        toolbar = (ConstraintLayout) root.findViewById(R.id.main_fragment_toolbar);
+        fragmentMain = (ConstraintLayout) root.findViewById(R.id.fragment_main);
 
 
         //Initializing settings button from toolbar
@@ -67,6 +74,7 @@ public class MainFragment extends Fragment implements ViewInterface {
                 System.out.println("Settings opened");
             }
         });
+
 
         return root;
     }
@@ -142,22 +150,36 @@ public class MainFragment extends Fragment implements ViewInterface {
     }
 
 
+    /**
+     * Setting null value to presenter.view field
+     */
     @Override
     public void onStop() {
         super.onStop();
         presenterNews.detachView();
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-    }
 
+    /**
+     * Setting this view to presenter, setting fragment colors, getting list of news from model
+     */
     @Override
     public void onStart() {
         super.onStart();
         presenterNews.setView(this);
+        setColors();
         this.newsArrayList = new ArrayList<>();
         createNewsList();
+    }
+
+
+    /**
+     * Setting colors which depends of nightMode variable
+     */
+    private void setColors(){
+        if (nightMode.getMode()){
+            toolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimaryNight));
+            fragmentMain.setBackgroundColor(getResources().getColor(R.color.colorPrimaryLightNight));
+        }
     }
 }

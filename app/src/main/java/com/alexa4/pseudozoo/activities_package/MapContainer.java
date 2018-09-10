@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.alexa4.pseudozoo.R;
+import com.alexa4.pseudozoo.user_data.ApiKey;
 import com.yandex.mapkit.Animation;
 import com.yandex.mapkit.MapKitFactory;
 import com.yandex.mapkit.geometry.Point;
@@ -22,10 +23,18 @@ public class MapContainer extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        MapKitFactory.setApiKey (API_KEY);
+        MapKitFactory.setApiKey (ApiKey.API_KEY);
         MapKitFactory.initialize(this.getContext());
     }
 
+
+    /**
+     * Creating map due to Yandex mapkit
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

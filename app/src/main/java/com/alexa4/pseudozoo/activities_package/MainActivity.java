@@ -12,6 +12,7 @@ import com.alexa4.pseudozoo.R;
 import com.alexa4.pseudozoo.models.ModelNews;
 import com.alexa4.pseudozoo.presenter.PresenterNews;
 import com.alexa4.pseudozoo.presenter.PresenterParent;
+import com.alexa4.pseudozoo.presenter.ViewInterfaceParent;
 
 
 /**
@@ -19,13 +20,17 @@ import com.alexa4.pseudozoo.presenter.PresenterParent;
  * In a bottom of activity is bottomNavigation, by which we can change fragments
  * In a top part is Constraint layout which is container where loads fragments
  */
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements ViewInterfaceParent{
     private BottomNavigationView navigation;
 
     private PresenterParent presenter;
 
     private ModelNews modelNews;
 
+
+    /**
+     * Bottom navigation bar which open fragments
+     */
     private final BottomNavigationView.OnNavigationItemSelectedListener bnl = new
             BottomNavigationView.OnNavigationItemSelectedListener() {
                 @Override
@@ -75,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
             };
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,9 +89,10 @@ public class MainActivity extends AppCompatActivity {
         modelNews = new ModelNews();
 
         final FragmentManager manager = getSupportFragmentManager();
-        final MainFragment mainFragment = new MainFragment();
 
         final FragmentTransaction ft = manager.beginTransaction();
+
+        final MainFragment mainFragment = new MainFragment();
 
         presenter = new PresenterNews(modelNews);
         presenter.setView(mainFragment);
@@ -94,7 +101,6 @@ public class MainActivity extends AppCompatActivity {
 
         ft.add(R.id.container, mainFragment,"fragment_main");
         ft.commit();
-
 
         navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(bnl);
