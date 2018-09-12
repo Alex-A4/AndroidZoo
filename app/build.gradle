@@ -37,6 +37,7 @@ dependencies {
     implementation 'com.yandex.android:mapkit:3.0.0'
     implementation 'com.google.guava:guava:25.0-android'
     implementation 'com.android.support:multidex:1.0.2'
+    implementation 'org.jsoup:jsoup:1.11.3:'
     //noinspection GradleCompatible
     implementation 'com.android.support:appcompat-v7:28.0.0-rc01'
     implementation 'com.android.support:design:28.0.0-rc01'
