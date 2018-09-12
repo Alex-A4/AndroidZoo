@@ -78,7 +78,7 @@ public class ZooMapFragment extends Fragment implements ViewInterfaceParent {
                     android.R.animator.fade_in, android.R.animator.fade_out);
             ft.commit();
         } else {
-            Toast toast =  Toast.makeText(getContext(), "Check your internet connection", Toast.LENGTH_SHORT);
+            Toast toast =  Toast.makeText(getContext(), R.string.check_internet, Toast.LENGTH_SHORT);
             toast.setGravity(Gravity.CENTER, 0, 0);
             toast.show();
         }
