@@ -1,24 +1,31 @@
 package com.alexa4.pseudozoo.models;
 
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 
-import com.alexa4.pseudozoo.R;
 import com.alexa4.pseudozoo.user_data.News;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
+
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 
 /**
  * Model class which contains list of News and methods to exchange information with Presenter
  */
 public class ModelNews {
-    private ArrayList<News> newsArrayList = new ArrayList<News>(Arrays.asList(
-            new News("1 и 2 сентября - День знаний в Ярославском зоопарке!","02 августа 2018", R.drawable.firstseptember,"1 и 2 сентября 2018 года мы приглашаем мальчишек и девчонок, а так же их родителей на День знаний в Ярославский зоопарк! Для Вас - интерактивная экскурсия, лекторий, а так же возможность познаокмиться с нашим учебным центром!"),
-            new News("Выездная выставка зоопарка в Левцово!", "02 августа 2018", R.drawable.levcovo,"3 августа 2018 года Ярославский зоопарк представил свою экспозицию на \"Дне ярославского поля\", а 4 августа мы ждем всех в \"Левцово\" на фестивале \"ТехноTravel\", где Вы сможете покататься верхом на верблюде!"),
-            new News("Вкусное лакомство для обитаталей зоопарка", "01 июня 2018",R.drawable.lakomstvo,"Во время жаркой погоды сотрудники Ярославского зоопарка балуют обитаталей вкусным мороженым. В пятницу, 27.07.2018, все желающие наблюдали, как лакомятся вкусняшками наши Ума и Топа")
-    ));
+
+    public interface Progress{
+        int CONNECTING_ERROR = 1;
+        int DOWNLOADING_ERROR = 2;
+    }
+
+    //List of news
+    private final ArrayList<News> newsList = new ArrayList<>();
 
 
     /**
@@ -26,27 +33,35 @@ public class ModelNews {
      * @param loadNewsCallback
      */
     public void loadNews(LoadNewsCallback loadNewsCallback){
-
         LoadNewsTask loadTask = new LoadNewsTask(loadNewsCallback);
         loadTask.execute();
     }
 
-
     /**
-     * Method which inform about complete downloading of news
+     * Getting basic list of news
+     * @return
      */
-    public interface LoadNewsCallback{
-        void onLoad(ArrayList<News> list);
+    public ArrayList<News> getNewsList(){
+        return this.newsList;
     }
 
 
+    /**
+     * Interface which inform about complete downloading of news
+     */
+    public interface LoadNewsCallback{
+        void retrieveResult(ArrayList<News> list);
+        NetworkInfo getInstanceNetworkInfo();
+        void startDownloading();
+        void stopDownloading();
+        void errorWhileDownloading(int progress);
+    }
 
 
     /**
-     * Class to async download news from internet
+     * Class to async download news from link http://yar-zoo.ru/home/news.html
      */
-    class LoadNewsTask {
-
+    private class LoadNewsTask extends AsyncTask<String, Void, ArrayList<News>> {
         LoadNewsCallback loadNewsCallback;
 
         LoadNewsTask(LoadNewsCallback loadNewsCallback){
@@ -54,12 +69,84 @@ public class ModelNews {
         }
 
         /**
-         * Later it will download news from internet
+         * Cancel background network operation if we do not have network connectivity.
          */
-        protected void execute(){
-            ArrayList<News> list = newsArrayList;
-            if (loadNewsCallback != null)
-                loadNewsCallback.onLoad(list);
+        @Override
+        protected void onPreExecute() {
+            if (loadNewsCallback != null) {
+                NetworkInfo networkInfo = loadNewsCallback.getInstanceNetworkInfo();
+                if (networkInfo == null || !networkInfo.isConnected() ||
+                        (networkInfo.getType() != ConnectivityManager.TYPE_WIFI
+                                && networkInfo.getType() != ConnectivityManager.TYPE_MOBILE)) {
+                    // If no connectivity, cancel task and update Callback with null data.
+                    loadNewsCallback.errorWhileDownloading(Progress.CONNECTING_ERROR);
+                    cancel(true);
+                }
+            }
+        }
+
+        /**
+         * Defines work to perform on the background thread
+         * Downloading html page, parse it due to JSOUP then create list of news
+         */
+        @Override
+        protected ArrayList<News> doInBackground(String... urls) {
+            loadNewsCallback.startDownloading();
+
+            boolean wasExist = newsList.size() == 0 ? false : true;
+
+            Document doc = null;
+            try {
+                //Downloading html page
+                doc = Jsoup.connect("http://yar-zoo.ru/home/news.html").get();
+
+                //Parsing page
+                Elements timeElement = doc.select(   ".element-itempublish_up");
+                Elements headerElement = doc.select(".jbimage-link");
+                Elements descriptionElement = doc.select("div.element");
+
+                //Creating list of news
+                for (int i = 0; i < headerElement.size(); i++){
+                    String title = headerElement.get(i).attr("title");
+                    String link = headerElement.get(i).attr("href");
+                    String imageUrl = headerElement.get(i).select("img[src$=.jpg]")
+                            .attr("src");
+                    String time = timeElement.get(i).text();
+                    String description = descriptionElement.get(i).text();
+                    if (wasExist) {
+                        if (!isContains(time))
+                            newsList.add(0, new News(title, time, imageUrl, description, link));
+                    } else newsList.add(new News(title, time, imageUrl, description, link));
+                }
+            } catch (IOException e) {
+                //If reading error appear then call to view about it and return empty list
+                e.printStackTrace();
+                cancel(true);
+                loadNewsCallback.errorWhileDownloading(Progress.DOWNLOADING_ERROR);
+                return null;
+            }
+
+            return newsList;
+        }
+
+
+        private boolean isContains(String time){
+            for (News news: newsList){
+                if (news.getTime().equals(time))
+                    return true;
+            }
+            return false;
+        }
+
+        /**
+         * Updates the LoadNewsCallback with the result.
+         */
+        @Override
+        protected void onPostExecute(ArrayList<News> result) {
+            if (result != null && loadNewsCallback != null) {
+                loadNewsCallback.stopDownloading();
+                loadNewsCallback.retrieveResult(result);
+            }
         }
     }
 
