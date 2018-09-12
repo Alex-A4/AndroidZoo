@@ -1,5 +1,10 @@
 package com.alexa4.pseudozoo.presenter;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+
+import com.alexa4.pseudozoo.activities_package.MainActivity;
 import com.alexa4.pseudozoo.activities_package.MainFragment;
 import com.alexa4.pseudozoo.models.ModelNews;
 import com.alexa4.pseudozoo.user_data.News;
@@ -8,31 +13,85 @@ import java.util.ArrayList;
 
 
 /**
- *
+ * Presenter which implements interface to download news from the internet
  */
 public class PresenterNews extends PresenterParent{
     private final ModelNews modelNews;
 
+    /**
+     * Setting model to presenter
+     * @param model
+     */
     public PresenterNews(ModelNews model) {
         this.modelNews = model;
     }
 
+    /**
+     * Bind current open view
+     * @param view current open view
+     */
     @Override
     public void setView(ViewInterfaceParent view) {
         super.setView(view);
     }
 
+
+    /**
+     * Unbind view to avoid memory leaks
+     */
     @Override
     public void detachView() {
         super.detachView();
     }
 
-    public void getNewsList(){
+    /**
+     * Downloading list of news from Zoo web link
+     */
+    public void updateNewsList(){
+        System.out.println(getView().getClass());
         modelNews.loadNews(new ModelNews.LoadNewsCallback() {
             @Override
-            public void onLoad(ArrayList<News> list) {
-                ((MainFragment) getView()).updateNewsList(list);
+            public void retrieveResult(ArrayList<News> list) {
+                if (getView() != null)
+                    ((MainFragment) getView()).updateNewsList(list);
+            }
+
+            @Override
+            public NetworkInfo getInstanceNetworkInfo() {
+                ConnectivityManager cm = (ConnectivityManager) ((MainFragment) getView())
+                        .getContext()
+                        .getSystemService(Context.CONNECTIVITY_SERVICE);
+                NetworkInfo networkInfo = cm.getActiveNetworkInfo();
+                return networkInfo;
+            }
+
+
+            @Override
+            public void startDownloading() {
+                if (getView() != null)
+                    ((MainFragment) getView()).showConnectingText();
+            }
+
+            @Override
+            public void stopDownloading() {
+                if (getView() != null)
+                    ((MainFragment) getView()).hideConnectingText();
+            }
+
+            @Override
+            public void errorWhileDownloading(int progress) {
+                if (getView() != null)
+                    ((MainFragment) getView()).showErrorConnection(progress);
             }
         });
+    }
+
+
+    /**
+     * Getting basic list of news
+     * @return
+     */
+    public ArrayList<News> getNewsList(){
+        return modelNews.getNewsList();
     }
 }
