@@ -60,4 +60,11 @@
         <item name="android:layout_marginRight">@dimen/settings_switch_marginLR</item>
         <item name="android:layout_marginTop">@dimen/settings_switch_marginTop</item>
     </style>
+
+    <style name="ConnectingTextView">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">@dimen/connecting_textview_leftmargin</item>
+        <item name="android:text">@string/connecting_text</item>
+    </style>
 </resources>
