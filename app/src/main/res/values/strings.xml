@@ -20,4 +20,7 @@
     <string name="fragment_main_title">News</string>
     <string name="we_in_socials">We are in social networks</string>
     <string name="settings_theme_switch">Night mode</string>
+    <string name="connecting_text">Connecting...</string>
+    <string name="check_internet">Check your internet connection</string>
+    <string name="downloading_error">Error during download</string>
 </resources>

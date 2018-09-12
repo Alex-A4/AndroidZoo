@@ -20,4 +20,8 @@
     <string name="ournumber_head">Наш телефон:</string>
     <string name="fragment_main_title">Новости</string>
     <string name="we_in_socials">Мы в социальных сетях:</string>
+    <string name="settings_theme_switch">Ночной режим</string>
+    <string name="connecting_text">Соединение...</string>
+    <string name="check_internet">Проверться подключение к интернету</string>
+    <string name="downloading_error">Ошибка загрузки</string>
 </resources>
