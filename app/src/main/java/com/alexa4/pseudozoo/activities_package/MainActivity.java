@@ -3,6 +3,7 @@ package com.alexa4.pseudozoo.activities_package;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -34,9 +35,6 @@ public class MainActivity extends AppCompatActivity implements ViewInterfacePare
             BottomNavigationView.OnNavigationItemSelectedListener() {
                 @Override
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                    FragmentManager manager = getSupportFragmentManager();
-                    FragmentTransaction ft = manager.beginTransaction();
-
                     presenter.detachView();
 
                     switch (item.getItemId()) {
@@ -45,32 +43,19 @@ public class MainActivity extends AppCompatActivity implements ViewInterfacePare
                             NewsFragment mf = new NewsFragment();
                             presenter.setView(mf);
                             mf.setPresenter((PresenterNews) presenter);
-
-                            ft.replace(R.id.container, mf, "fragment_news");
-                            ft.addToBackStack(null);
-                            ft.setCustomAnimations(
-                                    android.R.animator.fade_in, android.R.animator.fade_out);
-                            ft.commit();
+                            loadFragment(mf);
                             System.out.println("Home opened");
                             return true;
 
                         case R.id.navigation_map:
                             ZooMapFragment mapf= new ZooMapFragment();
-                            ft.replace(R.id.container, mapf, "fragment_map");
-                            ft.addToBackStack(null);
-                            ft.setCustomAnimations(
-                                    android.R.animator.fade_in, android.R.animator.fade_out);
-                            ft.commit();
+                            loadFragment(mapf);
                             System.out.println("Map opened");
                             return true;
 
                         case R.id.navigation_about:
                             AboutFragment af = new AboutFragment();
-                            ft.replace(R.id.container, af, "fragment_about");
-                            ft.addToBackStack(null);
-                            ft.setCustomAnimations(
-                                    android.R.animator.fade_in, android.R.animator.fade_out);
-                            ft.commit();
+                            loadFragment(af);
                             System.out.println("About opened");
                             return true;
                     }
@@ -87,24 +72,29 @@ public class MainActivity extends AppCompatActivity implements ViewInterfacePare
 
         modelNews = new ModelNews();
 
-        final FragmentManager manager = getSupportFragmentManager();
-
-        final FragmentTransaction ft = manager.beginTransaction();
-
-        final NewsFragment newsFragment = new NewsFragment();
+        NewsFragment newsFragment = new NewsFragment();
 
         presenter = new PresenterNews(modelNews);
         presenter.setView(newsFragment);
         newsFragment.setPresenter((PresenterNews) presenter);
 
-
-        ft.add(R.id.container, newsFragment,"fragment_news");
-        ft.commit();
+        loadFragment(newsFragment);
 
         navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(bnl);
         navigation.setSelectedItemId(R.id.navigation_home);
     }
+
+    private void loadFragment(Fragment fragment){
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+
+        ft.replace(R.id.container, fragment);
+        ft.addToBackStack(null);
+        ft.setCustomAnimations(
+                android.R.animator.fade_in, android.R.animator.fade_out);
+        ft.commit();
+    }
+
 
     @Override
     protected void onStart() {
