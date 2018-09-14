@@ -19,7 +19,10 @@ import com.yandex.mapkit.mapview.MapView;
 public class MapContainer extends Fragment {
     private MapView mapview;
 
-    //Don't forget to change ApiKey to API_KEY before commit
+    /**
+     * Initializing Yandex Map
+     * @param savedInstanceState
+     */
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
