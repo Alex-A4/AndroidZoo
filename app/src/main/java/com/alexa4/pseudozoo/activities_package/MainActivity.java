@@ -42,11 +42,11 @@ public class MainActivity extends AppCompatActivity implements ViewInterfacePare
                     switch (item.getItemId()) {
                         case R.id.navigation_home:
                             presenter = new PresenterNews(modelNews);
-                            MainFragment mf = new MainFragment();
+                            NewsFragment mf = new NewsFragment();
                             presenter.setView(mf);
                             mf.setPresenter((PresenterNews) presenter);
 
-                            ft.replace(R.id.container, mf, "fragment_main");
+                            ft.replace(R.id.container, mf, "fragment_news");
                             ft.addToBackStack(null);
                             ft.setCustomAnimations(
                                     android.R.animator.fade_in, android.R.animator.fade_out);
@@ -91,14 +91,14 @@ public class MainActivity extends AppCompatActivity implements ViewInterfacePare
 
         final FragmentTransaction ft = manager.beginTransaction();
 
-        final MainFragment mainFragment = new MainFragment();
+        final NewsFragment newsFragment = new NewsFragment();
 
         presenter = new PresenterNews(modelNews);
-        presenter.setView(mainFragment);
-        mainFragment.setPresenter((PresenterNews) presenter);
+        presenter.setView(newsFragment);
+        newsFragment.setPresenter((PresenterNews) presenter);
 
 
-        ft.add(R.id.container, mainFragment,"fragment_main");
+        ft.add(R.id.container, newsFragment,"fragment_news");
         ft.commit();
 
         navigation = (BottomNavigationView) findViewById(R.id.navigation);

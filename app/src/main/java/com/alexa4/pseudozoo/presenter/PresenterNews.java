@@ -4,8 +4,7 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
-import com.alexa4.pseudozoo.activities_package.MainActivity;
-import com.alexa4.pseudozoo.activities_package.MainFragment;
+import com.alexa4.pseudozoo.activities_package.NewsFragment;
 import com.alexa4.pseudozoo.models.ModelNews;
 import com.alexa4.pseudozoo.user_data.News;
 
@@ -53,12 +52,12 @@ public class PresenterNews extends PresenterParent{
             @Override
             public void retrieveResult(ArrayList<News> list) {
                 if (getView() != null)
-                    ((MainFragment) getView()).updateNewsList(list);
+                    ((NewsFragment) getView()).updateNewsList(list);
             }
 
             @Override
             public NetworkInfo getInstanceNetworkInfo() {
-                ConnectivityManager cm = (ConnectivityManager) ((MainFragment) getView())
+                ConnectivityManager cm = (ConnectivityManager) ((NewsFragment) getView())
                         .getContext()
                         .getSystemService(Context.CONNECTIVITY_SERVICE);
                 NetworkInfo networkInfo = cm.getActiveNetworkInfo();
@@ -69,19 +68,19 @@ public class PresenterNews extends PresenterParent{
             @Override
             public void startDownloading() {
                 if (getView() != null)
-                    ((MainFragment) getView()).showConnectingText();
+                    ((NewsFragment) getView()).showConnectingText();
             }
 
             @Override
             public void stopDownloading() {
                 if (getView() != null)
-                    ((MainFragment) getView()).hideConnectingText();
+                    ((NewsFragment) getView()).hideConnectingText();
             }
 
             @Override
             public void errorWhileDownloading(int progress) {
                 if (getView() != null)
-                    ((MainFragment) getView()).showErrorConnection(progress);
+                    ((NewsFragment) getView()).showErrorConnection(progress);
             }
         });
     }

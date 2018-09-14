@@ -29,16 +29,14 @@ import com.alexa4.pseudozoo.presenter.PresenterNews;
 import com.alexa4.pseudozoo.presenter.ViewInterfaceNews;
 import com.alexa4.pseudozoo.user_data.News;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 
 
 /**
- * MainFragment contains list of news, toolbar with settings button
+ * NewsFragment contains list of news, toolbar with settings button
  * It's loading when the app starts
  */
-public class MainFragment extends Fragment implements ViewInterfaceNews {
+public class NewsFragment extends Fragment implements ViewInterfaceNews {
     private ListView newsList;
 
     private ConstraintLayout toolbar;
@@ -56,7 +54,7 @@ public class MainFragment extends Fragment implements ViewInterfaceNews {
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
 
-        final View root = inflater.inflate(R.layout.fragment_main, container, false);
+        final View root = inflater.inflate(R.layout.fragment_news, container, false);
 
         newsList = (ListView) root.findViewById(R.id.news_list);
         toolbar = (ConstraintLayout) root.findViewById(R.id.main_fragment_toolbar);
