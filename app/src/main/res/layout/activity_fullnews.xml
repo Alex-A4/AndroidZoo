@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    android:id="@+id/fullnews_scrollview"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+<android.support.constraint.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/activity_fullnews"
+    tools:context=".activities_package.MainActivity">
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/fullnews_toolbar"
+        style="@style/ToolbarStyle"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent">
+
+        <ImageView
+            android:id="@+id/fullnews_toolbar_back"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:paddingRight="@dimen/settings_arrowback_paddingRight"
+            android:paddingBottom="@dimen/fragment_toolbar_paddingbottom"
+            android:src="@drawable/ic_back_arrow"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/fullnews_toolbar_text"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+
+        <TextView
+            android:id="@+id/fullnews_toolbar_text"
+            style="@style/ToolBarFullNewsTextStyle"
+            android:layout_width="321dp"
+            android:text="Закрытие сезона выездной экспозиции!"
+            app:layout_constraintLeft_toRightOf="@id/fullnews_toolbar_back"
+            app:layout_constraintRight_toRightOf="parent" />
+
+    </android.support.constraint.ConstraintLayout>
+
+    <ImageView
+        android:layout_margin="@dimen/fullnews_image_margin"
+        android:id="@+id/fullnews_image_of_news"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintTop_toBottomOf="@id/fullnews_toolbar"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+    <TextView
+        android:id="@+id/fullnews_text"
+        style="@style/FullNews_TextOfNews"
+        tools:text="Heyo this is news"
+        app:layout_constraintTop_toBottomOf="@id/fullnews_image_of_news"
+        app:layout_constraintLeft_toLeftOf="parent"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/fullnews_image_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/fullnews_images_margin"
+        app:layout_constraintTop_toBottomOf="@id/fullnews_text"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:listitem="@layout/news_image_item"/>
+
+
+</android.support.constraint.ConstraintLayout>
+</ScrollView>
