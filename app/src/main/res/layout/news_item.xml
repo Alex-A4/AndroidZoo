@@ -16,10 +16,7 @@
         tools:text="Caption of the news"/>
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:textSize="10sp"
+        style="@style/NewsTimeText"
         android:id="@+id/news_item_time"
         tools:text="Publication time of news"/>
 
