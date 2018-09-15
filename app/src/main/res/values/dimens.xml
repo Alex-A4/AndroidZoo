@@ -23,4 +23,12 @@
     <dimen name="settings_switch_marginLR">24dp</dimen>
     <dimen name="settings_switch_marginTop">32dp</dimen>
     <dimen name="connecting_textview_leftmargin">16dp</dimen>
+    <dimen name="fullnews_caption_textsize">24sp</dimen>
+    <dimen name="fullnews_caption_margin">16dp</dimen>
+    <dimen name="fullnews_textofnews_textsize">16sp</dimen>
+    <dimen name="fullnews_text_margin">24dp</dimen>
+    <dimen name="fullnews_images_margin">16dp</dimen>
+    <dimen name="fullnews_images_spacing">40dp</dimen>
+    <dimen name="toolbar_fullnews_text_size">16sp</dimen>
+    <dimen name="fullnews_image_margin">24dp</dimen>
 </resources>

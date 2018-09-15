@@ -10,4 +10,6 @@
 
     <color name="colorToolbarItems">@android:color/black</color>
     <color name="colorText">#000000</color>
+
+    <color name="colorFullNewsCaption">@android:color/black</color>
 </resources>

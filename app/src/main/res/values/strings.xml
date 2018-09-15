@@ -23,4 +23,5 @@
     <string name="connecting_text">Connecting...</string>
     <string name="check_internet">Check your internet connection</string>
     <string name="downloading_error">Error during download</string>
+    <string name="zoo_news">News default text</string>
 </resources>
