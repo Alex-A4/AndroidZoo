@@ -2,6 +2,7 @@ package com.alexa4.pseudozoo.activities_package;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
@@ -74,7 +75,6 @@ public class NewsFragment extends Fragment implements ViewInterfaceNews {
                 ft.setCustomAnimations(
                         android.R.animator.fade_in, android.R.animator.fade_out);
                 ft.commit();
-                System.out.println("Settings opened");
             }
         });
 
@@ -119,7 +119,6 @@ public class NewsFragment extends Fragment implements ViewInterfaceNews {
      * @param list of news
      */
     public void updateNewsList(ArrayList<News> list){
-        System.out.println("List had been updated");
         this.newsArrayList = list;
         newsList.setAdapter(new NewsAdapter(getContext(), R.layout.news_item, newsArrayList));
     }
@@ -131,15 +130,14 @@ public class NewsFragment extends Fragment implements ViewInterfaceNews {
     public void createNewsList() {
         //Init list of news if it's not empty
         this.newsArrayList = presenterNews.getNewsList();
-        System.out.println("List had been created");
 
-        System.out.println("Adapter running");
         newsList.setAdapter(new NewsAdapter(getContext(), R.layout.news_item, newsArrayList));
         newsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                Toast.makeText(getContext(), newsArrayList.get(position).getCaption(),
-                        Toast.LENGTH_SHORT).show();
+                Intent newsIntent = new Intent("com.alexa4.pseudozoo.FullNewsActivity");
+                newsIntent.putExtra("NewsUrl", newsArrayList.get(position).getFullNewsLink());
+                startActivity(newsIntent);
             }
         });
     }

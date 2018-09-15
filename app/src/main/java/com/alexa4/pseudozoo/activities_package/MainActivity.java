@@ -23,7 +23,7 @@ import com.alexa4.pseudozoo.presenter.ViewInterfaceParent;
 public class MainActivity extends AppCompatActivity implements ViewInterfaceParent{
     private BottomNavigationView navigation;
 
-    private PresenterParent presenter;
+    public PresenterParent presenter;
 
     private ModelNews modelNews;
 
@@ -44,19 +44,16 @@ public class MainActivity extends AppCompatActivity implements ViewInterfacePare
                             presenter.setView(mf);
                             mf.setPresenter((PresenterNews) presenter);
                             loadFragment(mf);
-                            System.out.println("Home opened");
                             return true;
 
                         case R.id.navigation_map:
                             ZooMapFragment mapf= new ZooMapFragment();
                             loadFragment(mapf);
-                            System.out.println("Map opened");
                             return true;
 
                         case R.id.navigation_about:
                             AboutFragment af = new AboutFragment();
                             loadFragment(af);
-                            System.out.println("About opened");
                             return true;
                     }
                     return false;
@@ -87,8 +84,7 @@ public class MainActivity extends AppCompatActivity implements ViewInterfacePare
 
     private void loadFragment(Fragment fragment){
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-
-        ft.replace(R.id.container, fragment);
+        ft.replace(R.id.container, fragment, String.valueOf(fragment.getClass()));
         ft.addToBackStack(null);
         ft.setCustomAnimations(
                 android.R.animator.fade_in, android.R.animator.fade_out);
