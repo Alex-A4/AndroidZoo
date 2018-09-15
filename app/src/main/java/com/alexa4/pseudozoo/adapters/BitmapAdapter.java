@@ -3,7 +3,9 @@ package com.alexa4.pseudozoo.adapters;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.Image;
 import android.os.AsyncTask;
+import android.widget.ImageView;
 
 import com.alexa4.pseudozoo.R;
 
@@ -28,12 +30,11 @@ public class BitmapAdapter extends BitmapFactory{
         downloadBitmap.execute();
     }
 
-
     /**
      * Notify that download finished and send the downloaded bitmap
      */
     public interface DownloadImageCallback{
-        void onDownloadFinished(Bitmap image);
+        void onDownloadFinished(Bitmap bitmap);
     }
 
 
@@ -45,11 +46,19 @@ public class BitmapAdapter extends BitmapFactory{
         String url;
         Resources res;
         DownloadImageCallback callback;
+        ImageView imageView;
 
         AsyncDownloadBitmap(String url, Resources res, DownloadImageCallback callback){
             this.url = url;
             this.res = res;
             this.callback = callback;
+            this.imageView = null;
+        }
+
+        public AsyncDownloadBitmap(String url, Resources res, ImageView imageView) {
+            this.url = url;
+            this.res = res;
+            this.imageView = imageView;
         }
 
         @Override
@@ -64,7 +73,9 @@ public class BitmapAdapter extends BitmapFactory{
 
         @Override
         protected void onPostExecute(Bitmap bitmap) {
-            callback.onDownloadFinished(bitmap);
+            if (this.imageView != null)
+                this.imageView.setImageBitmap(bitmap);
+            else callback.onDownloadFinished(bitmap);
         }
     }
 }
