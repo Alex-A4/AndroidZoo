@@ -2,11 +2,13 @@ package com.alexa4.pseudozoo.user_data;
 
 
 import android.graphics.Bitmap;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 /**
  * Custom class for using it list of news
  */
-public final class News{
+public final class News {
     private String caption;
     private String time;
     private String imageUrl;
@@ -45,6 +47,10 @@ public final class News{
 
     public Bitmap getBitmap(){
         return this.bitmap;
+    }
+
+    public String getFullNewsLink(){
+        return this.fullNewsLink;
     }
 
     @Override
