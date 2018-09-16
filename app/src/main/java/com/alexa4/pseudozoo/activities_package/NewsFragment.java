@@ -66,6 +66,8 @@ public class NewsFragment extends Fragment implements ViewInterfaceNews {
 
         settingsFragment = new SettingsFragment();
 
+        setRetainInstance(true);
+
         //Initializing settings button from toolbar
         final ImageView settings = (ImageView) root.findViewById(R.id.main_fragment_toolbar_settings);
         settings.setOnClickListener(new View.OnClickListener() {
