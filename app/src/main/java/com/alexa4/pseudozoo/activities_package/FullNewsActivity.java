@@ -1,13 +1,14 @@
 package com.alexa4.pseudozoo.activities_package;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -28,10 +29,10 @@ import com.alexa4.pseudozoo.user_data.FullNews;
 
 import java.util.ArrayList;
 
-public class FullNewsActivity extends AppCompatActivity implements ViewInterfaceFullNews {
+public class FullNewsActivity extends FragmentActivity implements ViewInterfaceFullNews {
 
     private final int RECYCLERVIEW_SPACING = 24;
-    private PresenterFullNews presenterNews;
+    private PresenterFullNews presenterFullNews;
 
     private ConstraintLayout activityFullNews;
     private ConstraintLayout toolbar;
@@ -52,10 +53,12 @@ public class FullNewsActivity extends AppCompatActivity implements ViewInterface
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fullnews);
 
+        //Getting news url from the intent data
+        newsUrl = getIntent().getStringExtra("NewsUrl");
+
         final ScrollView scrollView = (ScrollView) findViewById(R.id.fullnews_scrollview);
         scrollView.scrollTo(0, 0);
 
-        newsUrl = getIntent().getStringExtra("NewsUrl");
 
         activityFullNews = (ConstraintLayout) findViewById(R.id.activity_fullnews);
 
@@ -64,9 +67,9 @@ public class FullNewsActivity extends AppCompatActivity implements ViewInterface
         fullTextOfNews = (TextView) findViewById(R.id.fullnews_text);
         imageOfNews = (ImageView) findViewById(R.id.fullnews_image_of_news);
 
-        presenterNews = new PresenterFullNews(new ModelNews());
-        presenterNews.setView(this);
-        this.setPresenter(presenterNews);
+        presenterFullNews = new PresenterFullNews(new ModelNews());
+        presenterFullNews.setView(this);
+        this.setPresenter(presenterFullNews);
 
         ImageView toolbarBackArrow = (ImageView) findViewById(R.id.fullnews_toolbar_back);
         toolbarBackArrow.setOnClickListener(new View.OnClickListener() {
@@ -76,9 +79,16 @@ public class FullNewsActivity extends AppCompatActivity implements ViewInterface
             }
         });
 
+        //Initializing recyclerview which contains images
         imagesRecyclerView = (RecyclerView) findViewById(R.id.fullnews_image_container);
-        GridLayoutManager manager = new GridLayoutManager(this, 2,
-                LinearLayoutManager.VERTICAL, false);
+        GridLayoutManager manager = new GridLayoutManager (this, 2,
+                LinearLayoutManager.VERTICAL, false) {
+            @Override
+            public boolean canScrollVertically() {
+                return false;
+            }
+        };
+
         imagesRecyclerView.setLayoutManager(manager);
         imagesRecyclerView.setHasFixedSize(true);
         imagesRecyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
@@ -97,13 +107,6 @@ public class FullNewsActivity extends AppCompatActivity implements ViewInterface
     }
 
 
-    @SuppressLint("ResourceAsColor")
-    public void startDownloading(){
-    }
-
-
-    public void stopDownloading(){
-    }
 
 
     /**
@@ -124,8 +127,9 @@ public class FullNewsActivity extends AppCompatActivity implements ViewInterface
                 });
         fullTextOfNews.setText(fullNews.getFullText());
 
-        if (fullNews.getListUrlOfImages() != null){
-            imagesRecyclerView.setAdapter(new FullNewsAdapter(fullNews.getListUrlOfImages()));
+        if (fullNews.getListUrlOfImagesLowQuality() != null){
+            imagesRecyclerView.setAdapter(new FullNewsAdapter(fullNews.getListUrlOfImagesLowQuality(),
+                    fullNews.getListUrlOfImagesHighQuality()));
         }
     }
 
@@ -138,13 +142,16 @@ public class FullNewsActivity extends AppCompatActivity implements ViewInterface
                     R.string.downloading_error, Toast.LENGTH_SHORT).show();
                 break;
         }
-        Toast.makeText(this, R.string.check_internet, Toast.LENGTH_SHORT).show();
-        finish();
+        getFragmentManager().popBackStack();
     }
 
+    /**
+     * Setting presenter
+     * @param presenter
+     */
     @Override
     public void setPresenter(PresenterFullNews presenter) {
-        this.presenterNews = presenter;
+        this.presenterFullNews = presenter;
     }
 
 
@@ -153,7 +160,9 @@ public class FullNewsActivity extends AppCompatActivity implements ViewInterface
      */
     private class FullNewsAdapter extends RecyclerView.Adapter<FullNewsAdapter.FullNewsHolder> {
 
-        private ArrayList<String> urls;
+        private ArrayList<String> urlsLowQuality;
+        private ArrayList<String> urlsHighQuality;
+
 
         public class FullNewsHolder extends RecyclerView.ViewHolder{
             public ImageView imageView;
@@ -163,8 +172,9 @@ public class FullNewsActivity extends AppCompatActivity implements ViewInterface
             }
         }
 
-        public FullNewsAdapter(ArrayList<String> urls){
-            this.urls = urls;
+        public FullNewsAdapter(ArrayList<String> urlsLowQuality, ArrayList<String> urlsHighQuality){
+            this.urlsLowQuality = urlsLowQuality;
+            this.urlsHighQuality = urlsHighQuality;
         }
 
 
@@ -182,7 +192,7 @@ public class FullNewsActivity extends AppCompatActivity implements ViewInterface
 
         @Override
         public void onBindViewHolder(@NonNull FullNewsHolder fullNewsHolder, int i) {
-            BitmapAdapter.decodeBitmapFromUrl(urls.get(i), getResources(),
+            BitmapAdapter.decodeBitmapFromUrl(urlsLowQuality.get(i), getResources(),
                     new BitmapAdapter.DownloadImageCallback() {
                         @Override
                         public void onDownloadFinished(Bitmap bitmap) {
@@ -190,14 +200,17 @@ public class FullNewsActivity extends AppCompatActivity implements ViewInterface
                             fullNewsHolder.imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
 
                             fullNewsHolder.imageView.setMaxWidth(imagesRecyclerView.getWidth() / 2
-                                    - RECYCLERVIEW_SPACING);
+                                    - RECYCLERVIEW_SPACING*2);
                             fullNewsHolder.imageView.setMaxHeight(fullNewsHolder.imageView.getMaxWidth());
 
                             fullNewsHolder.imageView.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-                                    Toast.makeText(FullNewsActivity.this,urls.get(i),
+                                    Toast.makeText(FullNewsActivity.this, urlsHighQuality.get(i),
                                             Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent("com.alexa4.pseudozoo.ImageViewerActivity");
+                                    intent.putExtra("HighNewsUrl", urlsHighQuality.get(i));
+                                    startActivity(intent);
                                 }
                             });
                         }
@@ -208,21 +221,27 @@ public class FullNewsActivity extends AppCompatActivity implements ViewInterface
 
         @Override
         public int getItemCount() {
-            return urls.size();
+            return urlsLowQuality.size();
         }
     }
 
 
+    /**
+     * Start downloading of news data
+     */
     @Override
     protected void onStart() {
         super.onStart();
         setColors();
-        presenterNews.updateFullNews(newsUrl);
+        presenterFullNews.updateFullNews(newsUrl);
     }
 
+    /**
+     * Detach
+     */
     @Override
     protected void onDestroy() {
-        presenterNews.detachView();
+        presenterFullNews.detachView();
         super.onDestroy();
     }
 
