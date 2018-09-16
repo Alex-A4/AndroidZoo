@@ -1,5 +1,7 @@
 package com.alexa4.pseudozoo.user_data;
 
+import android.graphics.Bitmap;
+
 import java.util.ArrayList;
 
 public class FullNews {
@@ -8,7 +10,11 @@ public class FullNews {
     private String imgUrl;
     private ArrayList<String> listUrlOfImagesHighQuality;
     private ArrayList<String> listUrlOfImagesLowQuality;
+    private ArrayList<Bitmap> listOfBitmap;
 
+    public void setListOfBitmap(ArrayList<Bitmap> listOfBitmap) {
+        this.listOfBitmap = listOfBitmap;
+    }
 
     public void setListUrlOfImagesHighQuality(ArrayList<String> listUrlOfImagesHighQuality) {
 
@@ -30,6 +36,11 @@ public class FullNews {
         this.imgUrl = imgUrl;
         this.listUrlOfImagesLowQuality = new ArrayList<>();
         this.listUrlOfImagesHighQuality = new ArrayList<>();
+        this.listOfBitmap = new ArrayList<>();
+    }
+
+    public ArrayList<Bitmap> getListOfBitmap() {
+        return listOfBitmap;
     }
 
     public String getTitle() {
