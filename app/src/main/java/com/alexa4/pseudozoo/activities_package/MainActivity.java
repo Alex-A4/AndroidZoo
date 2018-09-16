@@ -73,16 +73,26 @@ public class MainActivity extends FragmentActivity implements ViewInterfaceParen
 
 
         //Basic fragments
-        newsFragment = new NewsFragment();
+        FragmentManager fm = getSupportFragmentManager();
+        newsFragment = (NewsFragment) fm.findFragmentByTag(String.valueOf(NewsFragment.class));
+        zooMapFragment = (ZooMapFragment) fm.findFragmentByTag(String.valueOf(ZooMapFragment.class));
+        aboutFragment = (AboutFragment) fm.findFragmentByTag(String.valueOf(AboutFragment.class));
+
+        if (newsFragment == null){
+            newsFragment = new NewsFragment();
+            fm.beginTransaction().add(newsFragment, String.valueOf(NewsFragment.class)).commit();
+        }
+
         zooMapFragment = new ZooMapFragment();
         aboutFragment = new AboutFragment();
+
 
         presenter = new PresenterNews(modelNews);
         presenter.setView(newsFragment);
         newsFragment.setPresenter((PresenterNews) presenter);
 
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.add(R.id.container, newsFragment, String.valueOf(newsFragment.getClass()));
+        ft.replace(R.id.container, newsFragment, String.valueOf(newsFragment.getClass()));
         ft.addToBackStack(null);
         ft.commit();
 
