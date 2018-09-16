@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -20,12 +21,16 @@ import com.alexa4.pseudozoo.presenter.ViewInterfaceParent;
  * In a bottom of activity is bottomNavigation, by which we can change fragments
  * In a top part is Constraint layout which is container where loads fragments
  */
-public class MainActivity extends AppCompatActivity implements ViewInterfaceParent{
+public class MainActivity extends FragmentActivity implements ViewInterfaceParent{
     private BottomNavigationView navigation;
 
     public PresenterParent presenter;
 
     private ModelNews modelNews;
+
+    private NewsFragment newsFragment;
+    private ZooMapFragment zooMapFragment;
+    private AboutFragment aboutFragment;
 
 
     /**
@@ -40,20 +45,17 @@ public class MainActivity extends AppCompatActivity implements ViewInterfacePare
                     switch (item.getItemId()) {
                         case R.id.navigation_home:
                             presenter = new PresenterNews(modelNews);
-                            NewsFragment mf = new NewsFragment();
-                            presenter.setView(mf);
-                            mf.setPresenter((PresenterNews) presenter);
-                            loadFragment(mf);
+                            presenter.setView(newsFragment);
+                            newsFragment.setPresenter((PresenterNews) presenter);
+                            loadFragment(newsFragment);
                             return true;
 
                         case R.id.navigation_map:
-                            ZooMapFragment mapf= new ZooMapFragment();
-                            loadFragment(mapf);
+                            loadFragment(zooMapFragment);
                             return true;
 
                         case R.id.navigation_about:
-                            AboutFragment af = new AboutFragment();
-                            loadFragment(af);
+                            loadFragment(aboutFragment);
                             return true;
                     }
                     return false;
@@ -69,23 +71,39 @@ public class MainActivity extends AppCompatActivity implements ViewInterfacePare
 
         modelNews = new ModelNews();
 
-        NewsFragment newsFragment = new NewsFragment();
+
+        //Basic fragments
+        newsFragment = new NewsFragment();
+        zooMapFragment = new ZooMapFragment();
+        aboutFragment = new AboutFragment();
 
         presenter = new PresenterNews(modelNews);
         presenter.setView(newsFragment);
         newsFragment.setPresenter((PresenterNews) presenter);
 
-        loadFragment(newsFragment);
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.add(R.id.container, newsFragment, String.valueOf(newsFragment.getClass()));
+        ft.addToBackStack(null);
+        ft.commit();
 
         navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(bnl);
-        navigation.setSelectedItemId(R.id.navigation_home);
     }
 
     private void loadFragment(Fragment fragment){
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+
+        //Delete settings from backstack
+        if (getSupportFragmentManager().getFragments().get(0).getClass() == SettingsFragment.class)
+            getSupportFragmentManager().popBackStack();
+
         ft.replace(R.id.container, fragment, String.valueOf(fragment.getClass()));
-        ft.addToBackStack(null);
+
+        //If current fragment is not a fragment which we want to open
+        if (fragment.getClass() != getSupportFragmentManager().getFragments().get(0).getClass()) {
+            ft.addToBackStack(null);
+        }
+
         ft.setCustomAnimations(
                 android.R.animator.fade_in, android.R.animator.fade_out);
         ft.commit();
@@ -102,6 +120,14 @@ public class MainActivity extends AppCompatActivity implements ViewInterfacePare
         if (nightMode.getMode())
             navigation.setBackgroundColor(getResources().getColor(R.color.colorPrimaryNight));
         else navigation.setBackgroundColor(getResources().getColor(R.color.colorScreenBackground));
+    }
+
+    @Override
+    public void onBackPressed() {
+        getSupportFragmentManager().popBackStack();
+        if (getSupportFragmentManager().getBackStackEntryCount() == 1) {
+            finish();
+        }
     }
 }
 
