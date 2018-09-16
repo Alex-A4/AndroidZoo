@@ -12,5 +12,5 @@
     <color name="colorText">#000000</color>
 
     <color name="colorFullNewsCaption">@android:color/black</color>
-    <color name="colorImageViewer">#787777</color>
+    <color name="colorImageViewer">@android:color/black</color>
 </resources>
