@@ -56,7 +56,6 @@ public class MapContainer extends Fragment {
     public void onStop() {
         super.onStop();
         mapview.onStop();
-        System.out.println("OnStop");
         MapKitFactory.getInstance().onStop();
     }
 
@@ -64,7 +63,6 @@ public class MapContainer extends Fragment {
     public void onStart() {
         super.onStart();
         mapview.onStart();
-        System.out.println("OnStart");
         MapKitFactory.getInstance().onStart();
     }
 }
