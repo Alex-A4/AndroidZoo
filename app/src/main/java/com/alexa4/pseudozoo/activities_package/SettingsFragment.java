@@ -8,6 +8,8 @@ import android.support.annotation.RequiresApi;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,7 +64,7 @@ public class SettingsFragment extends Fragment implements ViewInterfaceParent {
         backArrow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((MainActivity) getActivity()).getSupportFragmentManager().popBackStack();
+                getFragmentManager().popBackStack();
             }
         });
 
@@ -75,7 +77,6 @@ public class SettingsFragment extends Fragment implements ViewInterfaceParent {
         super.onStart();
         setColors();
     }
-
 
     /**
      * Setting colors which depends of nightMode variable
