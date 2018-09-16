@@ -45,6 +45,8 @@ public class NewsFragment extends Fragment implements ViewInterfaceNews {
     private TextView connectingText;
     private ArrayList<News> newsArrayList;
 
+    private SettingsFragment settingsFragment;
+    private FullNewsActivity fullNewsActivity;
     private PresenterNews presenterNews;
 
     @SuppressLint("ResourceAsColor")
@@ -62,15 +64,16 @@ public class NewsFragment extends Fragment implements ViewInterfaceNews {
         fragmentMain = (ConstraintLayout) root.findViewById(R.id.fragment_main);
         connectingText = (TextView) root.findViewById(R.id.main_fragment_text_connecting);
 
+        settingsFragment = new SettingsFragment();
+
         //Initializing settings button from toolbar
         final ImageView settings = (ImageView) root.findViewById(R.id.main_fragment_toolbar_settings);
         settings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FragmentManager manager = getActivity().getSupportFragmentManager();
+                FragmentManager manager = getFragmentManager();
                 FragmentTransaction ft = manager.beginTransaction();
-                SettingsFragment sf = new SettingsFragment();
-                ft.replace(R.id.container, sf, "fragment_settings");
+                ft.replace(R.id.container, settingsFragment, String.valueOf(settingsFragment.getClass()));
                 ft.addToBackStack(null);
                 ft.setCustomAnimations(
                         android.R.animator.fade_in, android.R.animator.fade_out);
@@ -236,6 +239,7 @@ public class NewsFragment extends Fragment implements ViewInterfaceNews {
         if (presenterNews.getNewsList().size() == 0)
             presenterNews.updateNewsList();
     }
+
 
     /**
      * Setting colors which depends of nightMode variable
