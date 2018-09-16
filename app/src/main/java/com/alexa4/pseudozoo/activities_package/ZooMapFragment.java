@@ -28,9 +28,6 @@ import java.net.InetAddress;
  */
 public class ZooMapFragment extends Fragment implements ViewInterfaceParent {
 
-    private FragmentTransaction ft;
-    private FragmentManager fm;
-
     private ConstraintLayout toolbar;
     private ConstraintLayout fragmentMap;
 
@@ -45,8 +42,6 @@ public class ZooMapFragment extends Fragment implements ViewInterfaceParent {
 
         toolbar = (ConstraintLayout) root.findViewById(R.id.map_fragment_toolbar);
         fragmentMap = (ConstraintLayout) root.findViewById(R.id.map_fragment_parent);
-        fm = getChildFragmentManager();
-        ft = fm.beginTransaction();
 
         return root;
     }
@@ -72,8 +67,8 @@ public class ZooMapFragment extends Fragment implements ViewInterfaceParent {
         super.onResume();
         if (isNetworkAvailable()) {
             final MapContainer mc = new MapContainer();
-            ft.replace(R.id.map_container, mc, "map_container");
-            ft.addToBackStack(null);
+            FragmentTransaction ft = getChildFragmentManager().beginTransaction();
+            ft.replace(R.id.map_container, mc);
             ft.setCustomAnimations(
                     android.R.animator.fade_in, android.R.animator.fade_out);
             ft.commit();
