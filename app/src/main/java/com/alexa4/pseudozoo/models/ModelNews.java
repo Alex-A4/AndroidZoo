@@ -67,8 +67,6 @@ public class ModelNews {
     public interface LoadFullNewsCallback {
         void retrieveResult(FullNews fullNews);
         NetworkInfo getInstanceNetworkInfo();
-        void startDownloading();
-        void stopDownloading();
         void errorWhileDownloading(int progress);
     }
 
@@ -202,7 +200,6 @@ public class ModelNews {
 
         @Override
         protected FullNews doInBackground(Void... voids) {
-            callback.startDownloading();
 
             FullNews fullNews;
 
@@ -216,6 +213,7 @@ public class ModelNews {
                 Elements titleElement = doc.select(".jbimage-link");
                 Elements fullTextElement = doc.select(".element-textarea").select("p");
                 Elements gallery = doc.select(".element-jbgallery").select("a[href$=.jpg]");
+                Elements galleryLowQuality = gallery.select("img[src$=.jpg]");
 
                 String title = titleElement.get(0).attr("title");
                 String imageUrl = titleElement.get(0).select("a[href$=.jpg]")
@@ -230,10 +228,15 @@ public class ModelNews {
                 fullNews = new FullNews(title, fullText, imageUrl);
 
                 if (gallery.size() > 0) {
-                    ArrayList<String> galleryList = new ArrayList<>();
+                    ArrayList<String> galleryListHighQuality = new ArrayList<>();
+                    ArrayList<String> galleryListLowQuality = new ArrayList<>();
+
                     for (Element element : gallery)
-                        galleryList.add(element.attr("href"));
-                    fullNews.setListUrlOfImages(galleryList);
+                        galleryListHighQuality.add(element.attr("href"));
+                    for (Element element: galleryLowQuality)
+                        galleryListLowQuality.add(element.attr("src"));
+                    fullNews.setListUrlOfImagesLowQuality(galleryListLowQuality);
+                    fullNews.setListUrlOfImagesHighQuality(galleryListHighQuality);
                 }
 
             } catch (IOException e) {
@@ -255,7 +258,6 @@ public class ModelNews {
         @Override
         protected void onPostExecute(FullNews result) {
             if (result != null && callback != null) {
-                callback.stopDownloading();
                 callback.retrieveResult(result);
             }
         }
