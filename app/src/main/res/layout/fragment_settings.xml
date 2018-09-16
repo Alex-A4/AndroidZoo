@@ -21,6 +21,7 @@
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:paddingRight="@dimen/settings_arrowback_paddingRight"
+            android:paddingLeft="@dimen/settings_arrowback_paddingRight"
             android:paddingBottom="@dimen/fragment_toolbar_paddingbottom"
             android:src="@drawable/ic_back_arrow"
             app:layout_constraintTop_toTopOf="parent"
