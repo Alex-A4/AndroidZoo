@@ -31,4 +31,5 @@
     <dimen name="fullnews_images_spacing">40dp</dimen>
     <dimen name="toolbar_fullnews_text_size">16sp</dimen>
     <dimen name="fullnews_image_margin">24dp</dimen>
+    <dimen name="image_viewer_title_size">18sp</dimen>
 </resources>
