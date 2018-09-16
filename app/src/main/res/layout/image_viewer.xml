@@ -2,7 +2,35 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorImageViewer"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/image_viewer_toolbar_padding"
+        android:background="@android:color/transparent">
+        <ImageView
+            android:id="@+id/image_viewer_back_arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_back_arrow"
+            android:paddingRight="@dimen/settings_arrowback_paddingRight"
+            android:paddingLeft="@dimen/settings_arrowback_paddingRight"
+            android:paddingBottom="@dimen/fragment_toolbar_paddingbottom"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/image_viewer_title"
+            app:layout_constraintLeft_toRightOf="@id/image_viewer_back_arrow"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/image_viewer_title_size"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+    </android.support.constraint.ConstraintLayout>
 
     <ImageView
         android:background="@android:color/transparent"
