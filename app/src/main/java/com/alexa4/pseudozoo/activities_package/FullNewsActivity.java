@@ -1,6 +1,7 @@
 package com.alexa4.pseudozoo.activities_package;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Rect;
@@ -192,15 +193,18 @@ public class FullNewsActivity extends FragmentActivity implements ViewInterfaceF
 
         @Override
         public void onBindViewHolder(@NonNull FullNewsHolder fullNewsHolder, int i) {
-            BitmapAdapter.decodeBitmapFromUrl(urlsLowQuality.get(i), getResources(),
+            if (fullNews.getListOfBitmap() != null && fullNews.getListOfBitmap().size() > i)
+                fullNewsHolder.imageView.setImageBitmap(fullNews.getListOfBitmap().get(i));
+            else BitmapAdapter.decodeBitmapFromUrl(urlsLowQuality.get(i), getResources(),
                     new BitmapAdapter.DownloadImageCallback() {
                         @Override
                         public void onDownloadFinished(Bitmap bitmap) {
                             fullNewsHolder.imageView.setImageBitmap(bitmap);
+                            fullNews.getListOfBitmap().add(i, bitmap);
                             fullNewsHolder.imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
 
                             fullNewsHolder.imageView.setMaxWidth(imagesRecyclerView.getWidth() / 2
-                                    - RECYCLERVIEW_SPACING*2);
+                                    - RECYCLERVIEW_SPACING);
                             fullNewsHolder.imageView.setMaxHeight(fullNewsHolder.imageView.getMaxWidth());
 
                             fullNewsHolder.imageView.setOnClickListener(new View.OnClickListener() {
