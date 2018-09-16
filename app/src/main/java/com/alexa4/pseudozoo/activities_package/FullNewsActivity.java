@@ -206,8 +206,6 @@ public class FullNewsActivity extends FragmentActivity implements ViewInterfaceF
                             fullNewsHolder.imageView.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-                                    Toast.makeText(FullNewsActivity.this, urlsHighQuality.get(i),
-                                            Toast.LENGTH_SHORT).show();
                                     Intent intent = new Intent("com.alexa4.pseudozoo.ImageViewerActivity");
                                     intent.putExtra("HighNewsUrl", urlsHighQuality.get(i));
                                     startActivity(intent);
