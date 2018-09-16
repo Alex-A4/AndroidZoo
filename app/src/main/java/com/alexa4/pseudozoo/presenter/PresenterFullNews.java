@@ -60,18 +60,6 @@ public class PresenterFullNews extends PresenterParent {
             }
 
             @Override
-            public void startDownloading() {
-                if (getView() != null)
-                    ((FullNewsActivity) getView()).startDownloading();
-            }
-
-            @Override
-            public void stopDownloading() {
-                if (getView() != null)
-                    ((FullNewsActivity) getView()).stopDownloading();
-            }
-
-            @Override
             public void errorWhileDownloading(int progress) {
                 if (getView() != null)
                     ((FullNewsActivity) getView()).errorWhileDownloading(progress);
