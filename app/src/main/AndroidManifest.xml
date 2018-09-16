@@ -40,6 +40,15 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".activities_package.ImageViewerActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="com.alexa4.pseudozoo.ImageViewerActivity" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
 
     </application>
 
