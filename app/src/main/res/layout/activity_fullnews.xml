@@ -34,7 +34,6 @@
         <TextView
             android:id="@+id/fullnews_toolbar_text"
             style="@style/ToolBarFullNewsTextStyle"
-            android:layout_width="321dp"
             android:text="Закрытие сезона выездной экспозиции!"
             app:layout_constraintLeft_toRightOf="@id/fullnews_toolbar_back"
             app:layout_constraintRight_toRightOf="parent" />
