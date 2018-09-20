@@ -20,7 +20,7 @@ import java.net.URL;
 public class BitmapAdapter extends BitmapFactory{
 
     /**
-     * Calling download of bitmap
+     * Calling download a bitmap
      * @param url of news image
      * @param res link to project Resources
      * @param callback callback interface which notify that download finished
@@ -29,6 +29,7 @@ public class BitmapAdapter extends BitmapFactory{
         AsyncDownloadBitmap downloadBitmap = new AsyncDownloadBitmap(url, res, callback);
         downloadBitmap.execute();
     }
+
 
     /**
      * Notify that download finished and send the downloaded bitmap
@@ -46,19 +47,11 @@ public class BitmapAdapter extends BitmapFactory{
         String url;
         Resources res;
         DownloadImageCallback callback;
-        ImageView imageView;
 
         AsyncDownloadBitmap(String url, Resources res, DownloadImageCallback callback){
             this.url = url;
             this.res = res;
             this.callback = callback;
-            this.imageView = null;
-        }
-
-        public AsyncDownloadBitmap(String url, Resources res, ImageView imageView) {
-            this.url = url;
-            this.res = res;
-            this.imageView = imageView;
         }
 
         @Override
@@ -73,9 +66,7 @@ public class BitmapAdapter extends BitmapFactory{
 
         @Override
         protected void onPostExecute(Bitmap bitmap) {
-            if (this.imageView != null)
-                this.imageView.setImageBitmap(bitmap);
-            else callback.onDownloadFinished(bitmap);
+            callback.onDownloadFinished(bitmap);
         }
     }
 }
