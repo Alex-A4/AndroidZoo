@@ -25,4 +25,6 @@
     <string name="downloading_error">Error during download</string>
     <string name="zoo_news">News default text</string>
     <string name="image_viewer_title">ImageViewer</string>
+    <string name="fullnews_default_string">News</string>
+    <string name="pref_header_general">General</string>
 </resources>

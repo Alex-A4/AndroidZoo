@@ -24,4 +24,7 @@
     <string name="connecting_text">Соединение...</string>
     <string name="check_internet">Проверться подключение к интернету</string>
     <string name="downloading_error">Ошибка загрузки</string>
+    <string name="image_viewer_title">Просмотр фотографий</string>
+    <string name="fullnews_default_string">Новости</string>
+    <string name="zoo_news">Новости</string>
 </resources>
