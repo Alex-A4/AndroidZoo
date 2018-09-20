@@ -203,10 +203,6 @@ public class FullNewsActivity extends FragmentActivity implements ViewInterfaceF
                             fullNews.getListOfBitmap().add(i, bitmap);
                             fullNewsHolder.imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
 
-                            fullNewsHolder.imageView.setMaxWidth(imagesRecyclerView.getWidth() / 2
-                                    - RECYCLERVIEW_SPACING);
-                            fullNewsHolder.imageView.setMaxHeight(fullNewsHolder.imageView.getMaxWidth());
-
                             fullNewsHolder.imageView.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
