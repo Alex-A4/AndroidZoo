@@ -223,8 +223,6 @@ public class ModelNews {
                 for (int i = 0; i < fullTextElement.size(); i++)
                     fullText = fullText.concat(fullTextElement.get(i).text() + "\n\n");
 
-                System.out.println(fullText);
-
                 fullNews = new FullNews(title, fullText, imageUrl);
 
                 if (gallery.size() > 0) {
@@ -238,7 +236,6 @@ public class ModelNews {
                     fullNews.setListUrlOfImagesLowQuality(galleryListLowQuality);
                     fullNews.setListUrlOfImagesHighQuality(galleryListHighQuality);
                 }
-
             } catch (IOException e) {
                 //If reading error appear then call to view about it and return empty list
                 e.printStackTrace();
