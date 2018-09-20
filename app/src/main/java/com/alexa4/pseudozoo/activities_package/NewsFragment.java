@@ -13,6 +13,7 @@ import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -87,6 +88,27 @@ public class NewsFragment extends Fragment implements ViewInterfaceNews {
         return root;
     }
 
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        if (outState == null)
+            outState = new Bundle();
+        //astFirstVisiblePosition = ((LinearLayoutManager)rv.getLayoutManager()).findFirstCompletelyVisibleItemPosition();
+        System.out.println("Scrolled position saved" + newsList);
+        outState.putInt("NEWS_SCROLL_X", newsList.getVerticalScrollbarPosition());
+        System.out.println(outState);
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
+        super.onViewStateRestored(savedInstanceState);
+        System.out.println(savedInstanceState);
+        //((LinearLayoutManager) rv.getLayoutManager()).scrollToPosition(lastFirstVisiblePosition);
+        if (savedInstanceState != null) {
+            System.out.println("Scrolled posit  ion restored " + savedInstanceState.getInt("NEWS_SCROLL_X"));
+            newsList.setScrollX(savedInstanceState.getInt("NEWS_SCROLL_X"));
+        }
+    }
 
     /**
      * Show connecting text when news loading begin
