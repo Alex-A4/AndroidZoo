@@ -47,7 +47,6 @@ public class NewsFragment extends Fragment implements ViewInterfaceNews {
     private ArrayList<News> newsArrayList;
 
     private SettingsFragment settingsFragment;
-    private FullNewsActivity fullNewsActivity;
     private PresenterNews presenterNews;
 
     @SuppressLint("ResourceAsColor")
@@ -93,19 +92,15 @@ public class NewsFragment extends Fragment implements ViewInterfaceNews {
         if (outState == null)
             outState = new Bundle();
         //astFirstVisiblePosition = ((LinearLayoutManager)rv.getLayoutManager()).findFirstCompletelyVisibleItemPosition();
-        System.out.println("Scrolled position saved" + newsList);
         outState.putInt("NEWS_SCROLL_X", newsList.getVerticalScrollbarPosition());
-        System.out.println(outState);
         super.onSaveInstanceState(outState);
     }
 
     @Override
     public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
         super.onViewStateRestored(savedInstanceState);
-        System.out.println(savedInstanceState);
         //((LinearLayoutManager) rv.getLayoutManager()).scrollToPosition(lastFirstVisiblePosition);
         if (savedInstanceState != null) {
-            System.out.println("Scrolled posit  ion restored " + savedInstanceState.getInt("NEWS_SCROLL_X"));
             newsList.setScrollX(savedInstanceState.getInt("NEWS_SCROLL_X"));
         }
     }
