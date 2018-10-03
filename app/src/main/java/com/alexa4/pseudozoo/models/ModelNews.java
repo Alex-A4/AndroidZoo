@@ -213,7 +213,6 @@ public class ModelNews {
                 Elements titleElement = doc.select(".jbimage-link");
                 Elements fullTextElement = doc.select(".element-textarea").select("p");
                 Elements gallery = doc.select(".element-jbgallery").select("a[href$=.jpg]");
-                Elements galleryLowQuality = gallery.select("img[src$=.jpg]");
 
                 String title = titleElement.get(0).attr("title");
                 String imageUrl = titleElement.get(0).select("a[href$=.jpg]")
@@ -226,15 +225,12 @@ public class ModelNews {
                 fullNews = new FullNews(title, fullText, imageUrl);
 
                 if (gallery.size() > 0) {
-                    ArrayList<String> galleryListHighQuality = new ArrayList<>();
-                    ArrayList<String> galleryListLowQuality = new ArrayList<>();
+                    ArrayList<String> galleryList = new ArrayList<>();
 
                     for (Element element : gallery)
-                        galleryListHighQuality.add(element.attr("href"));
-                    for (Element element: galleryLowQuality)
-                        galleryListLowQuality.add(element.attr("src"));
-                    fullNews.setListUrlOfImagesLowQuality(galleryListLowQuality);
-                    fullNews.setListUrlOfImagesHighQuality(galleryListHighQuality);
+                        galleryList.add(element.attr("href"));
+
+                    fullNews.setListUrlOfImages(galleryList);
                 }
             } catch (IOException e) {
                 //If reading error appear then call to view about it and return empty list
