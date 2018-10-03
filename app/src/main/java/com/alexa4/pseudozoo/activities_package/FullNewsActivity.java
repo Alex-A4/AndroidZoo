@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 import com.alexa4.pseudozoo.R;
 import com.alexa4.pseudozoo.adapters.BitmapAdapter;
+import com.alexa4.pseudozoo.custom_views.CustomImageView;
 import com.alexa4.pseudozoo.models.ModelNews;
 import com.alexa4.pseudozoo.presenter.PresenterFullNews;
 import com.alexa4.pseudozoo.presenter.ViewInterfaceFullNews;
@@ -41,7 +42,7 @@ public class FullNewsActivity extends FragmentActivity implements ViewInterfaceF
     private RecyclerView imagesRecyclerView;
     private TextView toolbarTitle;
     private TextView fullTextOfNews;
-    private ImageView imageOfNews;
+    private CustomImageView imageOfNews;
 
 
     private FullNews fullNews = new FullNews(null, null, null);
@@ -66,7 +67,7 @@ public class FullNewsActivity extends FragmentActivity implements ViewInterfaceF
         toolbar = (ConstraintLayout) findViewById(R.id.fullnews_toolbar);
         toolbarTitle = (TextView) findViewById(R.id.fullnews_toolbar_text);
         fullTextOfNews = (TextView) findViewById(R.id.fullnews_text);
-        imageOfNews = (ImageView) findViewById(R.id.fullnews_image_of_news);
+        imageOfNews = (CustomImageView) findViewById(R.id.fullnews_image_of_news);
 
         presenterFullNews = new PresenterFullNews(new ModelNews());
         presenterFullNews.setView(this);
@@ -118,19 +119,11 @@ public class FullNewsActivity extends FragmentActivity implements ViewInterfaceF
         this.fullNews = fullNews;
 
         toolbarTitle.setText(fullNews.getTitle());
-        BitmapAdapter.decodeBitmapFromUrl(
-                fullNews.getImgUrl(), getResources(),
-                new BitmapAdapter.DownloadImageCallback() {
-                    @Override
-                    public void onDownloadFinished(Bitmap bitmap) {
-                        imageOfNews.setImageBitmap(bitmap);
-                    }
-                });
+        imageOfNews.downloadImageByUrl(fullNews.getImgUrl());
         fullTextOfNews.setText(fullNews.getFullText());
 
-        if (fullNews.getListUrlOfImagesLowQuality() != null){
-            imagesRecyclerView.setAdapter(new FullNewsAdapter(fullNews.getListUrlOfImagesLowQuality(),
-                    fullNews.getListUrlOfImagesHighQuality()));
+        if (fullNews.getListUrlOfImages() != null){
+            imagesRecyclerView.setAdapter(new FullNewsAdapter(fullNews.getListUrlOfImages()));
         }
     }
 
@@ -161,21 +154,19 @@ public class FullNewsActivity extends FragmentActivity implements ViewInterfaceF
      */
     private class FullNewsAdapter extends RecyclerView.Adapter<FullNewsAdapter.FullNewsHolder> {
 
-        private ArrayList<String> urlsLowQuality;
-        private ArrayList<String> urlsHighQuality;
+        private ArrayList<String> urlsList;
 
 
         public class FullNewsHolder extends RecyclerView.ViewHolder{
-            public ImageView imageView;
-            public FullNewsHolder(@NonNull ImageView itemView) {
+            public CustomImageView imageView;
+            public FullNewsHolder(@NonNull CustomImageView itemView) {
                 super(itemView);
                 this.imageView = itemView;
             }
         }
 
-        public FullNewsAdapter(ArrayList<String> urlsLowQuality, ArrayList<String> urlsHighQuality){
-            this.urlsLowQuality = urlsLowQuality;
-            this.urlsHighQuality = urlsHighQuality;
+        public FullNewsAdapter(ArrayList<String> urls){
+            this.urlsList = urls;
         }
 
 
@@ -184,7 +175,7 @@ public class FullNewsActivity extends FragmentActivity implements ViewInterfaceF
         @Override
         public FullNewsHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
 
-            ImageView imageView = (ImageView) LayoutInflater.from(viewGroup.getContext())
+            CustomImageView imageView = (CustomImageView) LayoutInflater.from(viewGroup.getContext())
                     .inflate(R.layout.news_image_item, viewGroup, false);
 
             FullNewsHolder holder = new FullNewsHolder(imageView);
@@ -195,31 +186,15 @@ public class FullNewsActivity extends FragmentActivity implements ViewInterfaceF
         public void onBindViewHolder(@NonNull FullNewsHolder fullNewsHolder, int i) {
             if (fullNews.getListOfBitmap() != null && fullNews.getListOfBitmap().size() > i)
                 fullNewsHolder.imageView.setImageBitmap(fullNews.getListOfBitmap().get(i));
-            else BitmapAdapter.decodeBitmapFromUrl(urlsLowQuality.get(i), getResources(),
-                    new BitmapAdapter.DownloadImageCallback() {
-                        @Override
-                        public void onDownloadFinished(Bitmap bitmap) {
-                            fullNewsHolder.imageView.setImageBitmap(bitmap);
-                            fullNews.getListOfBitmap().add(i, bitmap);
-                            fullNewsHolder.imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-
-                            fullNewsHolder.imageView.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    Intent intent = new Intent("com.alexa4.pseudozoo.ImageViewerActivity");
-                                    intent.putExtra("HighNewsUrl", urlsHighQuality.get(i));
-                                    startActivity(intent);
-                                }
-                            });
-                        }
-                    });
+            else fullNewsHolder.imageView.downloadImageByUrl(urlsList.get(i),
+                    fullNews.getListOfBitmap(), i);
         }
 
 
 
         @Override
         public int getItemCount() {
-            return urlsLowQuality.size();
+            return urlsList.size();
         }
     }
 
