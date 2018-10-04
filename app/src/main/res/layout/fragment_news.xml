@@ -38,23 +38,6 @@
 
 
     <TextView
-        android:id="@+id/mainppage_head"
-        android:layout_marginRight="@dimen/news_horizontal_margin"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:layout_marginLeft="@dimen/news_horizontal_margin"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        app:layout_constraintWidth_default="spread"
-        android:text="@string/mainpage_head"
-        android:textSize="@dimen/mainpage_head_textsize"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/main_fragment_toolbar"
-        android:textStyle="bold" />
-
-
-    <TextView
         android:id="@+id/main_fragment_text_connecting"
         style="@style/ConnectingTextView"
         android:visibility="invisible"
@@ -66,15 +49,15 @@
     <ListView
         android:id="@+id/news_list"
         android:layout_width="0dp"
-        android:layout_height="398dp"
+        android:layout_height="0dp"
         android:layout_marginLeft="@dimen/news_horizontal_margin"
         android:layout_marginRight="@dimen/news_horizontal_margin"
         android:layout_marginTop="@dimen/fragment_main_listview_topmargin"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHeight_percent="0.7"
+        app:layout_constraintHeight_percent="0.8"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/mainppage_head"
+        app:layout_constraintTop_toBottomOf="@id/main_fragment_toolbar"
         app:layout_constraintWidth_default="spread"
         tools:listitem="@layout/news_item" />
 
