@@ -8,6 +8,7 @@ import android.view.View;
 
 import com.alexa4.pseudozoo.R;
 import com.alexa4.pseudozoo.adapters.BitmapAdapter;
+import com.alexa4.pseudozoo.adapters.ImageCompressor;
 
 import java.util.List;
 
@@ -78,6 +79,26 @@ public class CustomImageView extends android.support.v7.widget.AppCompatImageVie
             @Override
             public void onDownloadFinished(Bitmap bitmap) {
                 setImageBitmap(bitmap);
+            }
+        });
+    }
+
+    public void downloadCompressedImageByUrl(String url) {
+        this.photoUrl = url;
+        ImageCompressor.getCompressedImage(getContext(), url, new ImageCompressor.BitmapCompressorCallback() {
+            @Override
+            public void sendCompressedBmp(Bitmap bmp) {
+                setImageBitmap(bmp);
+            }
+        });
+    }
+    public void downloadCompressedImageByUrl(String url, List<Bitmap> listOfBmp, int position) {
+        this.photoUrl = url;
+        ImageCompressor.getCompressedImage(getContext(), url, new ImageCompressor.BitmapCompressorCallback() {
+            @Override
+            public void sendCompressedBmp(Bitmap bmp) {
+                setImageBitmap(bmp);
+                listOfBmp.add(position, bmp);
             }
         });
     }
