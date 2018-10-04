@@ -119,7 +119,7 @@ public class FullNewsActivity extends FragmentActivity implements ViewInterfaceF
         this.fullNews = fullNews;
 
         toolbarTitle.setText(fullNews.getTitle());
-        imageOfNews.downloadImageByUrl(fullNews.getImgUrl());
+        imageOfNews.downloadCompressedImageByUrl(fullNews.getImgUrl());
         fullTextOfNews.setText(fullNews.getFullText());
 
         if (fullNews.getListUrlOfImages() != null){
@@ -186,7 +186,7 @@ public class FullNewsActivity extends FragmentActivity implements ViewInterfaceF
         public void onBindViewHolder(@NonNull FullNewsHolder fullNewsHolder, int i) {
             if (fullNews.getListOfBitmap() != null && fullNews.getListOfBitmap().size() > i)
                 fullNewsHolder.imageView.setImageBitmap(fullNews.getListOfBitmap().get(i));
-            else fullNewsHolder.imageView.downloadImageByUrl(urlsList.get(i),
+            else fullNewsHolder.imageView.downloadCompressedImageByUrl(urlsList.get(i),
                     fullNews.getListOfBitmap(), i);
         }
 
