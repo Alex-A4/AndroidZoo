@@ -40,7 +40,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".activities_package.ImageViewerActivity"
+        <activity android:name=".activities_package.ImageViewerPager"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" >
             <intent-filter>
