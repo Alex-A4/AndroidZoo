@@ -9,4 +9,4 @@ Later this app will support work with internet
 * [Yandex mapkit](https://tech.yandex.ru/maps/mapkit/) used to show map
 
 ## Downloading
-To download .apk file visit [link](https://yadi.sk/d/RFgwwIvTnhwW4w)
+To download .apk file visit [link](https://yadi.sk/d/lVFz5CG-8NR-uA)
