@@ -25,9 +25,9 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"/>
         <TextView
+            android:id="@+id/image_viewer_toolbar_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/image_viewer_title"
             app:layout_constraintLeft_toRightOf="@id/image_viewer_back_arrow"
             android:textColor="@android:color/white"
             android:textSize="@dimen/image_viewer_title_size"
