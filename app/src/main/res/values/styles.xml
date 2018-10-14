@@ -91,7 +91,7 @@
         <item name="android:layout_marginLeft">8dp</item>
         <item name="android:paddingBottom">@dimen/fragment_toolbar_marginbottom</item>
         <item name="android:textSize">@dimen/toolbar_fullnews_text_size</item>
-        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
 </resources>
