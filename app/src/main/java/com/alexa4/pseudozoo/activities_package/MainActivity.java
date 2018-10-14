@@ -42,8 +42,6 @@ public class MainActivity extends FragmentActivity implements ViewInterfaceParen
 
                     switch (item.getItemId()) {
                         case R.id.navigation_home:
-                            presenter.setView(newsFragment);
-                            newsFragment.setPresenter((PresenterNews) presenter);
                             loadFragment(newsFragment);
                             return true;
 
