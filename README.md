@@ -1,7 +1,5 @@
 # AndroidZoo
-Non commercial android application about Yaroslavl's Zoo
-This application shows my growth pace, new tools which I learned and embedded
-Later this app will support work with internet
+Non commercial android application about Yaroslavl's Zoo. This application shows my growth pace, new tools which I learned and embedded.
 
 # Used library
 * [JSOUP](https://jsoup.org/) used to parse zoo pages and to get necessary information, for example, list of news
