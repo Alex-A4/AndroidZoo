@@ -6,7 +6,6 @@
     <string name="title_map">Карта</string>
     <string name="title_about">О нас</string>
     <string name="title_settings">Настройки</string>
-    <string name="title_activity_settings">Настройки</string>
     <string name="pref_header_general">Общее</string>
     <string name="title_activity_map">Карта</string>
     <string name="aboutpage_head">О нас</string>
@@ -21,7 +20,7 @@
     <string name="connecting_text">Соединение...</string>
     <string name="check_internet">Проверться подключение к интернету</string>
     <string name="downloading_error">Ошибка загрузки</string>
-    <string name="image_viewer_title">Просмотр фотографий</string>
     <string name="fullnews_default_string">Новости</string>
     <string name="zoo_news">Новости</string>
+    <string name="image_viewer_toolbar_of">из</string>
 </resources>
