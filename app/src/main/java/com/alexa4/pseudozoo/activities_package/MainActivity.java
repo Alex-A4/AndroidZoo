@@ -26,8 +26,6 @@ public class MainActivity extends FragmentActivity implements ViewInterfaceParen
 
     public PresenterParent presenter;
 
-    private ModelNews modelNews;
-
     private NewsFragment newsFragment;
     private ZooMapFragment zooMapFragment;
     private AboutFragment aboutFragment;
@@ -44,7 +42,6 @@ public class MainActivity extends FragmentActivity implements ViewInterfaceParen
 
                     switch (item.getItemId()) {
                         case R.id.navigation_home:
-                            presenter = new PresenterNews(modelNews);
                             presenter.setView(newsFragment);
                             newsFragment.setPresenter((PresenterNews) presenter);
                             loadFragment(newsFragment);
@@ -69,8 +66,6 @@ public class MainActivity extends FragmentActivity implements ViewInterfaceParen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        modelNews = new ModelNews();
-
 
         //Basic fragments
         FragmentManager fm = getSupportFragmentManager();
@@ -87,7 +82,7 @@ public class MainActivity extends FragmentActivity implements ViewInterfaceParen
         aboutFragment = new AboutFragment();
 
 
-        presenter = new PresenterNews(modelNews);
+        presenter = new PresenterNews(ModelNews.getModelNews());
         presenter.setView(newsFragment);
         newsFragment.setPresenter((PresenterNews) presenter);
 

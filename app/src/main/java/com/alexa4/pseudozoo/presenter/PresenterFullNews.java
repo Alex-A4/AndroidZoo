@@ -13,10 +13,9 @@ public class PresenterFullNews extends PresenterParent {
 
     /**
      * Setting model to presenter
-     * @param model
      */
-    public PresenterFullNews(ModelNews model) {
-        this.modelNews = model;
+    public PresenterFullNews() {
+        this.modelNews = ModelNews.getModelNews();
     }
 
     /**

@@ -21,6 +21,19 @@ import java.util.ArrayList;
  */
 public class ModelNews {
 
+    private static ModelNews sModelNews;
+
+    public static ModelNews getModelNews() {
+        if (sModelNews == null)
+            sModelNews = new ModelNews();
+
+        return sModelNews;
+    }
+
+    private ModelNews() {
+    }
+
+
     public interface Progress{
         int CONNECTING_ERROR = 1;
         int DOWNLOADING_ERROR = 2;

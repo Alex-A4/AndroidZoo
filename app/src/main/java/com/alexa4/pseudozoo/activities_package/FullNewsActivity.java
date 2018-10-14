@@ -28,6 +28,7 @@ import com.alexa4.pseudozoo.models.ModelNews;
 import com.alexa4.pseudozoo.presenter.PresenterFullNews;
 import com.alexa4.pseudozoo.presenter.ViewInterfaceFullNews;
 import com.alexa4.pseudozoo.user_data.FullNews;
+import com.alexa4.pseudozoo.user_data.NightMode;
 
 import java.util.ArrayList;
 
@@ -69,7 +70,7 @@ public class FullNewsActivity extends FragmentActivity implements ViewInterfaceF
         fullTextOfNews = (TextView) findViewById(R.id.fullnews_text);
         imageOfNews = (CustomImageView) findViewById(R.id.fullnews_image_of_news);
 
-        presenterFullNews = new PresenterFullNews(new ModelNews());
+        presenterFullNews = new PresenterFullNews();
         presenterFullNews.setView(this);
         this.setPresenter(presenterFullNews);
 
@@ -222,7 +223,7 @@ public class FullNewsActivity extends FragmentActivity implements ViewInterfaceF
      * Setting colors which depends of nightMode variable
      */
     private void setColors() {
-        if (nightMode.getMode()) {
+        if (NightMode.getNightMode().getMode()) {
             toolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimaryNight));
             activityFullNews.setBackgroundColor(getResources().getColor(R.color.colorPrimaryLightNight));
         }
