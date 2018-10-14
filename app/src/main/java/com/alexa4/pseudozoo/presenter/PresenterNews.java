@@ -45,14 +45,6 @@ public class PresenterNews extends PresenterParent{
     }
 
     /**
-     * Model getter, needs to start fullnewsfragment
-     * @return
-     */
-    public ModelNews getModel() {
-        return this.modelNews;
-    }
-
-    /**
      * Downloading list of news from Zoo web link
      */
     public void updateNewsList(){
