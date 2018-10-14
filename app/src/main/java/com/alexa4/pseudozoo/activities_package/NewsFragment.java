@@ -158,8 +158,8 @@ public class NewsFragment extends Fragment implements ViewInterfaceNews {
         newsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                Intent newsIntent = new Intent("com.alexa4.pseudozoo.FullNewsActivity");
-                newsIntent.putExtra("NewsUrl", newsArrayList.get(position).getFullNewsLink());
+                Intent newsIntent = FullNewsActivity.newIntent(getContext(),
+                        newsArrayList.get(position).getFullNewsLink());
                 startActivity(newsIntent);
             }
         });

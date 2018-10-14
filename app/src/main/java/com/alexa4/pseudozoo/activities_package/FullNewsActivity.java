@@ -3,7 +3,6 @@ package com.alexa4.pseudozoo.activities_package;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -22,7 +21,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alexa4.pseudozoo.R;
-import com.alexa4.pseudozoo.adapters.BitmapAdapter;
 import com.alexa4.pseudozoo.custom_views.CustomImageView;
 import com.alexa4.pseudozoo.models.ModelNews;
 import com.alexa4.pseudozoo.presenter.PresenterFullNews;
@@ -33,8 +31,9 @@ import com.alexa4.pseudozoo.user_data.NightMode;
 import java.util.ArrayList;
 
 public class FullNewsActivity extends FragmentActivity implements ViewInterfaceFullNews {
-
+    private final static String NEWS_URL = "NEWS_URL";
     private final int RECYCLERVIEW_SPACING = 24;
+
     private PresenterFullNews presenterFullNews;
 
     private ConstraintLayout activityFullNews;
@@ -57,7 +56,7 @@ public class FullNewsActivity extends FragmentActivity implements ViewInterfaceF
         setContentView(R.layout.activity_fullnews);
 
         //Getting news url from the intent data
-        newsUrl = getIntent().getStringExtra("NewsUrl");
+        newsUrl = getIntent().getStringExtra(NEWS_URL);
 
         final ScrollView scrollView = (ScrollView) findViewById(R.id.fullnews_scrollview);
         scrollView.scrollTo(0, 0);
@@ -107,6 +106,12 @@ public class FullNewsActivity extends FragmentActivity implements ViewInterfaceF
                 else outRect.top = 0;
             }
         });
+    }
+
+    public static Intent newIntent(Context context, String newsUrl) {
+        Intent intent = new Intent(context, FullNewsActivity.class);
+        intent.putExtra(NEWS_URL, newsUrl);
+        return intent;
     }
 
 
