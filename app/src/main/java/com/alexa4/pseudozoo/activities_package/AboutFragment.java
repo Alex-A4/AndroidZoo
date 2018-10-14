@@ -13,14 +13,14 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.alexa4.pseudozoo.R;
-import com.alexa4.pseudozoo.presenter.ViewInterfaceParent;
+import com.alexa4.pseudozoo.user_data.NightMode;
 
 
 /**
  * AboutFragment represent information about zoo, and communication methods,
  * toolbar with title and icon of zoo
  */
-public class AboutFragment extends Fragment implements ViewInterfaceParent{
+public class AboutFragment extends Fragment {
 
     private final String VK_LINK = "https://vk.com/zooyar";
     private final String INSTAGRAM_LINK = "https://www.instagram.com/yaroslavlzoo/";
@@ -102,7 +102,7 @@ public class AboutFragment extends Fragment implements ViewInterfaceParent{
      * Setting colors which depends of nightMode variable
      */
     private void setColors(){
-        if (nightMode.getMode()){
+        if (NightMode.getNightMode().getMode()){
             toolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimaryNight));
             fragmentAbout.setBackgroundColor(getResources().getColor(R.color.colorPrimaryLightNight));
         }

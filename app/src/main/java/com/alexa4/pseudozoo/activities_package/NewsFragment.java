@@ -30,6 +30,7 @@ import com.alexa4.pseudozoo.models.ModelNews;
 import com.alexa4.pseudozoo.presenter.PresenterNews;
 import com.alexa4.pseudozoo.presenter.ViewInterfaceNews;
 import com.alexa4.pseudozoo.user_data.News;
+import com.alexa4.pseudozoo.user_data.NightMode;
 
 import java.util.ArrayList;
 
@@ -264,7 +265,7 @@ public class NewsFragment extends Fragment implements ViewInterfaceNews {
      * Setting colors which depends of nightMode variable
      */
     private void setColors(){
-        if (nightMode.getMode()){
+        if (NightMode.getNightMode().getMode()){
             toolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimaryNight));
             fragmentMain.setBackgroundColor(getResources().getColor(R.color.colorPrimaryLightNight));
         }

@@ -7,7 +7,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
 import com.alexa4.pseudozoo.R;
@@ -15,13 +14,14 @@ import com.alexa4.pseudozoo.models.ModelNews;
 import com.alexa4.pseudozoo.presenter.PresenterNews;
 import com.alexa4.pseudozoo.presenter.PresenterParent;
 import com.alexa4.pseudozoo.presenter.ViewInterfaceParent;
+import com.alexa4.pseudozoo.user_data.NightMode;
 
 /**
  * MainActivity is a container to all fragments which contains UI
  * In a bottom of activity is bottomNavigation, by which we can change fragments
  * In a top part is Constraint layout which is container where loads fragments
  */
-public class MainActivity extends FragmentActivity implements ViewInterfaceParent{
+public class MainActivity extends FragmentActivity implements ViewInterfaceParent {
     private BottomNavigationView navigation;
 
     public PresenterParent presenter;
@@ -127,7 +127,7 @@ public class MainActivity extends FragmentActivity implements ViewInterfaceParen
     }
 
     public void setColors(){
-        if (nightMode.getMode())
+        if (NightMode.getNightMode().getMode())
             navigation.setBackgroundColor(getResources().getColor(R.color.colorPrimaryNight));
         else navigation.setBackgroundColor(getResources().getColor(R.color.colorScreenBackground));
     }

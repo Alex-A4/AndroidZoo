@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.alexa4.pseudozoo.R;
 import com.alexa4.pseudozoo.presenter.ViewInterfaceParent;
+import com.alexa4.pseudozoo.user_data.NightMode;
 
 
 /**
@@ -38,17 +39,17 @@ public class SettingsFragment extends Fragment implements ViewInterfaceParent {
 
         //Night mode switcher
         final Switch night_mode = root.findViewById(R.id.settings_switch_night_mode);
-        night_mode.setChecked(nightMode.getMode());
+        night_mode.setChecked(NightMode.getNightMode().getMode());
         night_mode.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked){
                     Toast.makeText(getContext(), "Night mode enabled", Toast.LENGTH_SHORT).show();
-                    nightMode.setMode(true);
+                    NightMode.getNightMode().setMode(true);
                     setColors();
                 } else {
                     Toast.makeText(getContext(), "Night mode disabled", Toast.LENGTH_SHORT).show();
-                    nightMode.setMode(false);
+                    NightMode.getNightMode().setMode(false);
                     setColors();
                 }
             }
@@ -78,7 +79,7 @@ public class SettingsFragment extends Fragment implements ViewInterfaceParent {
      * Setting colors which depends of nightMode variable
      */
     private void setColors(){
-        if (nightMode.getMode()){
+        if (NightMode.getNightMode().getMode()){
             toolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimaryNight));
             settingsFragment.setBackgroundColor(getResources().getColor(R.color.colorPrimaryLightNight));
         } else {

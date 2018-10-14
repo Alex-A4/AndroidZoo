@@ -9,7 +9,6 @@ import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -19,8 +18,7 @@ import android.widget.Toast;
 
 import com.alexa4.pseudozoo.R;
 import com.alexa4.pseudozoo.presenter.ViewInterfaceParent;
-
-import java.net.InetAddress;
+import com.alexa4.pseudozoo.user_data.NightMode;
 
 
 /**
@@ -90,7 +88,7 @@ public class ZooMapFragment extends Fragment implements ViewInterfaceParent {
      * Setting colors which depends of nightMode variable
      */
     private void setColors(){
-        if (nightMode.getMode()){
+        if (NightMode.getNightMode().getMode()){
             toolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimaryNight));
             fragmentMap.setBackgroundColor(getResources().getColor(R.color.colorPrimaryLightNight));
         }
