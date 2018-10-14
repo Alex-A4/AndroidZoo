@@ -80,7 +80,7 @@ public class MainActivity extends FragmentActivity implements ViewInterfaceParen
         aboutFragment = new AboutFragment();
 
 
-        presenter = new PresenterNews(ModelNews.getModelNews());
+        presenter = new PresenterNews();
         presenter.setView(newsFragment);
         newsFragment.setPresenter((PresenterNews) presenter);
 
