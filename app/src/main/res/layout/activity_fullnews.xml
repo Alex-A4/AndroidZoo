@@ -25,7 +25,7 @@
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:paddingBottom="@dimen/fragment_toolbar_paddingbottom"
-            android:layout_marginLeft="12dp"
+            android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:src="@drawable/ic_back_arrow"
             app:layout_constraintTop_toTopOf="parent"
