@@ -1,5 +1,7 @@
 package com.alexa4.pseudozoo.activities_package;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -15,6 +17,7 @@ import com.yandex.mapkit.MapKitFactory;
 import com.yandex.mapkit.geometry.Point;
 import com.yandex.mapkit.map.CameraPosition;
 import com.yandex.mapkit.mapview.MapView;
+import com.yandex.runtime.image.ImageProvider;
 
 public class MapContainer extends Fragment {
     private MapView mapview;
@@ -40,14 +43,17 @@ public class MapContainer extends Fragment {
      */
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
         final View root = inflater.inflate(R.layout.mapfragment, container, false);
 
         mapview = (MapView)root.findViewById (R. id.mapview);
-        mapview.getMap ().move(
-                new CameraPosition(new Point(57.677282, 39.90008), 20.0f, 0.0f, 0.0f),
+        mapview.getMap().move(
+                new CameraPosition(new Point(57.677282, 39.90008), 20.0f,
+                        0.0f, 0.0f),
                 new Animation(Animation.Type.SMOOTH, 0),
                 null);
+        mapview.getMap().getMapObjects().addPlacemark(new Point(57.677282,39.90008));
 
         return root;
     }
