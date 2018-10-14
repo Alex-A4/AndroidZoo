@@ -7,6 +7,7 @@ import android.util.AttributeSet;
 import android.view.View;
 
 import com.alexa4.pseudozoo.R;
+import com.alexa4.pseudozoo.activities_package.ImageViewerActivity;
 import com.alexa4.pseudozoo.adapters.BitmapAdapter;
 import com.alexa4.pseudozoo.adapters.ImageCompressor;
 
@@ -45,8 +46,8 @@ public class CustomImageView extends android.support.v7.widget.AppCompatImageVie
         super.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent("com.alexa4.pseudozoo.ImageViewerActivity");
-                intent.putExtra("HighNewsUrl", CustomImageView.this.photoUrl);
+                Intent intent = ImageViewerActivity.newIntent(getContext(),
+                        CustomImageView.this.photoUrl);
                 getContext().startActivity(intent);
             }
         });
