@@ -42,7 +42,7 @@
         style="@style/ConnectingTextView"
         android:visibility="invisible"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/news_list"
+        app:layout_constraintTop_toBottomOf="@id/main_fragment_toolbar"
         tools:text="@string/connecting_text"
         />
 
@@ -52,9 +52,7 @@
         android:layout_height="0dp"
         android:layout_marginLeft="@dimen/news_horizontal_margin"
         android:layout_marginRight="@dimen/news_horizontal_margin"
-        android:layout_marginTop="@dimen/fragment_main_listview_topmargin"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHeight_percent="0.8"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/main_fragment_toolbar"
