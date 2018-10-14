@@ -26,6 +26,7 @@ import com.alexa4.pseudozoo.models.ModelNews;
 import com.alexa4.pseudozoo.presenter.PresenterFullNews;
 import com.alexa4.pseudozoo.presenter.ViewInterfaceFullNews;
 import com.alexa4.pseudozoo.user_data.FullNews;
+import com.alexa4.pseudozoo.user_data.ImagesStore;
 import com.alexa4.pseudozoo.user_data.NightMode;
 
 import java.util.ArrayList;
@@ -173,6 +174,7 @@ public class FullNewsActivity extends FragmentActivity implements ViewInterfaceF
 
         public FullNewsAdapter(ArrayList<String> urls){
             this.urlsList = urls;
+            ImagesStore.getStore().setUrls(urls);
         }
 
 
