@@ -107,6 +107,9 @@ public class FullNewsActivity extends FragmentActivity implements ViewInterfaceF
                 else outRect.top = 0;
             }
         });
+
+        //Start downloading
+        presenterFullNews.updateFullNews(newsUrl);
     }
 
     public static Intent newIntent(Context context, String newsUrl) {
@@ -221,7 +224,6 @@ public class FullNewsActivity extends FragmentActivity implements ViewInterfaceF
     protected void onStart() {
         super.onStart();
         setColors();
-        presenterFullNews.updateFullNews(newsUrl);
     }
 
     /**
