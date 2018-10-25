@@ -130,7 +130,8 @@ public class FullNewsActivity extends FragmentActivity implements ViewInterfaceF
         fullTextOfNews.setText(fullNews.getFullText());
 
         if (fullNews.getListUrlOfImages() != null){
-            imagesRecyclerView.setAdapter(new FullNewsAdapter(fullNews.getListUrlOfImages()));
+            imagesRecyclerView.setAdapter(new FullNewsAdapter(fullNews.getListUrlOfImages(),
+                    imagesRecyclerView.getWidth()));
         }
     }
 
@@ -160,7 +161,7 @@ public class FullNewsActivity extends FragmentActivity implements ViewInterfaceF
      * Custom adapter to represent list of news images
      */
     private class FullNewsAdapter extends RecyclerView.Adapter<FullNewsAdapter.FullNewsHolder> {
-
+        private int recyclerWidth;
         private ArrayList<String> urlsList;
 
 
@@ -168,12 +169,17 @@ public class FullNewsActivity extends FragmentActivity implements ViewInterfaceF
             public CustomImageView imageView;
             public FullNewsHolder(@NonNull CustomImageView itemView) {
                 super(itemView);
-                this.imageView = itemView;
+                imageView = itemView;
+                imageView.requestLayout();
+                imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+                imageView.getLayoutParams().height = recyclerWidth / 2 - RECYCLERVIEW_SPACING*2;
+                imageView.getLayoutParams().width = recyclerWidth / 2 - RECYCLERVIEW_SPACING*2;
             }
         }
 
-        public FullNewsAdapter(ArrayList<String> urls){
+        public FullNewsAdapter(ArrayList<String> urls, int width){
             this.urlsList = urls;
+            this.recyclerWidth = width;
             ImagesStore.getStore().setUrls(urls);
         }
 
