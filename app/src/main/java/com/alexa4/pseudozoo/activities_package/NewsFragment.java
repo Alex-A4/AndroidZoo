@@ -135,7 +135,8 @@ public class NewsFragment extends Fragment implements ViewInterfaceNews {
      * @param progress code of error
      */
     public void showErrorConnection(int progress){
-        connectingText.setVisibility(View.INVISIBLE);
+        if (connectingText!= null)
+            connectingText.setVisibility(View.INVISIBLE);
         switch (progress) {
             case ModelNews.Progress.CONNECTING_ERROR:   Toast.makeText(getContext(),
                     R.string.check_internet, Toast.LENGTH_SHORT).show();
