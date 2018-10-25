@@ -9,7 +9,7 @@ public interface ViewInterfaceNews extends ViewInterfaceParent {
     /**
      * Initializing list's of news
      */
-    void createNewsList();
+    void getNewsList();
 
     /**
      * Adding presenter to view
