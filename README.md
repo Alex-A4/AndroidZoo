@@ -7,4 +7,4 @@ Non commercial android application about Yaroslavl's Zoo. This application shows
 * [Yandex mapkit](https://tech.yandex.ru/maps/mapkit/) used to show map
 
 ## Downloading
-To download .apk file visit [link](https://yadi.sk/d/lVFz5CG-8NR-uA)
+To download .apk file visit this [link](https://yadi.sk/d/HDeZ81O6U1lvTA)
