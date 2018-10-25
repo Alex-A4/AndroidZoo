@@ -10,7 +10,6 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.MenuItem;
 
 import com.alexa4.pseudozoo.R;
-import com.alexa4.pseudozoo.models.ModelNews;
 import com.alexa4.pseudozoo.presenter.PresenterNews;
 import com.alexa4.pseudozoo.presenter.PresenterParent;
 import com.alexa4.pseudozoo.presenter.ViewInterfaceParent;
@@ -23,6 +22,9 @@ import com.alexa4.pseudozoo.user_data.NightMode;
  */
 public class MainActivity extends FragmentActivity implements ViewInterfaceParent {
     private BottomNavigationView navigation;
+    private static final String NEWS_FRAGMENT_TAG = "NEWS_FRAGMENT";
+    private static final String MAP_FRAGMENT_TAG = "MAP_FRAGMENT";
+    private static final String ABOUT_FRAGMENT_TAG = "ABOUT_FRAGMENT";
 
     public PresenterParent presenter;
 
@@ -65,50 +67,66 @@ public class MainActivity extends FragmentActivity implements ViewInterfaceParen
         setContentView(R.layout.activity_main);
 
 
+        navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        navigation.setOnNavigationItemSelectedListener(bnl);
         //Basic fragments
-        FragmentManager fm = getSupportFragmentManager();
-        newsFragment = (NewsFragment) fm.findFragmentByTag(String.valueOf(NewsFragment.class));
-        zooMapFragment = (ZooMapFragment) fm.findFragmentByTag(String.valueOf(ZooMapFragment.class));
-        aboutFragment = (AboutFragment) fm.findFragmentByTag(String.valueOf(AboutFragment.class));
-
-        if (newsFragment == null){
-            newsFragment = new NewsFragment();
-            fm.beginTransaction().add(newsFragment, String.valueOf(NewsFragment.class)).commit();
-        }
-
-        zooMapFragment = new ZooMapFragment();
-        aboutFragment = new AboutFragment();
-
+        initFragments();
 
         presenter = new PresenterNews();
         presenter.setView(newsFragment);
         newsFragment.setPresenter((PresenterNews) presenter);
 
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.container, newsFragment, String.valueOf(newsFragment.getClass()));
-        ft.addToBackStack(null);
-        ft.commit();
+        ft.replace(R.id.container, newsFragment, newsFragment.getTag())
+                .addToBackStack(null)
+                .show(newsFragment)
+                .setCustomAnimations(
+                    android.R.animator.fade_in, android.R.animator.fade_out)
+                .commit();
 
-        navigation = (BottomNavigationView) findViewById(R.id.navigation);
-        navigation.setOnNavigationItemSelectedListener(bnl);
     }
 
-    private void loadFragment(Fragment fragment){
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+    /**
+     * Initializing fragments
+     */
+    private void initFragments() {
+        FragmentManager fm = getSupportFragmentManager();
+        newsFragment = (NewsFragment) fm.findFragmentByTag(NEWS_FRAGMENT_TAG);
+        zooMapFragment = (ZooMapFragment) fm.findFragmentByTag(MAP_FRAGMENT_TAG);
+        aboutFragment = (AboutFragment) fm.findFragmentByTag(ABOUT_FRAGMENT_TAG);
 
+        if (newsFragment == null){
+            newsFragment = new NewsFragment();
+            fm.beginTransaction().add(R.id.container, newsFragment, NEWS_FRAGMENT_TAG).commit();
+        }
+
+        if (zooMapFragment == null) {
+            zooMapFragment = new ZooMapFragment();
+            fm.beginTransaction().add(R.id.container, zooMapFragment, MAP_FRAGMENT_TAG).commit();
+        }
+        if (aboutFragment == null) {
+            aboutFragment = new AboutFragment();
+            fm.beginTransaction().add(R.id.container, aboutFragment, ABOUT_FRAGMENT_TAG).commit();
+        }
+    }
+
+    /**
+     * Loading fragment to container and clearing settings fragment
+     * @param fragment
+     */
+    private void loadFragment(Fragment fragment){
+        FragmentManager manager = getSupportFragmentManager();
+        FragmentTransaction ft = manager.beginTransaction();
         //Delete settings from backstack
         if (getSupportFragmentManager().getFragments().get(0).getClass() == SettingsFragment.class)
             getSupportFragmentManager().popBackStack();
 
-        ft.replace(R.id.container, fragment, String.valueOf(fragment.getClass()));
-
         //If current fragment is not a fragment which we want to open
-        if (fragment.getClass() != getSupportFragmentManager().getFragments().get(0).getClass()) {
+        if (!fragment.getTag().equals(manager.getFragments().get(0).getTag())) {
+            ft.replace(R.id.container, fragment, fragment.getTag());
             ft.addToBackStack(null);
         }
 
-        ft.setCustomAnimations(
-                android.R.animator.fade_in, android.R.animator.fade_out);
         ft.commit();
     }
 
@@ -127,8 +145,9 @@ public class MainActivity extends FragmentActivity implements ViewInterfaceParen
 
     @Override
     public void onBackPressed() {
-        getSupportFragmentManager().popBackStack();
-        if (getSupportFragmentManager().getBackStackEntryCount() == 1) {
+        FragmentManager manager = getSupportFragmentManager();
+        manager.popBackStack();
+        if (manager.getBackStackEntryCount() == 1 || manager.getBackStackEntryCount() == 0) {
             finish();
         }
     }
