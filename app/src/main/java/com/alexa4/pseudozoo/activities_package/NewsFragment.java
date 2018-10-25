@@ -40,6 +40,7 @@ import java.util.ArrayList;
  * It's loading when the app starts
  */
 public class NewsFragment extends Fragment implements ViewInterfaceNews {
+
     private ListView newsList;
 
     private ConstraintLayout toolbar;
@@ -50,6 +51,21 @@ public class NewsFragment extends Fragment implements ViewInterfaceNews {
     private SettingsFragment settingsFragment;
     private PresenterNews presenterNews;
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        settingsFragment = new SettingsFragment();
+        presenterNews.setView(this);
+        presenterNews.updateNewsList();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        //Getting news list if it was changed
+        getNewsList();
+    }
+
     @SuppressLint("ResourceAsColor")
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Nullable
@@ -59,15 +75,20 @@ public class NewsFragment extends Fragment implements ViewInterfaceNews {
                              @Nullable Bundle savedInstanceState) {
 
         final View root = inflater.inflate(R.layout.fragment_news, container, false);
-
         newsList = (ListView) root.findViewById(R.id.news_list);
+        newsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                Intent newsIntent = FullNewsActivity.newIntent(getContext(),
+                        newsArrayList.get(position).getFullNewsLink());
+                startActivity(newsIntent);
+            }
+        });
+
         toolbar = (ConstraintLayout) root.findViewById(R.id.main_fragment_toolbar);
         fragmentMain = (ConstraintLayout) root.findViewById(R.id.fragment_main);
         connectingText = (TextView) root.findViewById(R.id.main_fragment_text_connecting);
 
-        settingsFragment = new SettingsFragment();
-
-        setRetainInstance(true);
 
         //Initializing settings button from toolbar
         final ImageView settings = (ImageView) root.findViewById(R.id.main_fragment_toolbar_settings);
@@ -84,40 +105,28 @@ public class NewsFragment extends Fragment implements ViewInterfaceNews {
             }
         });
 
+        //Setting color if the night mode enabled
+        setColors();
+        setRetainInstance(true);
 
         return root;
     }
 
-    @Override
-    public void onSaveInstanceState(@NonNull Bundle outState) {
-        if (outState == null)
-            outState = new Bundle();
-        //astFirstVisiblePosition = ((LinearLayoutManager)rv.getLayoutManager()).findFirstCompletelyVisibleItemPosition();
-        outState.putInt("NEWS_SCROLL_X", newsList.getVerticalScrollbarPosition());
-        super.onSaveInstanceState(outState);
-    }
-
-    @Override
-    public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
-        super.onViewStateRestored(savedInstanceState);
-        //((LinearLayoutManager) rv.getLayoutManager()).scrollToPosition(lastFirstVisiblePosition);
-        if (savedInstanceState != null) {
-            newsList.setScrollX(savedInstanceState.getInt("NEWS_SCROLL_X"));
-        }
-    }
 
     /**
      * Show connecting text when news loading begin
      */
     public void showConnectingText(){
-        connectingText.setVisibility(View.VISIBLE);
+        if (connectingText!= null)
+            connectingText.setVisibility(View.VISIBLE);
     }
 
     /**
      * Hide connecting text when news loading finish
      */
     public void hideConnectingText(){
-        connectingText.setVisibility(View.INVISIBLE);
+        if (connectingText != null)
+            connectingText.setVisibility(View.INVISIBLE);
     }
 
 
@@ -143,26 +152,21 @@ public class NewsFragment extends Fragment implements ViewInterfaceNews {
      */
     public void updateNewsList(ArrayList<News> list){
         this.newsArrayList = list;
-        newsList.setAdapter(new NewsAdapter(getContext(), R.layout.news_item, newsArrayList));
+        if (newsList != null && newsList.getAdapter() == null)
+            newsList.setAdapter(new NewsAdapter(getContext(), R.layout.news_item, newsArrayList));
     }
 
     /**
-     * Overloaded method to update newsArrayList from model
+     * Overloaded method to get newsArrayList from model
+     * if news was create
      */
     @Override
-    public void createNewsList() {
+    public void getNewsList() {
         //Init list of news if it's not empty
-        this.newsArrayList = presenterNews.getNewsList();
-
-        newsList.setAdapter(new NewsAdapter(getContext(), R.layout.news_item, newsArrayList));
-        newsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                Intent newsIntent = FullNewsActivity.newIntent(getContext(),
-                        newsArrayList.get(position).getFullNewsLink());
-                startActivity(newsIntent);
-            }
-        });
+        if (newsArrayList != null && newsArrayList.size() == 0) {
+            this.newsArrayList = presenterNews.getNewsList();
+        } else if (newsList != null && newsList.getAdapter() == null && newsArrayList != null)
+            newsList.setAdapter(new NewsAdapter(getContext(), R.layout.news_item, newsArrayList));
     }
 
 
@@ -231,35 +235,10 @@ public class NewsFragment extends Fragment implements ViewInterfaceNews {
      * Setting null value to presenter.view field
      */
     @Override
-    public void onStop() {
-        super.onStop();
+    public void onDetach() {
+        super.onDetach();
         presenterNews.detachView();
     }
-
-
-    /**
-     * Setting this view to presenter, setting fragment colors, getting list of news from model
-     */
-    @Override
-    public void onStart() {
-        super.onStart();
-        presenterNews.setView(this);
-        setColors();
-        this.newsArrayList = new ArrayList<>();
-        createNewsList();
-    }
-
-
-    /**
-     * Later will be added scroll updating, now update news if size is 0
-     */
-    @Override
-    public void onResume() {
-        super.onResume();
-        if (presenterNews.getNewsList().size() == 0)
-            presenterNews.updateNewsList();
-    }
-
 
     /**
      * Setting colors which depends of nightMode variable
