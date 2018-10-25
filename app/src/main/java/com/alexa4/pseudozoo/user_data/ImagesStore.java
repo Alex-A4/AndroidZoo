@@ -13,7 +13,7 @@ public class ImagesStore {
 
     private ImagesStore(){
     }
-    
+
     public void setUrls(List<String> urls) {
         mUrls = new ArrayList<>(urls);
     }
