@@ -164,6 +164,8 @@ public class NewsFragment extends Fragment implements ViewInterfaceNews {
     @Override
     public void getNewsList() {
         //Init list of news if it's not empty
+        if (newsArrayList == null)
+            presenterNews.updateNewsList();
         if (newsArrayList != null && newsArrayList.size() == 0) {
             this.newsArrayList = presenterNews.getNewsList();
         } else if (newsList != null && newsList.getAdapter() == null && newsArrayList != null)
