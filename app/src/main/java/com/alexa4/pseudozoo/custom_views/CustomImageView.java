@@ -11,6 +11,7 @@ import com.alexa4.pseudozoo.activities_package.ImageViewerFragment;
 import com.alexa4.pseudozoo.activities_package.ImageViewerPager;
 import com.alexa4.pseudozoo.adapters.BitmapAdapter;
 import com.alexa4.pseudozoo.adapters.ImageCompressor;
+import com.alexa4.pseudozoo.user_data.ImagesStore;
 
 import java.util.List;
 
@@ -94,6 +95,13 @@ public class CustomImageView extends android.support.v7.widget.AppCompatImageVie
             }
         });
     }
+
+    /**
+     * Downloading the bitmap by the specified url
+     * @param url the url of image
+     * @param listOfBmp the list where need add bmp after downloading
+     * @param position the position of image where need add bmp
+     */
     public void downloadCompressedImageByUrl(String url, List<Bitmap> listOfBmp, int position) {
         this.photoUrl = url;
         ImageCompressor.getCompressedImage(getContext(), url, new ImageCompressor.BitmapCompressorCallback() {
@@ -104,4 +112,5 @@ public class CustomImageView extends android.support.v7.widget.AppCompatImageVie
             }
         });
     }
+
 }
