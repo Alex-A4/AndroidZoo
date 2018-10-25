@@ -1,5 +1,6 @@
 package com.alexa4.pseudozoo.user_data;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -12,10 +13,9 @@ public class ImagesStore {
 
     private ImagesStore(){
     }
-
-
+    
     public void setUrls(List<String> urls) {
-        mUrls = urls;
+        mUrls = new ArrayList<>(urls);
     }
 
     public List<String> getUrls() {
