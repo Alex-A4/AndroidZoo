@@ -47,24 +47,6 @@ public class ImageViewerFragment extends Fragment {
             }
         });
 
-        int position = 0;
-        int count = ImagesStore.getStore().getUrls().size();
-        for (int i = 0; i < count; i++)
-            if (ImagesStore.getStore().getUrls().get(i).equals(url)) {
-                position = i;
-                break;
-            }
-
-        TextView toolbarTitle = (TextView) root.findViewById(R.id.image_viewer_toolbar_text);
-        toolbarTitle.setText((position+1)+ " " +getString(R.string.image_viewer_toolbar_of) + " " + count);
-
-        ImageView backArrow = root.findViewById(R.id.image_viewer_back_arrow);
-        backArrow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getActivity().finish();
-            }
-        });
 
         return root;
     }
