@@ -124,6 +124,7 @@ public class FullNewsActivity extends FragmentActivity implements ViewInterfaceF
      */
     public void updateNews(FullNews fullNews){
         this.fullNews = fullNews;
+        fullNews.getListUrlOfImages().add(0, fullNews.getImgUrl());
 
         toolbarTitle.setText(fullNews.getTitle());
         imageOfNews.downloadCompressedImageByUrl(fullNews.getImgUrl());
