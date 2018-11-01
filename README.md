@@ -8,3 +8,6 @@ Non commercial android application about Yaroslavl's Zoo. This application shows
 
 ## Downloading
 To download .apk file visit this [link](https://yadi.sk/d/HDeZ81O6U1lvTA)
+
+## Compilation
+To compile app you should add String API_KEY into the source code for using yandex mapkit. [Add](https://github.com/Alex-A4/AndroidZoo/blob/master/app/src/main/java/com/alexa4/pseudozoo/activities_package/MapContainer.java) 
