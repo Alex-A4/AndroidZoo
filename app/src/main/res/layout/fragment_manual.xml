@@ -23,7 +23,7 @@
             android:id="@+id/manual_fragment_toolbar_text"
             style="@style/ToolBarTextStyle"
             app:layout_constraintLeft_toRightOf="@id/manual_fragment_toolbar_image"
-            android:text="@string/title_manual"/>
+            android:text="@string/manual_toolbar_text"/>
     </android.support.constraint.ConstraintLayout>
 
     <android.support.v7.widget.RecyclerView
