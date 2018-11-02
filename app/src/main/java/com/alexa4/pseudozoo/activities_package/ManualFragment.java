@@ -1,5 +1,6 @@
 package com.alexa4.pseudozoo.activities_package;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -12,8 +13,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.alexa4.pseudozoo.R;
+import com.alexa4.pseudozoo.adapters.ImageCompressor;
 import com.alexa4.pseudozoo.presenter.PresenterManual;
 import com.alexa4.pseudozoo.user_data.ManualItem;
 import com.alexa4.pseudozoo.user_data.ManualItemStore;
@@ -62,8 +65,11 @@ public class ManualFragment extends Fragment {
      * @param result the result of downloading
      */
     public void setResultOfDownloading(boolean result) {
-        mManualItemsList = ManualItemStore.getStore().getItems();
-        mManualList.setAdapter(new ManualListAdapter(mManualItemsList));
+        if (result) {
+            mManualItemsList = ManualItemStore.getStore().getItems();
+            mManualList.setAdapter(new ManualListAdapter(mManualItemsList));
+        } else
+            Toast.makeText(getContext(), "Downloading problems", Toast.LENGTH_SHORT).show();
     }
 
 
@@ -97,9 +103,26 @@ public class ManualFragment extends Fragment {
             return new ManualViewHolder(root);
         }
 
+        //TODO: add logic to onClickListener to open clicked selected item
         @Override
-        public void onBindViewHolder(@NonNull ManualViewHolder manualViewHolder, int position) {
-
+        public void onBindViewHolder(@NonNull ManualViewHolder holder, int position) {
+            holder.mItemText.setText(mItems.get(position).getTitle());
+            //Setting compressed image
+            ImageCompressor.getCompressedImage(holder.mItemImage.getContext(),
+                    mItems.get(position).getImageSrc(),
+                    new ImageCompressor.BitmapCompressorCallback() {
+                        @Override
+                        public void sendCompressedBmp(Bitmap bmp) {
+                            holder.mItemImage.setImageBitmap(bmp);
+                        }
+                    });
+            //Setting click listener on root element
+            holder.mItemImage.getRootView().setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(v.getContext(), "You clicked " + position, Toast.LENGTH_SHORT).show();
+                }
+            });
         }
 
         @Override
