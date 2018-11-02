@@ -43,7 +43,7 @@ public class MainActivity extends FragmentActivity implements ViewInterfaceParen
                     presenter.detachView();
 
                     switch (item.getItemId()) {
-                        case R.id.navigation_home:
+                        case R.id.navigation_news:
                             loadFragment(newsFragment);
                             return true;
 
