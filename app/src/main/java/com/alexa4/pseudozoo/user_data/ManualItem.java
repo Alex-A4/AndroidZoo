@@ -16,6 +16,7 @@ public class ManualItem {
         mTitle = title;
         mImageSrc = imageSrc;
         mUrl = url;
+        mImage = null;
     }
 
     public Bitmap getImage() {
