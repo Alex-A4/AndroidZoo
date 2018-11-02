@@ -4,11 +4,9 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
-import com.alexa4.pseudozoo.activities_package.FullNewsActivity;
-import com.alexa4.pseudozoo.activities_package.NewsFragment;
+import com.alexa4.pseudozoo.activities_package.news_views.NewsFragment;
 import com.alexa4.pseudozoo.models.ModelNews;
-import com.alexa4.pseudozoo.user_data.FullNews;
-import com.alexa4.pseudozoo.user_data.News;
+import com.alexa4.pseudozoo.user_data.news_data.News;
 
 import java.util.ArrayList;
 

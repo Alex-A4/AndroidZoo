@@ -1,6 +1,6 @@
 package com.alexa4.pseudozoo.presenter;
 
-import com.alexa4.pseudozoo.activities_package.ManualFragment;
+import com.alexa4.pseudozoo.activities_package.manual_views.ManualFragment;
 import com.alexa4.pseudozoo.models.ModelManual;
 
 public class PresenterManual {
