@@ -13,20 +13,21 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.alexa4.pseudozoo.R;
-import com.alexa4.pseudozoo.models.ModelManual;
+import com.alexa4.pseudozoo.presenter.PresenterManual;
 
 public class ManualFragment extends Fragment {
     private RecyclerView mManualList;
-    
+    private PresenterManual mPresenter;
+
 
     /**
-     * Getting model object
+     * Setting connection between fragment and its presenter
      * @param savedInstanceState
      */
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        mPresenter = new PresenterManual(this);
     }
 
     @Nullable
