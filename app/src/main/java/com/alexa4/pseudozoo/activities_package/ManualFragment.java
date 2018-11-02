@@ -44,7 +44,8 @@ public class ManualFragment extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_manual, container, false);
 
         mManualList = (RecyclerView) root.findViewById(R.id.manual_list);
@@ -58,8 +59,9 @@ public class ManualFragment extends Fragment {
         if (ManualItemStore.getStore().getItems() != null && mManualList.getAdapter() == null)
             mManualList.setAdapter(new ManualListAdapter(mManualItemsList));
 
-        setRetainInstance(true);
         setColors();
+
+        setRetainInstance(true);
         return root;
     }
 
@@ -73,7 +75,7 @@ public class ManualFragment extends Fragment {
             mManualItemsList = ManualItemStore.getStore().getItems();
             if (mManualList != null)
                 mManualList.setAdapter(new ManualListAdapter(mManualItemsList));
-            
+
         } else
             Toast.makeText(getContext(), "Downloading problems", Toast.LENGTH_SHORT).show();
     }
@@ -112,17 +114,24 @@ public class ManualFragment extends Fragment {
         //TODO: add logic to onClickListener to open clicked selected item
         @Override
         public void onBindViewHolder(@NonNull ManualViewHolder holder, int position) {
-            holder.mItemText.setText(mItems.get(position).getTitle());
+            ManualItem item = mItems.get(position);
+            holder.mItemText.setText(item.getTitle());
+
             //Setting compressed image
-            ImageCompressor.getCompressedImage(holder.mItemImage.getContext(),
-                    mItems.get(position).getImageSrc(),
-                    new ImageCompressor.BitmapCompressorCallback() {
-                        @Override
-                        public void sendCompressedBmp(Bitmap bmp) {
-                            holder.mItemImage.setImageBitmap(bmp);
-                        }
-                    });
-            //Setting click listener on root element
+            if (item.getImage() != null)
+                holder.mItemImage.setImageBitmap(item.getImage());
+            else {
+                ImageCompressor.getCompressedImage(holder.mItemImage.getContext(),
+                        item.getImageSrc(),
+                        new ImageCompressor.BitmapCompressorCallback() {
+                            @Override
+                            public void sendCompressedBmp(Bitmap bmp) {
+                                item.setImage(bmp);
+                                holder.mItemImage.setImageBitmap(bmp);
+                            }
+                        });
+            }
+            //Setting click listener on the root element
             holder.mItemImage.getRootView().setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
