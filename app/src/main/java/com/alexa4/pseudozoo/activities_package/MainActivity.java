@@ -10,6 +10,9 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.MenuItem;
 
 import com.alexa4.pseudozoo.R;
+import com.alexa4.pseudozoo.activities_package.manual_views.ManualFragment;
+import com.alexa4.pseudozoo.activities_package.map_views.ZooMapFragment;
+import com.alexa4.pseudozoo.activities_package.news_views.NewsFragment;
 import com.alexa4.pseudozoo.presenter.PresenterNews;
 import com.alexa4.pseudozoo.presenter.PresenterParent;
 import com.alexa4.pseudozoo.presenter.ViewInterfaceParent;

@@ -1,4 +1,4 @@
-package com.alexa4.pseudozoo.activities_package;
+package com.alexa4.pseudozoo.activities_package.news_views;
 
 import android.annotation.SuppressLint;
 import android.content.Context;

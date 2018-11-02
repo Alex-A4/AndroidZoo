@@ -1,4 +1,4 @@
-package com.alexa4.pseudozoo.activities_package;
+package com.alexa4.pseudozoo.activities_package.manual_views;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;

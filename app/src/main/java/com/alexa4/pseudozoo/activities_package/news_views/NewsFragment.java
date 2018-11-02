@@ -1,4 +1,4 @@
-package com.alexa4.pseudozoo.activities_package;
+package com.alexa4.pseudozoo.activities_package.news_views;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -24,6 +24,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alexa4.pseudozoo.R;
+import com.alexa4.pseudozoo.activities_package.SettingsFragment;
+import com.alexa4.pseudozoo.activities_package.news_views.FullNewsActivity;
 import com.alexa4.pseudozoo.adapters.BitmapAdapter;
 import com.alexa4.pseudozoo.models.ModelNews;
 import com.alexa4.pseudozoo.presenter.PresenterNews;
