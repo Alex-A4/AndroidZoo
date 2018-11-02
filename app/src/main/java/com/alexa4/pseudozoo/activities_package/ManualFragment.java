@@ -3,6 +3,7 @@ package com.alexa4.pseudozoo.activities_package;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -14,11 +15,13 @@ import android.widget.TextView;
 
 import com.alexa4.pseudozoo.R;
 import com.alexa4.pseudozoo.presenter.PresenterManual;
+import com.alexa4.pseudozoo.user_data.NightMode;
 
 public class ManualFragment extends Fragment {
     private RecyclerView mManualList;
     private PresenterManual mPresenter;
-
+    private ConstraintLayout mToolbar;
+    private ConstraintLayout mManualFragment;
 
     /**
      * Setting connection between fragment and its presenter
@@ -39,6 +42,11 @@ public class ManualFragment extends Fragment {
         mManualList.setLayoutManager(new LinearLayoutManager(getContext(),
                 LinearLayoutManager.VERTICAL, false));
 
+        mToolbar = (ConstraintLayout) root.findViewById(R.id.manual_fragment_toolbar);
+        mManualFragment = (ConstraintLayout) root.findViewById(R.id.fragment_manual);
+
+        
+        setColors();
         return root;
     }
 
@@ -77,6 +85,17 @@ public class ManualFragment extends Fragment {
         @Override
         public int getItemCount() {
             return 0;
+        }
+    }
+
+
+    /**
+     * Setting colors which depends of nightMode variable
+     */
+    private void setColors(){
+        if (NightMode.getNightMode().getMode()){
+            mToolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimaryNight));
+            mManualFragment.setBackgroundColor(getResources().getColor(R.color.colorPrimaryLightNight));
         }
     }
 }
