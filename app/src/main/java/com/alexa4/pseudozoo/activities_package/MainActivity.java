@@ -25,12 +25,14 @@ public class MainActivity extends FragmentActivity implements ViewInterfaceParen
     private static final String NEWS_FRAGMENT_TAG = "NEWS_FRAGMENT";
     private static final String MAP_FRAGMENT_TAG = "MAP_FRAGMENT";
     private static final String ABOUT_FRAGMENT_TAG = "ABOUT_FRAGMENT";
+    private static final String MANUAL_FRAGMENT_TAG = "MANUAL_FRAGMENT";
 
     public PresenterParent presenter;
 
     private NewsFragment newsFragment;
     private ZooMapFragment zooMapFragment;
     private AboutFragment aboutFragment;
+    private ManualFragment mManualFragment;
 
 
     /**
@@ -53,6 +55,9 @@ public class MainActivity extends FragmentActivity implements ViewInterfaceParen
 
                         case R.id.navigation_about:
                             loadFragment(aboutFragment);
+                            return true;
+                        case R.id.navigation_manual:
+                            loadFragment(mManualFragment);
                             return true;
                     }
                     return false;
@@ -94,6 +99,7 @@ public class MainActivity extends FragmentActivity implements ViewInterfaceParen
         newsFragment = (NewsFragment) fm.findFragmentByTag(NEWS_FRAGMENT_TAG);
         zooMapFragment = (ZooMapFragment) fm.findFragmentByTag(MAP_FRAGMENT_TAG);
         aboutFragment = (AboutFragment) fm.findFragmentByTag(ABOUT_FRAGMENT_TAG);
+        mManualFragment = (ManualFragment) fm.findFragmentByTag(MANUAL_FRAGMENT_TAG);
 
         if (newsFragment == null){
             newsFragment = new NewsFragment();
@@ -108,18 +114,22 @@ public class MainActivity extends FragmentActivity implements ViewInterfaceParen
             aboutFragment = new AboutFragment();
             fm.beginTransaction().add(R.id.container, aboutFragment, ABOUT_FRAGMENT_TAG).commit();
         }
+        if (mManualFragment == null) {
+            mManualFragment = new ManualFragment();
+            fm.beginTransaction().add(R.id.container, mManualFragment, MANUAL_FRAGMENT_TAG).commit();
+        }
     }
 
     /**
      * Loading fragment to container and clearing settings fragment
-     * @param fragment
+     * @param fragment the fragment which need to set to container
      */
     private void loadFragment(Fragment fragment){
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction ft = manager.beginTransaction();
         //Delete settings from backstack
-        if (getSupportFragmentManager().getFragments().get(0).getClass() == SettingsFragment.class)
-            getSupportFragmentManager().popBackStack();
+        if (manager.getFragments().get(0).getClass() == SettingsFragment.class)
+            manager.popBackStack();
 
         //If current fragment is not a fragment which we want to open
         if (!fragment.getTag().equals(manager.getFragments().get(0).getTag())) {
