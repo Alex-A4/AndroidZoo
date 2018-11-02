@@ -4,8 +4,8 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 
-import com.alexa4.pseudozoo.user_data.FullNews;
-import com.alexa4.pseudozoo.user_data.News;
+import com.alexa4.pseudozoo.user_data.news_data.FullNews;
+import com.alexa4.pseudozoo.user_data.news_data.News;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
