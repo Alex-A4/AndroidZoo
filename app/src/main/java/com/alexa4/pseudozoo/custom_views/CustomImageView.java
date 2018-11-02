@@ -7,11 +7,9 @@ import android.util.AttributeSet;
 import android.view.View;
 
 import com.alexa4.pseudozoo.R;
-import com.alexa4.pseudozoo.activities_package.ImageViewerFragment;
-import com.alexa4.pseudozoo.activities_package.ImageViewerPager;
+import com.alexa4.pseudozoo.activities_package.image_viewer.ImageViewerPager;
 import com.alexa4.pseudozoo.adapters.BitmapAdapter;
 import com.alexa4.pseudozoo.adapters.ImageCompressor;
-import com.alexa4.pseudozoo.user_data.ImagesStore;
 
 import java.util.List;
 
