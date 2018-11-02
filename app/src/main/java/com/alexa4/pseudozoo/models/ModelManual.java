@@ -3,6 +3,8 @@ package com.alexa4.pseudozoo.models;
 import android.content.Context;
 import android.os.AsyncTask;
 
+import com.alexa4.pseudozoo.user_data.manual_data.ManualAnimalItem;
+import com.alexa4.pseudozoo.user_data.manual_data.ManualAnimalsStore;
 import com.alexa4.pseudozoo.user_data.manual_data.ManualItem;
 import com.alexa4.pseudozoo.user_data.manual_data.ManualItemStore;
 
@@ -124,22 +126,51 @@ public class ModelManual {
      * @param callback the callback
      */
     public void downloadAnimalsPage(String url, DownloadAnimalsCallback callback) {
-
+        AsyncAnimalsPageDownloading async = new AsyncAnimalsPageDownloading(callback, url);
+        async.execute();
     }
 
     /**
-     * Async class to download information about group of animals
+     * Async class to download information about group of animals by input url
      */
     public static class AsyncAnimalsPageDownloading extends AsyncTask<Void, Void, Boolean> {
         private DownloadAnimalsCallback mCallback;
+        private String mUrl;
 
-        public AsyncAnimalsPageDownloading(DownloadAnimalsCallback callback) {
+        public AsyncAnimalsPageDownloading(DownloadAnimalsCallback callback, String url) {
             mCallback = callback;
+            mUrl = url;
         }
 
         @Override
         protected Boolean doInBackground(Void... voids) {
+            Document doc = null;
 
+            try {
+                //Downloading html page
+                doc = Jsoup.connect("http://yar-zoo.ru/animals.html").get();
+
+                ArrayList<ManualAnimalItem> list = new ArrayList<>();
+
+                //Parsing page
+                Elements item = doc.select(".item-image");
+
+                for (int i = 0; i < item.size(); i++) {
+                    String title = item.get(i).select("a").attr("title");
+                    String imgSrc = item.get(i).select("img[src]")
+                            .attr("src");;
+                    String url = item.get(i).select("a").attr("href");
+                    
+                    list.add(new ManualAnimalItem(title, imgSrc, url));
+                }
+
+                //Add the list to store
+                ManualAnimalsStore.getStore().setItems(list);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+                return false;
+            }
 
             return true;
         }
