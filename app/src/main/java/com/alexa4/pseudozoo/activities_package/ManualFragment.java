@@ -52,9 +52,13 @@ public class ManualFragment extends Fragment {
                 LinearLayoutManager.VERTICAL, false));
 
         mToolbar = (ConstraintLayout) root.findViewById(R.id.manual_fragment_toolbar);
-        mManualFragment = (ConstraintLayout) root.findViewById(R.id.fragment_manual);
+        mManualFragment = (ConstraintLayout) root.findViewById(R.id.fragment_manual_layout);
 
+        //Check if the manual downloaded but adapter is null
+        if (ManualItemStore.getStore().getItems() != null && mManualList.getAdapter() == null)
+            mManualList.setAdapter(new ManualListAdapter(mManualItemsList));
 
+        setRetainInstance(true);
         setColors();
         return root;
     }
@@ -67,7 +71,9 @@ public class ManualFragment extends Fragment {
     public void setResultOfDownloading(boolean result) {
         if (result) {
             mManualItemsList = ManualItemStore.getStore().getItems();
-            mManualList.setAdapter(new ManualListAdapter(mManualItemsList));
+            if (mManualList != null)
+                mManualList.setAdapter(new ManualListAdapter(mManualItemsList));
+            
         } else
             Toast.makeText(getContext(), "Downloading problems", Toast.LENGTH_SHORT).show();
     }
