@@ -64,7 +64,7 @@ public class PresenterNews extends PresenterParent{
                         cm = (ConnectivityManager) ((NewsFragment) getView())
                                 .getContext()
                                 .getSystemService(Context.CONNECTIVITY_SERVICE);
-                    }
+                    } else return null;
                     NetworkInfo networkInfo = cm.getActiveNetworkInfo();
                     return networkInfo;
                 }
