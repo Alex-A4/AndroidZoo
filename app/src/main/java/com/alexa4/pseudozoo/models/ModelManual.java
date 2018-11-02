@@ -3,8 +3,8 @@ package com.alexa4.pseudozoo.models;
 import android.content.Context;
 import android.os.AsyncTask;
 
-import com.alexa4.pseudozoo.user_data.ManualItem;
-import com.alexa4.pseudozoo.user_data.ManualItemStore;
+import com.alexa4.pseudozoo.user_data.manual_data.ManualItem;
+import com.alexa4.pseudozoo.user_data.manual_data.ManualItemStore;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -104,6 +104,46 @@ public class ModelManual {
          * Notify callback about downloading finish
          * @param aBoolean the result of downloading
          */
+        @Override
+        protected void onPostExecute(Boolean aBoolean) {
+            mCallback.sendResult(aBoolean);
+        }
+    }
+
+
+    /**
+     * Callback which notify about result of downloading
+     */
+    public interface DownloadAnimalsCallback {
+        void sendResult(boolean response);
+    }
+
+    /**
+     * Method to download page about selected animals group
+     * @param url the url of selected animals group
+     * @param callback the callback
+     */
+    public void downloadAnimalsPage(String url, DownloadAnimalsCallback callback) {
+
+    }
+
+    /**
+     * Async class to download information about group of animals
+     */
+    public static class AsyncAnimalsPageDownloading extends AsyncTask<Void, Void, Boolean> {
+        private DownloadAnimalsCallback mCallback;
+
+        public AsyncAnimalsPageDownloading(DownloadAnimalsCallback callback) {
+            mCallback = callback;
+        }
+
+        @Override
+        protected Boolean doInBackground(Void... voids) {
+
+
+            return true;
+        }
+
         @Override
         protected void onPostExecute(Boolean aBoolean) {
             mCallback.sendResult(aBoolean);
