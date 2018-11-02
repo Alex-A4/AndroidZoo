@@ -1,4 +1,4 @@
-package com.alexa4.pseudozoo.user_data;
+package com.alexa4.pseudozoo.user_data.news_data;
 
 import android.graphics.Bitmap;
 

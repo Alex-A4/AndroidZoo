@@ -1,10 +1,7 @@
-package com.alexa4.pseudozoo.user_data;
+package com.alexa4.pseudozoo.user_data.manual_data;
 
-
-import android.graphics.Bitmap;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  * Singleton store which contains all manual items
