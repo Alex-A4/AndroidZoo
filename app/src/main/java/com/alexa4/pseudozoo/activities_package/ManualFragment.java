@@ -15,13 +15,18 @@ import android.widget.TextView;
 
 import com.alexa4.pseudozoo.R;
 import com.alexa4.pseudozoo.presenter.PresenterManual;
+import com.alexa4.pseudozoo.user_data.ManualItem;
+import com.alexa4.pseudozoo.user_data.ManualItemStore;
 import com.alexa4.pseudozoo.user_data.NightMode;
+
+import java.util.ArrayList;
 
 public class ManualFragment extends Fragment {
     private RecyclerView mManualList;
     private PresenterManual mPresenter;
     private ConstraintLayout mToolbar;
     private ConstraintLayout mManualFragment;
+    private ArrayList<ManualItem> mManualItemsList;
 
     /**
      * Setting connection between fragment and its presenter
@@ -31,6 +36,7 @@ public class ManualFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mPresenter = new PresenterManual(this);
+        mPresenter.downloadManual();
     }
 
     @Nullable
@@ -45,9 +51,19 @@ public class ManualFragment extends Fragment {
         mToolbar = (ConstraintLayout) root.findViewById(R.id.manual_fragment_toolbar);
         mManualFragment = (ConstraintLayout) root.findViewById(R.id.fragment_manual);
 
-        
+
         setColors();
         return root;
+    }
+
+
+    /**
+     * The method which make actions after downloading of manuals
+     * @param result the result of downloading
+     */
+    public void setResultOfDownloading(boolean result) {
+        mManualItemsList = ManualItemStore.getStore().getItems();
+        mManualList.setAdapter(new ManualListAdapter(mManualItemsList));
     }
 
 
@@ -55,7 +71,11 @@ public class ManualFragment extends Fragment {
      * Adapter for recycler view. Each element of adapter it's manual_list_item instance
      */
     private static class ManualListAdapter extends RecyclerView.Adapter<ManualListAdapter.ManualViewHolder> {
+        private ArrayList<ManualItem> mItems;
 
+        public ManualListAdapter(ArrayList<ManualItem> items) {
+            mItems = items;
+        }
 
         public class ManualViewHolder extends RecyclerView.ViewHolder {
             private ImageView mItemImage;
@@ -84,7 +104,7 @@ public class ManualFragment extends Fragment {
 
         @Override
         public int getItemCount() {
-            return 0;
+            return mItems.size();
         }
     }
 
