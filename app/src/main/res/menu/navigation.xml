@@ -16,7 +16,7 @@
         android:icon="@drawable/ic_about"
         android:title="@string/title_about" />
     <item
-        android:id="+id/navigation_manual"
+        android:id="@+id/navigation_manual"
         android:icon="@drawable/ic_manual"
         android:title="@string/title_manual" />
 </menu>
