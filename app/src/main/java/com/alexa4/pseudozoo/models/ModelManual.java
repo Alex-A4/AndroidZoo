@@ -76,8 +76,6 @@ public class ModelManual {
                 doc = Jsoup.connect("http://yar-zoo.ru/animals.html").get();
 
                 ArrayList<ManualItem> list = new ArrayList<>();
-                //Add the list to store
-                ManualItemStore.getStore().setItems(list);
 
                 //Parsing page
                 Elements item = doc.select(".subcategory-image");
@@ -91,7 +89,8 @@ public class ModelManual {
                     list.add(new ManualItem(title, imgSrc, url));
                 }
 
-
+                //Add the list to store
+                ManualItemStore.getStore().setItems(list);
 
             } catch (IOException e) {
                 e.printStackTrace();
