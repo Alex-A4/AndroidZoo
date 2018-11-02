@@ -1,12 +1,12 @@
 package com.alexa4.pseudozoo.user_data;
 
 public class ManualItem {
-    private final String mText;
+    private final String mTitle;
     private final String mImageSrc;
     private final String mUrl;
 
-    public ManualItem(String text, String imageSrc, String url) {
-        mText = text;
+    public ManualItem(String title, String imageSrc, String url) {
+        mTitle = title;
         mImageSrc = imageSrc;
         mUrl = url;
     }
@@ -15,8 +15,8 @@ public class ManualItem {
         return mUrl;
     }
 
-    public String getText() {
-        return mText;
+    public String getTitle() {
+        return mTitle;
     }
 
     public String getImageSrc() {
