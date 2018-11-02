@@ -14,7 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.alexa4.pseudozoo.R;
-import com.alexa4.pseudozoo.user_data.ImagesStore;
+import com.alexa4.pseudozoo.user_data.news_data.ImagesStore;
 
 import java.util.List;
 

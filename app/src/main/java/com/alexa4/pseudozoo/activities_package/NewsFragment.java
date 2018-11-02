@@ -13,7 +13,6 @@ import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,7 +28,7 @@ import com.alexa4.pseudozoo.adapters.BitmapAdapter;
 import com.alexa4.pseudozoo.models.ModelNews;
 import com.alexa4.pseudozoo.presenter.PresenterNews;
 import com.alexa4.pseudozoo.presenter.ViewInterfaceNews;
-import com.alexa4.pseudozoo.user_data.News;
+import com.alexa4.pseudozoo.user_data.news_data.News;
 import com.alexa4.pseudozoo.user_data.NightMode;
 
 import java.util.ArrayList;

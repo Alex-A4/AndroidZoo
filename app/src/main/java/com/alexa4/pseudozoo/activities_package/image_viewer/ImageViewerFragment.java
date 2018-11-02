@@ -1,8 +1,6 @@
 package com.alexa4.pseudozoo.activities_package;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Build;
@@ -14,11 +12,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.alexa4.pseudozoo.R;
 import com.alexa4.pseudozoo.adapters.BitmapAdapter;
-import com.alexa4.pseudozoo.user_data.ImagesStore;
 
 public class ImageViewerFragment extends Fragment {
     private static final String IMAGE_URL = "IMAGE_URL";

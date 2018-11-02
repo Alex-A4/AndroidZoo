@@ -18,8 +18,8 @@ import android.widget.Toast;
 import com.alexa4.pseudozoo.R;
 import com.alexa4.pseudozoo.adapters.ImageCompressor;
 import com.alexa4.pseudozoo.presenter.PresenterManual;
-import com.alexa4.pseudozoo.user_data.ManualItem;
-import com.alexa4.pseudozoo.user_data.ManualItemStore;
+import com.alexa4.pseudozoo.user_data.manual_data.ManualItem;
+import com.alexa4.pseudozoo.user_data.manual_data.ManualItemStore;
 import com.alexa4.pseudozoo.user_data.NightMode;
 
 import java.util.ArrayList;
