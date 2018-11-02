@@ -82,7 +82,7 @@ public class ModelManual {
 
                 for (int i = 0; i < item.size(); i++) {
                     String title = item.get(i).select("a").attr("title");
-                    title.replace("<br/>", "\n");
+                    title = title.replace("<br/>", "\n");
                     String imgSrc = item.get(i).select("img[src]")
                             .attr("src");;
                     String url = "http://yar-zoo.ru"
