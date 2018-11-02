@@ -23,4 +23,6 @@
     <string name="fullnews_default_string">Новости</string>
     <string name="zoo_news">Новости</string>
     <string name="image_viewer_toolbar_of">из</string>
+    <string name="title_manual">Справочник</string>
+    <string name="manual_toolbar_text">Животные</string>
 </resources>

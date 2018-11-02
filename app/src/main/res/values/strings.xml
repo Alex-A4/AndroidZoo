@@ -24,4 +24,5 @@
     <string name="fullnews_default_string">News</string>
     <string name="pref_header_general">General</string>
     <string name="title_manual">Manual</string>
+    <string name="manual_toolbar_text">Animals</string>
 </resources>
