@@ -14,12 +14,9 @@ public class ManualItemStore {
     private static ManualItemStore sStore;
     //Items of ManualItem class
     private ArrayList<ManualItem> mItems;
-    //Collection which contains bitmap list of manuals
-    private HashMap<String, Bitmap> mImagesStore;
 
 
     private ManualItemStore() {
-        mImagesStore = new HashMap<>();
     }
 
 
@@ -48,27 +45,5 @@ public class ManualItemStore {
         if (sStore == null)
             sStore = new ManualItemStore();
         return sStore;
-    }
-
-
-    /**
-     * Return the bitmap by url
-     * @param url the url of image
-     * @return the bitmap
-     */
-    public Bitmap getBitmapByUrl(String url) {
-        if (mImagesStore.containsKey(url))
-            return mImagesStore.get(url);
-
-        return null;
-    }
-
-    /**
-     * Adding pair to collection
-     * @param url the specified url of image
-     * @param bmp the specified image
-     */
-    public void addBitmapWithUrl(String url, Bitmap bmp) {
-        mImagesStore.put(url, bmp);
     }
 }
