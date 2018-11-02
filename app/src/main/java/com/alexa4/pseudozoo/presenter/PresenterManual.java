@@ -12,4 +12,17 @@ public class PresenterManual {
         mView = fragment;
         mModel = ModelManual.getManual(mView.getContext());
     }
+
+
+    /**
+     * Downloading manual from Zoo-web, then set result to view
+     */
+    public void downloadManual() {
+        mModel.downloadManual(new ModelManual.DownloadManualCallback() {
+            @Override
+            public void sendResult(boolean result) {
+                mView.setResultOfDownloading(result);
+            }
+        });
+    }
 }
