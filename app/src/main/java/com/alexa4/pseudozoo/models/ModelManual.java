@@ -125,7 +125,7 @@ public class ModelManual {
      * @param url the url of selected animals group
      * @param callback the callback
      */
-    public void downloadAnimalsPage(String url, DownloadAnimalsCallback callback) {
+    public static void downloadAnimalsPage(String url, DownloadAnimalsCallback callback) {
         AsyncAnimalsPageDownloading async = new AsyncAnimalsPageDownloading(callback, url);
         async.execute();
     }
@@ -148,7 +148,7 @@ public class ModelManual {
 
             try {
                 //Downloading html page
-                doc = Jsoup.connect("http://yar-zoo.ru/animals.html").get();
+                doc = Jsoup.connect(mUrl).get();
 
                 ArrayList<ManualAnimalItem> list = new ArrayList<>();
 
@@ -160,7 +160,7 @@ public class ModelManual {
                     String imgSrc = item.get(i).select("img[src]")
                             .attr("src");;
                     String url = item.get(i).select("a").attr("href");
-                    
+
                     list.add(new ManualAnimalItem(title, imgSrc, url));
                 }
 
