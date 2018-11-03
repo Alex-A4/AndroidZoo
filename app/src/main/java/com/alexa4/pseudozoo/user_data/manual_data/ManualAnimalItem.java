@@ -16,7 +16,7 @@ public class ManualAnimalItem {
     //The image
     private Bitmap mImage;
 
-    public ManualAnimalItem(String url, String imageSrc, String title) {
+    public ManualAnimalItem(String title, String imageSrc, String url) {
         mUrl = url;
         mImageSrc = imageSrc;
         mTitle = title;
