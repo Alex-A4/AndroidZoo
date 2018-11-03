@@ -29,4 +29,17 @@ public class ManualAnimalsStore {
     public void setItems(ArrayList<ManualAnimalItem> items) {
         mItems = items;
     }
+
+    /**
+     * Getting item from list by title of item
+     * @param url the url which need find into the list
+     * @return the item or null
+     */
+    public ManualAnimalItem getItemByUrl(String url) {
+        for (ManualAnimalItem item: mItems)
+            if (item.getUrl().equals(url))
+                return item;
+
+        return null;
+    }
 }
