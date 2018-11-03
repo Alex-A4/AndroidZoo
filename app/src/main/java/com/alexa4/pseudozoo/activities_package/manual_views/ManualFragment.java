@@ -1,5 +1,6 @@
 package com.alexa4.pseudozoo.activities_package.manual_views;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -84,7 +85,7 @@ public class ManualFragment extends Fragment {
     /**
      * Adapter for recycler view. Each element of adapter it's manual_list_item instance
      */
-    private static class ManualListAdapter extends RecyclerView.Adapter<ManualListAdapter.ManualViewHolder> {
+    private class ManualListAdapter extends RecyclerView.Adapter<ManualListAdapter.ManualViewHolder> {
         private ArrayList<ManualItem> mItems;
 
         public ManualListAdapter(ArrayList<ManualItem> items) {
@@ -111,7 +112,6 @@ public class ManualFragment extends Fragment {
             return new ManualViewHolder(root);
         }
 
-        //TODO: add logic to onClickListener to open clicked selected item
         @Override
         public void onBindViewHolder(@NonNull ManualViewHolder holder, int position) {
             ManualItem item = mItems.get(position);
@@ -135,7 +135,9 @@ public class ManualFragment extends Fragment {
             holder.mItemImage.getRootView().setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(v.getContext(), "You clicked " + position, Toast.LENGTH_SHORT).show();
+                    Intent intent = ManualAnimalsActivity.newIntent(ManualFragment.this.getContext(),
+                            mItems.get(position).getUrl());
+                    startActivity(intent);
                 }
             });
         }
