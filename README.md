@@ -11,3 +11,11 @@ To download .apk file visit this [link](https://yadi.sk/d/HDeZ81O6U1lvTA)
 
 ## Compilation
 To compile app you should add String API_KEY into the source code for using yandex mapkit. [Add](https://github.com/Alex-A4/AndroidZoo/blob/master/app/src/main/java/com/alexa4/pseudozoo/activities_package/MapContainer.java) it into onCreate() method when MapKitFactory is initializing
+
+# Next version
+In next version 1.0.10 will be added page which contains manual by animals
+
+# Updates in previous versions:
+* 1.0.9 - fixed bugs associated with lists position after returning to fragment
+* 1.0.8 - fixed all bugs with ImageViwer
+* 1.0.7 - added imageViewerPager which helps view images with swiping
