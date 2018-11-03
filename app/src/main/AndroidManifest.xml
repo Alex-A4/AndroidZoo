@@ -49,6 +49,9 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".activities_package.manual_views.ManualAnimalsActivity"
+            android:launchMode="singleTop">
+        </activity>
 
     </application>
 
