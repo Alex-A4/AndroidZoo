@@ -33,6 +33,18 @@ public class ManualItemStore {
         return mItems;
     }
 
+    /**
+     * Getting item from list by title of item
+     * @param url the url which need find into the list
+     * @return the item or null
+     */
+    public ManualItem getItemByUrl(String url) {
+        for (ManualItem item: mItems)
+            if (item.getUrl().equals(url))
+                return item;
+
+        return null;
+    }
 
     /**
      * Get singleton instance
