@@ -3,6 +3,7 @@ package com.alexa4.pseudozoo.models;
 import android.content.Context;
 import android.os.AsyncTask;
 
+import com.alexa4.pseudozoo.user_data.manual_data.Animal;
 import com.alexa4.pseudozoo.user_data.manual_data.ManualAnimalItem;
 import com.alexa4.pseudozoo.user_data.manual_data.ManualAnimalsStore;
 import com.alexa4.pseudozoo.user_data.manual_data.ManualItem;
@@ -10,10 +11,12 @@ import com.alexa4.pseudozoo.user_data.manual_data.ManualItemStore;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 
 /**
@@ -178,6 +181,81 @@ public class ModelManual {
         @Override
         protected void onPostExecute(Boolean aBoolean) {
             mCallback.sendResult(aBoolean);
+        }
+    }
+
+
+    /**
+     * Callback interface which sends result of downloading information about one animal
+     */
+    public interface DownloadAnimalInfoCallback {
+        void sendResult(Animal animal);
+    }
+
+    public static void downloadAnimalInfo(String url, DownloadAnimalInfoCallback callback) {
+
+    }
+
+    private static class AsyncAnimalDownloading extends AsyncTask<Void, Void, Animal> {
+        private DownloadAnimalInfoCallback mCallback;
+        private String mUrl;
+
+        public AsyncAnimalDownloading(DownloadAnimalInfoCallback callback, String url) {
+            mCallback = callback;
+            mUrl = url;
+        }
+
+        //TODO: complement downloading logic
+        @Override
+        protected Animal doInBackground(Void... voids) {
+            Document doc = null;
+            Animal animal = null;
+
+            try {
+                //Downloading html page
+                doc = Jsoup.connect(mUrl).get();
+
+                //Parsing page
+                Elements dImage = doc.select("div.item-image");
+                Elements dDescription = doc.select("ul.item-properties").select("li");
+                Elements dParametersName = doc.select("ul.jb-nav").select("li");
+                Elements dParametersText = doc.select("div.element-textarea");
+
+                //Getting image src
+                String imgSrc = dImage.get(0).select("img[src]")
+                        .attr("src");
+
+                //Getting name of animal
+                String name = dImage.get(0).select("img[src]")
+                        .attr("alt");
+
+                //Creating description of animal
+                StringBuilder builder = new StringBuilder();
+                for (Element element: dDescription) {
+                    builder.append(element.text());
+                    builder.append("\n");
+                }
+                String description = builder.toString();
+
+                //Getting info pairs
+                HashMap<String, String> info = new HashMap<>();
+                for (int i = 0; i < dParametersName.size(); i++) {
+                    info.put(dParametersName.select("a").text(), dParametersText.select("p").text());
+                }
+
+                animal = new Animal(name, description, imgSrc, info);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+                return null;
+            }
+
+            return animal;
+        }
+
+        @Override
+        protected void onPostExecute(Animal animal) {
+            mCallback.sendResult(animal);
         }
     }
 }
