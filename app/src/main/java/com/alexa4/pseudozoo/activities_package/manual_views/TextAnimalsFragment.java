@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.alexa4.pseudozoo.R;
+
 
 /**
  *
@@ -28,14 +30,11 @@ public class TextAnimalsFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        TextView text = new TextView(getContext());
-        text.setLayoutParams(new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-        ));
+        View root = inflater.inflate(R.layout.fragment_animals_text, container, false);
+        TextView text = root.findViewById(R.id.animals_text);
         text.setText(mText);
 
-        return text;
+        return root;
     }
 
     /**
