@@ -235,15 +235,22 @@ public class ModelManual {
                     builder.append(element.text());
                     builder.append("\n");
                 }
-                String description = builder.toString();
+                for (Element element: dParametersText.get(0).select("p")) {
+                    builder.append(element.text());
+                    builder.append("\n");
+                }
+                String description = builder.toString().trim();
+
 
                 //Getting info pairs
+                //TODO here
                 ArrayList<String> names = new ArrayList<>();
                 ArrayList<String> texts = new ArrayList<>();
                 for (int i = 0; i < dParametersName.size(); i++) {
                     names.add(dParametersName.select("a").get(i).text());
-                    texts.add(dParametersText.select("p").get(i).text());
                 }
+                for (int i = 1; i < dParametersText.size(); i++)
+                    texts.add(dParametersText.get(i).select("p").text());
 
                 animal = new Animal(name, description, imgSrc, names, texts);
 
