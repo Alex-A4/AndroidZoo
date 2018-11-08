@@ -1,19 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.NestedScrollView
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
+        <android.support.constraint.ConstraintLayout
+            style="@style/ToolbarStyle">
+
+            <ImageView
+                android:id="@+id/fragment_animals_toolbar_image"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:paddingRight="@dimen/settings_arrowback_paddingRight"
+                android:paddingLeft="@dimen/settings_arrowback_paddingRight"
+                android:paddingBottom="@dimen/fragment_toolbar_paddingbottom"
+                android:src="@drawable/ic_back_arrow"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="@id/fragment_animals_toolbar_text"
+                app:layout_constraintLeft_toLeftOf="parent"/>
+
+            <TextView
+                android:id="@+id/fragment_animals_toolbar_text"
+                style="@style/ToolBarTextStyle"
+                android:textSize="18sp"
+                app:layout_constraintLeft_toRightOf="@id/fragment_animals_toolbar_image" />
+        </android.support.constraint.ConstraintLayout>
+
         <ImageView
             android:layout_gravity="center_horizontal"
             android:id="@+id/fragment_animals_image"
             android:scaleType="centerCrop"
-            android:layout_width="150dp"
-            android:layout_height="150dp" />
+            android:layout_width="250dp"
+            android:layout_height="250dp" />
 
         <TextView
             android:layout_margin="8dp"
@@ -34,4 +58,4 @@
         </android.support.v4.view.ViewPager>
     </LinearLayout>
 
-</android.support.v4.widget.NestedScrollView>
+</ScrollView>
