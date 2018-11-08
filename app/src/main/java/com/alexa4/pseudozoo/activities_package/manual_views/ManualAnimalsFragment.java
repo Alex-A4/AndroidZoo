@@ -93,7 +93,8 @@ public class ManualAnimalsFragment extends Fragment {
         }
 
         @Override
-        public void onBindViewHolder(@NonNull AnimalsViewHolder holder, @SuppressLint("RecyclerView") int position) {
+        public void onBindViewHolder(@NonNull AnimalsViewHolder holder,
+                                     @SuppressLint("RecyclerView") int position) {
             holder.mTextView.setText(mItems.get(position).getTitle());
 
             if (mItems.get(position).getImage() != null)
@@ -114,6 +115,12 @@ public class ManualAnimalsFragment extends Fragment {
             holder.mImageView.getRootView().setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    AnimalsFragment fragment = AnimalsFragment.newInstance(mItems.get(position).getUrl());
+                    getFragmentManager().beginTransaction()
+                            .replace(R.id.manual_animals_fragment_container, fragment)
+                            .addToBackStack(null)
+                            .commit();
+                    System.out.println(mItems.get(position).getUrl());
                     Toast.makeText(getContext(), mItems.get(position).getTitle(), Toast.LENGTH_SHORT).show();
                 }
             });
