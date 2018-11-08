@@ -238,12 +238,14 @@ public class ModelManual {
                 String description = builder.toString();
 
                 //Getting info pairs
-                HashMap<String, String> info = new HashMap<>();
+                ArrayList<String> names = new ArrayList<>();
+                ArrayList<String> texts = new ArrayList<>();
                 for (int i = 0; i < dParametersName.size(); i++) {
-                    info.put(dParametersName.select("a").get(i).text(), dParametersText.select("p").get(i).text());
+                    names.add(dParametersName.select("a").get(i).text());
+                    texts.add(dParametersText.select("p").get(i).text());
                 }
 
-                animal = new Animal(name, description, imgSrc, info);
+                animal = new Animal(name, description, imgSrc, names, texts);
 
             } catch (IOException e) {
                 e.printStackTrace();
