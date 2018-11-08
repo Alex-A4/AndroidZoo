@@ -40,7 +40,9 @@
             android:layout_height="250dp" />
 
         <TextView
-            android:layout_margin="8dp"
+            android:textColor="@android:color/black"
+            android:textSize="15sp"
+            android:layout_margin="16dp"
             android:id="@+id/fragment_animals_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
@@ -48,8 +50,9 @@
         <android.support.v4.view.ViewPager
             android:id="@+id/fragment_animals_view_pager"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="800dp">
             <android.support.v4.view.PagerTabStrip
+                style="@style/ViewPagerStyle"
                 android:id="@+id/fragment_animals_pager_strip"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
