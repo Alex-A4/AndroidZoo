@@ -57,7 +57,7 @@ public class ManualFragment extends Fragment {
         mManualFragment = (ConstraintLayout) root.findViewById(R.id.fragment_manual_layout);
 
         //Check if the manual downloaded but adapter is null
-        if (ManualItemStore.getStore().getItems() != null && mManualList.getAdapter() == null)
+        if (mManualItemsList != null && mManualList.getAdapter() == null)
             mManualList.setAdapter(new ManualListAdapter(mManualItemsList));
 
         setColors();
