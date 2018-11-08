@@ -1,6 +1,7 @@
 package com.alexa4.pseudozoo.user_data.manual_data;
 
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 
 
 /**
@@ -11,13 +12,16 @@ public class Animal {
     private String mDescription;
     private String mImageUrl;
     //Contains pairs like: Parameter name - parameter description
-    private HashMap<String, String> mAnimalInfo;
+    private ArrayList<String> mParamNames;
+    private ArrayList<String> mParamText;
 
-    public Animal(String name, String description, String imageUrl, HashMap<String, String> animalInfo) {
+    public Animal(String name, String description, String imageUrl,
+                  ArrayList<String> paramNames, ArrayList<String> paramText) {
         mName = name;
         mDescription = description;
         mImageUrl = imageUrl;
-        mAnimalInfo = animalInfo;
+        mParamNames = paramNames;
+        mParamText = paramText;
     }
 
     public String getName() {
@@ -32,7 +36,11 @@ public class Animal {
         return mImageUrl;
     }
 
-    public HashMap<String, String> getAnimalInfo() {
-        return mAnimalInfo;
+    public ArrayList<String> getParamNames() {
+        return mParamNames;
+    }
+
+    public ArrayList<String> getParamText() {
+        return mParamText;
     }
 }
