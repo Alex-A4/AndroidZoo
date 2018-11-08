@@ -240,7 +240,7 @@ public class ModelManual {
                 //Getting info pairs
                 HashMap<String, String> info = new HashMap<>();
                 for (int i = 0; i < dParametersName.size(); i++) {
-                    info.put(dParametersName.select("a").text(), dParametersText.select("p").text());
+                    info.put(dParametersName.select("a").get(i).text(), dParametersText.select("p").get(i).text());
                 }
 
                 animal = new Animal(name, description, imgSrc, info);
