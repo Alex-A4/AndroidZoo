@@ -193,7 +193,7 @@ public class ModelManual {
     }
 
     public static void downloadAnimalInfo(String url, DownloadAnimalInfoCallback callback) {
-
+        new AsyncAnimalDownloading(callback, url).execute();
     }
 
     private static class AsyncAnimalDownloading extends AsyncTask<Void, Void, Animal> {
