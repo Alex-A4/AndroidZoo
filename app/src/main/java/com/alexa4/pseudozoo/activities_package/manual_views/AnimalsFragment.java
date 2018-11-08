@@ -36,6 +36,12 @@ public class AnimalsFragment extends Fragment {
         mAnimalUrl = getArguments().getString(ANIMAL_URL);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        updateData();
+    }
+
     /**
      * Initializing fragment by the web url with animal
      * @param url the web url of page
@@ -67,17 +73,7 @@ public class AnimalsFragment extends Fragment {
             @Override
             public void sendResult(Animal animal) {
                 mAnimal = animal;
-
-                mPager.setAdapter(new AnimalsPagerAdapter(getFragmentManager()));
-                mPageText.setText(mAnimal.getDescription());
-
-                ImageCompressor.getCompressedImage(getContext(), mAnimal.getImageUrl(),
-                        new ImageCompressor.BitmapCompressorCallback() {
-                            @Override
-                            public void sendCompressedBmp(Bitmap bmp) {
-                                mPageImage.setImageBitmap(bmp);
-                            }
-                        });
+                updateData();
             }
         });
 
@@ -93,7 +89,7 @@ public class AnimalsFragment extends Fragment {
         public AnimalsPagerAdapter(FragmentManager fm) {
             super(fm);
         }
-        //TODO: add insert parameter
+
         @Override
         public Fragment getItem(int position) {
             return TextAnimalsFragment.newInstance(mAnimal.getParamText().get(position));
@@ -108,6 +104,21 @@ public class AnimalsFragment extends Fragment {
         @Override
         public CharSequence getPageTitle(int position) {
             return mAnimal.getParamNames().get(position);
+        }
+    }
+
+    private void updateData() {
+        if (mPager.getAdapter() == null && mAnimal != null) {
+            mPager.setAdapter(new AnimalsPagerAdapter(getFragmentManager()));
+            mPageText.setText(mAnimal.getDescription());
+
+            ImageCompressor.getCompressedImage(getContext(), mAnimal.getImageUrl(),
+                    new ImageCompressor.BitmapCompressorCallback() {
+                        @Override
+                        public void sendCompressedBmp(Bitmap bmp) {
+                            mPageImage.setImageBitmap(bmp);
+                        }
+                    });
         }
     }
 }
