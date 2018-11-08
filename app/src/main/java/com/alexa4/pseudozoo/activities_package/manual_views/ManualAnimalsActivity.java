@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 
 import com.alexa4.pseudozoo.R;
@@ -52,5 +53,13 @@ public class ManualAnimalsActivity extends AppCompatActivity {
         intent.putExtra(URL_ANIMAL, url);
 
         return intent;
+    }
+
+    @Override
+    public void onBackPressed() {
+        FragmentManager manager = getSupportFragmentManager();
+        if (manager.getBackStackEntryCount() <= 1)
+            finish();
+        else manager.popBackStack();
     }
 }
