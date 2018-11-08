@@ -122,7 +122,6 @@ public class ManualAnimalsFragment extends Fragment {
                             .replace(R.id.manual_animals_fragment_container, fragment)
                             .addToBackStack(null)
                             .commit();
-                    Toast.makeText(getContext(), mItems.get(position).getTitle(), Toast.LENGTH_SHORT).show();
                 }
             });
         }
