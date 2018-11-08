@@ -73,6 +73,8 @@ public class ManualAnimalsFragment extends Fragment {
             }
         });
 
+        setRetainInstance(true);
+
         return root;
     }
 
@@ -120,7 +122,6 @@ public class ManualAnimalsFragment extends Fragment {
                             .replace(R.id.manual_animals_fragment_container, fragment)
                             .addToBackStack(null)
                             .commit();
-                    System.out.println(mItems.get(position).getUrl());
                     Toast.makeText(getContext(), mItems.get(position).getTitle(), Toast.LENGTH_SHORT).show();
                 }
             });
