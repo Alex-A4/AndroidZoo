@@ -23,9 +23,11 @@ public class AnimalsFragment extends Fragment {
     private static final String ANIMAL_URL = "ANIMAL_URL";
     private String mAnimalUrl;
     private TextView mPageText;
+    private TextView toolbarText;
     private ImageView mPageImage;
     private ViewPager mPager;
     private Animal mAnimal;
+    private AnimalsPagerAdapter mAdapter;
 
     /**
      * Getting web url from args
@@ -68,6 +70,16 @@ public class AnimalsFragment extends Fragment {
 
         mPager = (ViewPager) root.findViewById(R.id.fragment_animals_view_pager);
 
+        toolbarText = (TextView) root.findViewById(R.id.fragment_animals_toolbar_text);
+
+        ImageView backArrow = (ImageView) root.findViewById(R.id.fragment_animals_toolbar_image);
+        backArrow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getFragmentManager().popBackStack();
+            }
+        });
+
         //Downloading info
         ModelManual.downloadAnimalInfo(mAnimalUrl, new ModelManual.DownloadAnimalInfoCallback() {
             @Override
@@ -107,11 +119,15 @@ public class AnimalsFragment extends Fragment {
         }
     }
 
+    /**
+     * Update data about animal
+     */
     private void updateData() {
-        if (mPager.getAdapter() == null && mAnimal != null) {
-            mPager.setAdapter(new AnimalsPagerAdapter(getFragmentManager()));
+        if (mAdapter == null && mAnimal != null) {
+            mAdapter = new AnimalsPagerAdapter(getFragmentManager());
+            mPager.setAdapter(mAdapter);
             mPageText.setText(mAnimal.getDescription());
-
+            toolbarText.setText(mAnimal.getName());
             ImageCompressor.getCompressedImage(getContext(), mAnimal.getImageUrl(),
                     new ImageCompressor.BitmapCompressorCallback() {
                         @Override
