@@ -45,8 +45,6 @@ public class MainActivity extends FragmentActivity implements ViewInterfaceParen
             BottomNavigationView.OnNavigationItemSelectedListener() {
                 @Override
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                    presenter.detachView();
-
                     switch (item.getItemId()) {
                         case R.id.navigation_news:
                             loadFragment(newsFragment);

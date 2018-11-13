@@ -92,7 +92,6 @@ public class NewsFragment extends Fragment implements ViewInterfaceNews {
         toolbar = (ConstraintLayout) root.findViewById(R.id.main_fragment_toolbar);
         fragmentMain = (ConstraintLayout) root.findViewById(R.id.fragment_main);
 
-
         //Initializing button for updating news
         mUpdateButton = (ImageButton) root.findViewById(R.id.news_fragment_button_update);
         mUpdateButton.setOnClickListener(new View.OnClickListener() {
