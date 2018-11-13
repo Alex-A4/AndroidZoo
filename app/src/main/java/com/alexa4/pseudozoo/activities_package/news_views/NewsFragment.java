@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -25,7 +26,6 @@ import android.widget.Toast;
 
 import com.alexa4.pseudozoo.R;
 import com.alexa4.pseudozoo.activities_package.SettingsFragment;
-import com.alexa4.pseudozoo.activities_package.news_views.FullNewsActivity;
 import com.alexa4.pseudozoo.adapters.BitmapAdapter;
 import com.alexa4.pseudozoo.models.ModelNews;
 import com.alexa4.pseudozoo.presenter.PresenterNews;
@@ -46,8 +46,11 @@ public class NewsFragment extends Fragment implements ViewInterfaceNews {
 
     private ConstraintLayout toolbar;
     private ConstraintLayout fragmentMain;
-    private TextView connectingText;
+    private TextView mToolbarText;
+    private ImageButton mUpdateButton;
     private ArrayList<News> newsArrayList;
+
+    boolean mIsDownloadingError = false;
 
     private SettingsFragment settingsFragment;
     private PresenterNews presenterNews;
@@ -88,8 +91,20 @@ public class NewsFragment extends Fragment implements ViewInterfaceNews {
 
         toolbar = (ConstraintLayout) root.findViewById(R.id.main_fragment_toolbar);
         fragmentMain = (ConstraintLayout) root.findViewById(R.id.fragment_main);
-        connectingText = (TextView) root.findViewById(R.id.main_fragment_text_connecting);
 
+
+        //Initializing button for updating news
+        mUpdateButton = (ImageButton) root.findViewById(R.id.news_fragment_button_update);
+        mUpdateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mIsDownloadingError = false;
+                updateUI();
+                presenterNews.updateNewsList();
+            }
+        });
+
+        mToolbarText = (TextView) root.findViewById(R.id.main_fragment_toolbar_text);
 
         //Initializing settings button from toolbar
         final ImageView settings = (ImageView) root.findViewById(R.id.main_fragment_toolbar_settings);
@@ -108,6 +123,7 @@ public class NewsFragment extends Fragment implements ViewInterfaceNews {
 
         //Setting color if the night mode enabled
         setColors();
+        updateUI();
         setRetainInstance(true);
 
         return root;
@@ -115,20 +131,35 @@ public class NewsFragment extends Fragment implements ViewInterfaceNews {
 
 
     /**
+     * Updating the UI of some views
+     */
+    private void updateUI() {
+        //If downloading had been broken then hide news list and show update button
+        if (mIsDownloadingError) {
+            mUpdateButton.setVisibility(View.VISIBLE);
+            newsList.setVisibility(View.INVISIBLE);
+        } else {
+            mUpdateButton.setVisibility(View.INVISIBLE);
+            newsList.setVisibility(View.VISIBLE);
+        }
+    }
+
+    /**
      * Show connecting text when news loading begin
      */
     public void showConnectingText(){
-        if (connectingText!= null)
-            connectingText.setVisibility(View.VISIBLE);
+        if (mToolbarText != null)
+            mToolbarText.setText(R.string.connecting_text);
     }
 
     /**
      * Hide connecting text when news loading finish
      */
     public void hideConnectingText(){
-        if (connectingText != null)
-            connectingText.setVisibility(View.INVISIBLE);
+        if (mToolbarText != null)
+            mToolbarText.setText(R.string.fragment_main_title);
     }
+
 
 
     /**
@@ -136,15 +167,19 @@ public class NewsFragment extends Fragment implements ViewInterfaceNews {
      * @param progress code of error
      */
     public void showErrorConnection(int progress){
-        if (connectingText!= null)
-            connectingText.setVisibility(View.INVISIBLE);
+        mIsDownloadingError = true;
+        //Update UI
+        if (mUpdateButton != null) {
+            updateUI();
+        }
+
         switch (progress) {
             case ModelNews.Progress.CONNECTING_ERROR:   Toast.makeText(getContext(),
                     R.string.check_internet, Toast.LENGTH_SHORT).show();
-            break;
+                break;
             case ModelNews.Progress.DOWNLOADING_ERROR: Toast.makeText(getContext(),
                     R.string.downloading_error, Toast.LENGTH_SHORT).show();
-            break;
+                break;
         }
     }
 
@@ -156,6 +191,7 @@ public class NewsFragment extends Fragment implements ViewInterfaceNews {
         this.newsArrayList = list;
         if (newsList != null && newsList.getAdapter() == null)
             newsList.setAdapter(new NewsAdapter(getContext(), R.layout.news_item, newsArrayList));
+        mIsDownloadingError = false;
     }
 
     /**
