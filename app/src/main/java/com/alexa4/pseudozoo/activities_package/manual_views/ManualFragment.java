@@ -78,7 +78,7 @@ public class ManualFragment extends Fragment {
                 mManualList.setAdapter(new ManualListAdapter(mManualItemsList));
 
         } else
-            Toast.makeText(getContext(), "Downloading problems", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), R.string.check_internet, Toast.LENGTH_SHORT).show();
     }
 
 
