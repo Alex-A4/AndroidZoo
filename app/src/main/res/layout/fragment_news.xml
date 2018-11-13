@@ -39,8 +39,8 @@
 
     <ImageButton
         android:id="@+id/news_fragment_button_update"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
         android:background="@android:color/transparent"
         android:visibility="invisible"
         android:src="@drawable/ic_update"
