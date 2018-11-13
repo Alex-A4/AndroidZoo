@@ -12,6 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,9 +29,13 @@ import java.util.ArrayList;
 public class ManualFragment extends Fragment {
     private RecyclerView mManualList;
     private PresenterManual mPresenter;
+    private ImageButton mUpdateButton;
+    private TextView mToolbarText;
     private ConstraintLayout mToolbar;
     private ConstraintLayout mManualFragment;
     private ArrayList<ManualItem> mManualItemsList;
+
+    boolean mIsDownloadingError = false;
 
     /**
      * Setting connection between fragment and its presenter
@@ -56,14 +61,41 @@ public class ManualFragment extends Fragment {
         mToolbar = (ConstraintLayout) root.findViewById(R.id.manual_fragment_toolbar);
         mManualFragment = (ConstraintLayout) root.findViewById(R.id.fragment_manual_layout);
 
+        mToolbarText = (TextView) root.findViewById(R.id.manual_fragment_toolbar_text);
+
+        //Initializing button to update downloading
+        mUpdateButton = (ImageButton) root.findViewById(R.id.manual_fragment_button_update);
+        mUpdateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mIsDownloadingError = false;
+                updateUI();
+                mPresenter.downloadManual();
+            }
+        });
+
         //Check if the manual downloaded but adapter is null
         if (mManualItemsList != null && mManualList.getAdapter() == null)
             mManualList.setAdapter(new ManualListAdapter(mManualItemsList));
 
         setColors();
-
+        updateUI();
         setRetainInstance(true);
         return root;
+    }
+
+    /**
+     * Updating the UI of some views
+     */
+    private void updateUI() {
+        //If downloading had been broken then hide news list and show update button
+        if (mIsDownloadingError) {
+            mUpdateButton.setVisibility(View.VISIBLE);
+            mManualList.setVisibility(View.INVISIBLE);
+        } else {
+            mUpdateButton.setVisibility(View.INVISIBLE);
+            mManualList.setVisibility(View.VISIBLE);
+        }
     }
 
 
@@ -77,8 +109,16 @@ public class ManualFragment extends Fragment {
             if (mManualList != null)
                 mManualList.setAdapter(new ManualListAdapter(mManualItemsList));
 
-        } else
+        } else {
+            //If the downloading had been broken
+            mIsDownloadingError = true;
+
+            //Update UI
+            if (mUpdateButton != null) {
+                updateUI();
+            }
             Toast.makeText(getContext(), R.string.check_internet, Toast.LENGTH_SHORT).show();
+        }
     }
 
 
