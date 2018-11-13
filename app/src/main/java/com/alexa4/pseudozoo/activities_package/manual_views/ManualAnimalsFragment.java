@@ -107,7 +107,7 @@ public class ManualAnimalsFragment extends Fragment {
                         new ImageCompressor.BitmapCompressorCallback() {
                             @Override
                             public void sendCompressedBmp(Bitmap bmp) {
-                                mItems.get(holder.getAdapterPosition()).setImage(bmp);
+                                mItems.get(position).setImage(bmp);
                                 holder.mImageView.setImageBitmap(bmp);
                             }
                         });
