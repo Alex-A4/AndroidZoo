@@ -108,6 +108,7 @@ public class ModelNews {
                     cancel(true);
                 }
             }
+            loadNewsCallback.startDownloading();
         }
 
         /**
@@ -116,8 +117,6 @@ public class ModelNews {
          */
         @Override
         protected ArrayList<News> doInBackground(String... urls) {
-            loadNewsCallback.startDownloading();
-
             boolean wasExist = newsList.size() == 0 ? false : true;
 
             Document doc = null;
