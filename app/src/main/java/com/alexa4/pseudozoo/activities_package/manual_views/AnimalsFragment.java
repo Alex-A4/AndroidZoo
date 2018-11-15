@@ -36,6 +36,15 @@ public class AnimalsFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mAnimalUrl = getArguments().getString(ANIMAL_URL);
+
+        //Downloading info
+        ModelManual.downloadAnimalInfo(mAnimalUrl, new ModelManual.DownloadAnimalInfoCallback() {
+            @Override
+            public void sendResult(Animal animal) {
+                mAnimal = animal;
+                updateData();
+            }
+        });
     }
 
     @Override
@@ -77,15 +86,6 @@ public class AnimalsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 getFragmentManager().popBackStack();
-            }
-        });
-
-        //Downloading info
-        ModelManual.downloadAnimalInfo(mAnimalUrl, new ModelManual.DownloadAnimalInfoCallback() {
-            @Override
-            public void sendResult(Animal animal) {
-                mAnimal = animal;
-                updateData();
             }
         });
 
