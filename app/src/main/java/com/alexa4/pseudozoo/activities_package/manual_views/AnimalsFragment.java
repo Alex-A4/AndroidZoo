@@ -45,21 +45,6 @@ public class AnimalsFragment extends Fragment {
         updateData();
     }
 
-
-    /**
-     * Downloading info about animal
-     */
-    public void startDownloading() {
-        //Downloading info
-        ModelManual.downloadAnimalInfo(mAnimalUrl, new ModelManual.DownloadAnimalInfoCallback() {
-            @Override
-            public void sendResult(Animal animal) {
-                mAnimal = animal;
-                updateData();
-            }
-        });
-    }
-
     /**
      * Initializing fragment by the web url with animal
      * @param url the web url of page
@@ -114,6 +99,17 @@ public class AnimalsFragment extends Fragment {
                 getFragmentManager().popBackStack();
             }
         });
+
+        //Downloading info if the fragment launch first
+        //TODO: check logic of downloading. Wrong text in viewPager appeared from another animals
+        if (mAnimal == null)
+            ModelManual.downloadAnimalInfo(mAnimalUrl, new ModelManual.DownloadAnimalInfoCallback() {
+                @Override
+                public void sendResult(Animal animal) {
+                    mAnimal = animal;
+                    updateData();
+                }
+            });
 
         return root;
     }
