@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.alexa4.pseudozoo.R;
+import com.alexa4.pseudozoo.adapters.BitmapAdapter;
 import com.alexa4.pseudozoo.adapters.ImageCompressor;
 import com.alexa4.pseudozoo.models.ModelManual;
 import com.alexa4.pseudozoo.user_data.manual_data.Animal;
@@ -147,11 +148,11 @@ public class AnimalsFragment extends Fragment {
             mPager.setAdapter(mAdapter);
             mPageText.setText(mAnimal.getDescription());
             toolbarText.setText(mAnimal.getName());
-            ImageCompressor.getCompressedImage(getContext(), mAnimal.getImageUrl(), true,
-                    new ImageCompressor.BitmapCompressorCallback() {
+            BitmapAdapter.decodeBitmapFromUrl(mAnimal.getImageUrl(), getResources(), true,
+                    new BitmapAdapter.DownloadImageCallback() {
                         @Override
-                        public void sendCompressedBmp(Bitmap bmp) {
-                            mPageImage.setImageBitmap(bmp);
+                        public void onDownloadFinished(Bitmap bitmap) {
+                            mPageImage.setImageBitmap(bitmap);
                         }
                     });
         }
