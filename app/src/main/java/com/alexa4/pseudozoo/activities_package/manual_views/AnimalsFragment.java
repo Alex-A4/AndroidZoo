@@ -37,7 +37,19 @@ public class AnimalsFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mAnimalUrl = getArguments().getString(ANIMAL_URL);
+    }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        updateData();
+    }
+
+
+    /**
+     * Downloading info about animal
+     */
+    public void startDownloading() {
         //Downloading info
         ModelManual.downloadAnimalInfo(mAnimalUrl, new ModelManual.DownloadAnimalInfoCallback() {
             @Override
@@ -46,12 +58,6 @@ public class AnimalsFragment extends Fragment {
                 updateData();
             }
         });
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        updateData();
     }
 
     /**
@@ -143,18 +149,29 @@ public class AnimalsFragment extends Fragment {
      * Update data about animal
      */
     private void updateData() {
-        if (mAdapter == null && mAnimal != null) {
+        //If the adapter initialized when app was not focused
+        if (mPager.getAdapter() == null && mAdapter != null) {
+            updateFill();
+            //If downloading finished when app is not focused
+        } else if (mPager == null && mAdapter == null && mAnimal != null) {
             mAdapter = new AnimalsPagerAdapter(getFragmentManager());
-            mPager.setAdapter(mAdapter);
-            mPageText.setText(mAnimal.getDescription());
-            toolbarText.setText(mAnimal.getName());
-            BitmapAdapter.decodeBitmapFromUrl(mAnimal.getImageUrl(), getResources(), true,
-                    new BitmapAdapter.DownloadImageCallback() {
-                        @Override
-                        public void onDownloadFinished(Bitmap bitmap) {
-                            mPageImage.setImageBitmap(bitmap);
-                        }
-                    });
+            //If the downloading finished when app was focused
+        } else if (mPager != null && mAdapter == null && mAnimal != null) {
+            mAdapter = new AnimalsPagerAdapter(getFragmentManager());
+            updateFill();
         }
+    }
+
+    private void updateFill() {
+        mPager.setAdapter(mAdapter);
+        mPageText.setText(mAnimal.getDescription());
+        toolbarText.setText(mAnimal.getName());
+        BitmapAdapter.decodeBitmapFromUrl(mAnimal.getImageUrl(), getResources(), true,
+                new BitmapAdapter.DownloadImageCallback() {
+                    @Override
+                    public void onDownloadFinished(Bitmap bitmap) {
+                        mPageImage.setImageBitmap(bitmap);
+                    }
+                });
     }
 }
