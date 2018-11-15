@@ -78,6 +78,25 @@ public class AnimalsFragment extends Fragment {
         mPageText = (TextView) root.findViewById(R.id.fragment_animals_text);
 
         mPager = (ViewPager) root.findViewById(R.id.fragment_animals_view_pager);
+        mPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int i, float v, int i1) {
+            }
+
+            /**
+             * Updating Pager height to accommodate whole text into the fragment
+             * TODO: change the call of method if not works
+             * @param position
+             */
+            @Override
+            public void onPageSelected(int position) {
+                mPager.invalidate();
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int i) {
+            }
+        });
 
         toolbarText = (TextView) root.findViewById(R.id.fragment_animals_toolbar_text);
 
@@ -96,7 +115,7 @@ public class AnimalsFragment extends Fragment {
     /**
      * Adapter for ViewPager. It creates instance of TextAnimalsFragment which contains text
      */
-    class AnimalsPagerAdapter extends FragmentPagerAdapter {
+    private class AnimalsPagerAdapter extends FragmentPagerAdapter {
 
         public AnimalsPagerAdapter(FragmentManager fm) {
             super(fm);
@@ -128,7 +147,7 @@ public class AnimalsFragment extends Fragment {
             mPager.setAdapter(mAdapter);
             mPageText.setText(mAnimal.getDescription());
             toolbarText.setText(mAnimal.getName());
-            ImageCompressor.getCompressedImage(getContext(), mAnimal.getImageUrl(),
+            ImageCompressor.getCompressedImage(getContext(), mAnimal.getImageUrl(), true,
                     new ImageCompressor.BitmapCompressorCallback() {
                         @Override
                         public void sendCompressedBmp(Bitmap bmp) {

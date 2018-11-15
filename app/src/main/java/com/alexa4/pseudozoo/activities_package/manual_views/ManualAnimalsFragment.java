@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alexa4.pseudozoo.R;
+import com.alexa4.pseudozoo.adapters.BitmapAdapter;
 import com.alexa4.pseudozoo.adapters.ImageCompressor;
 import com.alexa4.pseudozoo.models.ModelManual;
 import com.alexa4.pseudozoo.user_data.manual_data.ManualAnimalItem;
@@ -102,13 +103,12 @@ public class ManualAnimalsFragment extends Fragment {
             if (mItems.get(position).getImage() != null)
                 holder.mImageView.setImageBitmap(mItems.get(position).getImage());
             else {
-                ImageCompressor.getCompressedImage(getContext(),
-                        mItems.get(position).getImageSrc(),
-                        new ImageCompressor.BitmapCompressorCallback() {
+                BitmapAdapter.decodeBitmapFromUrl(mItems.get(position).getImageSrc(), getResources(),
+                        true, new BitmapAdapter.DownloadImageCallback() {
                             @Override
-                            public void sendCompressedBmp(Bitmap bmp) {
-                                mItems.get(position).setImage(bmp);
-                                holder.mImageView.setImageBitmap(bmp);
+                            public void onDownloadFinished(Bitmap bitmap) {
+                                mItems.get(position).setImage(bitmap);
+                                holder.mImageView.setImageBitmap(bitmap);
                             }
                         });
             }

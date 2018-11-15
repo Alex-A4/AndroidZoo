@@ -27,6 +27,7 @@ import android.widget.Toast;
 import com.alexa4.pseudozoo.R;
 import com.alexa4.pseudozoo.activities_package.SettingsFragment;
 import com.alexa4.pseudozoo.adapters.BitmapAdapter;
+import com.alexa4.pseudozoo.adapters.ImageCompressor;
 import com.alexa4.pseudozoo.models.ModelNews;
 import com.alexa4.pseudozoo.presenter.PresenterNews;
 import com.alexa4.pseudozoo.presenter.ViewInterfaceNews;
@@ -251,7 +252,7 @@ public class NewsFragment extends Fragment implements ViewInterfaceNews {
             if (newsArrayList.get(position).getBitmap() != null)
                 image.setImageBitmap(newsArrayList.get(position).getBitmap());
             else BitmapAdapter.decodeBitmapFromUrl(
-                    newsArrayList.get(position).getImageUrl(), getResources(),
+                    newsArrayList.get(position).getImageUrl(), getResources(), true,
                     new BitmapAdapter.DownloadImageCallback() {
                         @Override
                         public void onDownloadFinished(Bitmap bitmap) {
@@ -259,6 +260,7 @@ public class NewsFragment extends Fragment implements ViewInterfaceNews {
                             newsArrayList.get(position).setBitmap(bitmap);
                         }
                     });
+
 
             TextView description = (TextView) news.findViewById(R.id.news_item_description);
             description.setText(newsArrayList.get(position).getDescription());

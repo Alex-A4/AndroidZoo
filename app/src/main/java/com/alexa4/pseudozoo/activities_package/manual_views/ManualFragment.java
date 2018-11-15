@@ -161,8 +161,8 @@ public class ManualFragment extends Fragment {
             if (item.getImage() != null)
                 holder.mItemImage.setImageBitmap(item.getImage());
             else {
-                ImageCompressor.getCompressedImage(holder.mItemImage.getContext(),
-                        item.getImageSrc(),
+                ImageCompressor.getCompressedImage(getContext(),
+                        item.getImageSrc(), true,
                         new ImageCompressor.BitmapCompressorCallback() {
                             @Override
                             public void sendCompressedBmp(Bitmap bmp) {

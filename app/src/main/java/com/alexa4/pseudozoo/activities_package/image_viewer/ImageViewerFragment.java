@@ -36,7 +36,7 @@ public class ImageViewerFragment extends Fragment {
             getActivity().getWindow().setStatusBarColor(Color.argb(255, 0, 0, 0));
 
         ImageView image = root.findViewById(R.id.image_viewer);
-        BitmapAdapter.decodeBitmapFromUrl(url, getResources(), new BitmapAdapter.DownloadImageCallback() {
+        BitmapAdapter.decodeBitmapFromUrl(url, getResources(), false, new BitmapAdapter.DownloadImageCallback() {
             @Override
             public void onDownloadFinished(Bitmap bitmap) {
                 image.setImageBitmap(bitmap);
