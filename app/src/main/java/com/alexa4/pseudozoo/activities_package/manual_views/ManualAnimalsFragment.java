@@ -113,7 +113,9 @@ public class ManualAnimalsFragment extends Fragment {
                         });
             }
 
-            //TODO: change logic onClickListener
+            /**
+             * Start the fragment with the information about selected animal
+             */
             holder.mImageView.getRootView().setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
