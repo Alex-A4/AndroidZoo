@@ -61,7 +61,7 @@ public class CustomImageView extends android.support.v7.widget.AppCompatImageVie
      */
     public void downloadImageByUrl(String url, List<Bitmap> listOfBmp, int position) {
         this.photoUrl = url;
-        BitmapAdapter.decodeBitmapFromUrl(url, getResources(), new BitmapAdapter.DownloadImageCallback() {
+        BitmapAdapter.decodeBitmapFromUrl(url, getResources(), false, new BitmapAdapter.DownloadImageCallback() {
             @Override
             public void onDownloadFinished(Bitmap bitmap) {
                 setImageBitmap(bitmap);
@@ -76,7 +76,7 @@ public class CustomImageView extends android.support.v7.widget.AppCompatImageVie
      */
     public void downloadImageByUrl(String url) {
         this.photoUrl = url;
-        BitmapAdapter.decodeBitmapFromUrl(url, getResources(), new BitmapAdapter.DownloadImageCallback() {
+        BitmapAdapter.decodeBitmapFromUrl(url, getResources(), false, new BitmapAdapter.DownloadImageCallback() {
             @Override
             public void onDownloadFinished(Bitmap bitmap) {
                 setImageBitmap(bitmap);
@@ -86,7 +86,7 @@ public class CustomImageView extends android.support.v7.widget.AppCompatImageVie
 
     public void downloadCompressedImageByUrl(String url) {
         this.photoUrl = url;
-        ImageCompressor.getCompressedImage(getContext(), url, new ImageCompressor.BitmapCompressorCallback() {
+        ImageCompressor.getCompressedImage(getContext(), url, true, new ImageCompressor.BitmapCompressorCallback() {
             @Override
             public void sendCompressedBmp(Bitmap bmp) {
                 setImageBitmap(bmp);
@@ -102,7 +102,7 @@ public class CustomImageView extends android.support.v7.widget.AppCompatImageVie
      */
     public void downloadCompressedImageByUrl(String url, List<Bitmap> listOfBmp, int position) {
         this.photoUrl = url;
-        ImageCompressor.getCompressedImage(getContext(), url, new ImageCompressor.BitmapCompressorCallback() {
+        ImageCompressor.getCompressedImage(getContext(), url, false, new ImageCompressor.BitmapCompressorCallback() {
             @Override
             public void sendCompressedBmp(Bitmap bmp) {
                 setImageBitmap(bmp);
